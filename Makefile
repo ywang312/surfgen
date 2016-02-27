@@ -12,8 +12,11 @@ OBJSf   = hddata.o diis.o rdleclse.o combinatorial.o progdata.o libutil.o \
             libsym.o libinternal.o localcoord.o makesurf.o io.o linsteps.o surfgen.o 
 
 # Objects needed for runtime interface library
-OBJSLf  = hddata.o combinatorial.o progdata.o libutil.o libsym.o libinternal.o\
+OBJSLf  = hddata.o combinatorial.o progdata.o libutil.o libsym.o libinternal.o \
             io.o potlib.o
+# Objects for shared-library
+OBJSLSO = hddata.f90 combinatorial.f90 progdata.f90 libutil.f90 libsym.f90 \
+	  libinternal.f90 io.f90 potlib.f90
 
 # Objects needed for test programs 
 OBJTf   =  hddata.o diis.o rdleclse.o combinatorial.o progdata.o libutil.o \
@@ -58,6 +61,7 @@ CDS   := cd $(SDIR);
 
 OBJS  := $(addprefix $(SDIR)/,$(OBJSf))
 OBJSL := $(addprefix $(SDIR)/,$(OBJSLf))
+OBJSLSO:=$(addprefix $(SDIR)/,$(OBJSLSO))
 OBJT  := $(addprefix $(SDIR)/,$(OBJTf))
 OBJV  := $(addprefix $(SDIR)/,$(OBJVf))
 PDFPG := $(addprefix $(DDIR)/,$(PDFfl))
@@ -90,6 +94,7 @@ endif
 # set up product name
 EXEC  := $(BDIR)/surfgen-$(SGENVER)-$(OS)-$(ARC)
 LIBF  := $(LDIR)/libsurfgen-$(SGENVER)-$(OS)-$(ARC).a
+LIBSO := $(LDIR)/libsurfgen-$(SGENVER)-$(OS)-$(ARC).so
 DYLIBF:= $(LDIR)/surfgen.dylib
 TSTX  := $(TDIR)/test
 
@@ -210,7 +215,7 @@ ifndef LIBS
     ifneq ($(findstring mp,$(BLAS_LIB)),)
 	LDFLAGS :=
     else
-    	LDFLAGS := -openmp
+	LDFLAGS := -openmp
     endif	
  endif #BLAS_LIB
 endif #ifndef $LIBS
@@ -267,6 +272,13 @@ libs  :  $(OBJV) $(OBJSL) | $(LDIR)
 	@echo '-----------------------------------------'
 	@echo 'Creating symbolic link to new library'
 	ln -sf $(LIBF) $(LDIR)/libsurfgen.a
+	@echo '-----------------------------------------'
+	@echo ''
+	@echo 'Building shared library libsurfgen.so'
+	$(CDS) $(COMPILER) $(CPOPT) -shared $(OBJSLSO) -o $(LIBSO) -fPIC
+	@echo '-----------------------------------------'
+	@echo 'Creating symbolic link to new shared library'
+	ln -sf $(LIBSO) $(LDIR)/libsurfgen.so
 	@echo '-----------------------------------------'
 	@echo 'Compile and linking options:'
 	@echo 'To compile a program that use surfgen subroutines,'
