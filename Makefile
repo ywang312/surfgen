@@ -275,7 +275,7 @@ libs  :  $(OBJV) $(OBJSL) | $(LDIR)
 	@echo '-----------------------------------------'
 	@echo ''
 	@echo 'Building shared library libsurfgen.so'
-	$(CDS) $(COMPILER) $(CPOPT) -shared $(OBJSLSO) -o $(LIBSO) -fPIC
+	$(CDS) $(COMPILER) $(CPOPT) -shared $(OBJSLSO) $(OBJV) $(BLAS_LIB) -o $(LIBSO) -fPIC
 	@echo '-----------------------------------------'
 	@echo 'Creating symbolic link to new shared library'
 	ln -sf $(LIBSO) $(LDIR)/libsurfgen.so
