@@ -601,7 +601,6 @@ SUBROUTINE EvaluateSurfgen(cgeom,energy,cgrads,hmat,dcgrads)
     print *,"Please call initPotential() or prepot() once before calling EvaluateSurfgen()"
     stop "Execution aborted."
   end if
-
   nth=omp_get_max_threads()
   EvalCount = EvalCount+1
   if(timeeval) call system_clock(COUNT=count1,COUNT_RATE=count_rate)
@@ -618,7 +617,7 @@ SUBROUTINE EvaluateSurfgen(cgeom,energy,cgrads,hmat,dcgrads)
     teval(2) = dble(count1-count2)/count_rate*1000
   end if!timeeval
 
- ! construct Hd and its derivatives
+  ! construct Hd and its derivatives
   call EvalHdDirect(hmat,dhmat)
   if(timeeval)then
     call system_clock(COUNT=count2)
@@ -626,7 +625,8 @@ SUBROUTINE EvaluateSurfgen(cgeom,energy,cgrads,hmat,dcgrads)
   end if!timeeval
 
   ! convert gradients and couplings to cartesian coordinates
-  dcgrads=dble(0) 
+  dcgrads=dble(0)
+
 !$OMP PARALLEL DO DEFAULT(SHARED) PRIVATE(I,J,dhtmp)
   do i=1,3*natoms
     do j=1,ncoord
@@ -634,6 +634,7 @@ SUBROUTINE EvaluateSurfgen(cgeom,energy,cgrads,hmat,dcgrads)
     end do !j=1,ncoord
   end do !i=1,3*natoms
 !$OMP END PARALLEL DO
+
   if(timeeval)then
     call system_clock(COUNT=count1)
     teval(4) = dble(count1-count2)/count_rate*1000
@@ -687,7 +688,6 @@ SUBROUTINE EvaluateSurfgen(cgeom,energy,cgrads,hmat,dcgrads)
     call system_clock(COUNT=count1)
     teval(5) = dble(count1-count2)/count_rate*1000
   end if!timeeval
-
   if(parsing)then
     NEval=NEval+1
     write(str,"(I4)") natoms*3
@@ -748,6 +748,8 @@ SUBROUTINE EvaluateSurfgen(cgeom,energy,cgrads,hmat,dcgrads)
     print *," buildWBMat EvalRawTerms EvalHdDirect  int2cart   DSYEVR   DiagShift   analysis"
     print   "(7F11.3)",teval
   end if!timeeval
+
+  return
 END SUBROUTINE EvaluateSurfgen
 !----------------------------------------------------------------------------------
 ![Description]
