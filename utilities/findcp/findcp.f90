@@ -509,11 +509,13 @@ subroutine print_ant_output(na, g, aname, anum, masses)
     real*8, dimension(3, na),   intent(in) :: g
     real*8, dimension(na),      intent(in) :: anum, masses
     character(3), dimension(na),intent(in) :: aname
+    real*8, parameter :: BOHR2ANG = 0.529177
     integer :: i
     print *, ""
     print *, "Final geometry (ANT format):"
     do i = 1, na
-        print 100, trim(aname(i)), masses(i), g(1:3,i)
+        print 100, trim(aname(i)), masses(i), g(1,i) * BOHR2ANG, &
+          g(2,i) * BOHR2ANG, g(3,i) * BOHR2ANG
     end do
     return
 100 format(a2,4f14.8)
