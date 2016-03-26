@@ -2493,7 +2493,7 @@ SUBROUTINE makesurf()
   double precision  :: NaN
   character(3)                                    ::  str1, str2  ! # of ener and grad data
 
-
+  logical :: rdir_exist ! does the restart directory exist
 
 
   if(printlvl>0)print *,"Entering makesurf"
@@ -2578,6 +2578,14 @@ SUBROUTINE makesurf()
    !update weights
    ! Write coefficients of iteration to restart file
    if(trim(restartdir)/='')then !>>>>>>>>>>>>>>>>>>>
+       
+     ! check if restart directory exists. if it does not, create it.
+     c1=trim(restartdir)//'/.'
+     inquire(file=c1, exist=rdir_exist)
+     if (.not. rdir_exist) then
+         c1='mkdir '//trim(restartdir)
+     end if
+
      c1=""
      write(c1,"(I4)")iter
      fn = trim(restartdir)//'/hd.data.'//trim(adjustl(c1))
