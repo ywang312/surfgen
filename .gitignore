@@ -19,5 +19,5 @@ source/*.mod
 bin/*
 lib/*
 surfgen.xcodeproj/project.xcworkspace/xcshareddata/
-build.log
+build.log*
 *.sl
