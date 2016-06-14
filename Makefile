@@ -16,7 +16,7 @@ OBJSLf  = hddata.o combinatorial.o progdata.o libutil.o libsym.o libinternal.o \
             io.o potlib.o
 # Objects for shared-library
 OBJSLSO = hddata.f90 combinatorial.f90 progdata.f90 libutil.f90 libsym.f90 \
-	  libinternal.f90 io.f90 potlib.f90 
+	  libinternal.f90 io.f90 potlib.f90 getver.F90
 
 # Objects needed for test programs 
 OBJTf   =  hddata.o diis.o rdleclse.o combinatorial.o progdata.o libutil.o \
@@ -275,7 +275,7 @@ libs  :  $(OBJV) $(OBJSL) | $(LDIR)
 	@echo '-----------------------------------------'
 	@echo ''
 	@echo 'Building shared library libsurfgen.so'
-	$(CDS) $(COMPILER) $(CPOPT) -shared $(OBJSLSO) $(OBJV) $(BLAS_LIB) -o $(LIBSO) -fPIC -g
+	$(CDS) $(COMPILER) $(CPOPT) -shared $(OBJSLSO) $(BLAS_LIB) -o $(LIBSO) -fPIC -g
 	@echo '-----------------------------------------'
 	@echo 'Creating symbolic link to new shared library'
 	ln -sf $(LIBSO) $(LDIR)/libsurfgen.so
