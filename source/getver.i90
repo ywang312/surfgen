@@ -1,0 +1,15 @@
+# 1 "/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/getver.F90"
+# 3
+
+
+! This subroutine is called by other part of the program to retrieve the
+! version number of surfgen. The version number is reported as a 72
+! character string.
+SUBROUTINE getver(ver)
+        IMPLICIT NONE
+        CHARACTER(72),intent(OUT)       :: ver
+
+        ver = "2.8.8"
+
+
+END SUBROUTINE getver
