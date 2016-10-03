@@ -7,4 +7,10 @@ derivative couplings from surfgen.x input files:
 
 Please refer to surfgen.x documentation for information on these files.
 
-You must set the BLAS_LIB variable in your shell.
+Requires openmp libraries.
+
+Build with:
+make FC={Fortran compiler} BLAS_LIB={BLAS libraries + openmp libraries}
+
+Run:
+evalsurf.x [input geometry file]
