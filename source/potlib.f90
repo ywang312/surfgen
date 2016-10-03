@@ -450,7 +450,6 @@ END SUBROUTINE
 ! local packed variables
    double precision :: cgeompck(3*natoms),edpck(nstates,nstates)
    double precision,dimension(3*natoms,nstates,nstates) :: gapck,gdpck
-
    if(natoms>mnatm.or.nstates>mnst)&
      stop "EvaluateSurgen: Maximum on atom or state count insufficient."
    cgeompck = cgeom(1:3*natoms)
