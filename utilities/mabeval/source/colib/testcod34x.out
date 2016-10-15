@@ -1,0 +1,233 @@
+ New release has changed fil3w,fil3x header records
+ ** Testing coding/decoding for 3external integrals **
+ ** Using two 64bit words for record header         **
+current bit range for input variables:
+intblk:        18
+stn121:        18
+stn2  :        18
+stn3  :        18
+nintkl:        18
+ksym  :         5
+k1s   :        10
+k1f   :        10
+l1    :        10
+iscr  :         3
+      :         0
+
+ -- Testing maximum bit range minus                        3
+ inpdata(                        1 )=                    16382 bits= 
+                       18
+ inpdata(                        2 )=                    16382 bits= 
+                       18
+ inpdata(                        3 )=                    16382 bits= 
+                       18
+ inpdata(                        4 )=                    16382 bits= 
+                       18
+ inpdata(                        5 )=                    16382 bits= 
+                       18
+ inpdata(                        6 )=                        0 bits= 
+                        5
+ inpdata(                        7 )=                       62 bits= 
+                       10
+ inpdata(                        8 )=                       62 bits= 
+                       10
+ inpdata(                        9 )=                       62 bits= 
+                       10
+ inpdata(                       10 )=                        0 bits= 
+                        3
+    INPUT DATA                  OUTPUT DATA    
+
+intblk     16382  iblsym         0
+stn121     16382  ksym           0
+stn2       16382  k1s           62
+stn3       16382  k1f           62
+nintkl     16382  l1bl          62
+ksym           0  intblk     16382
+k1s           62  stn121     16382
+k1f           62  stn3       16382
+l1            62  stn1       16382
+iscr           0  stn2       16382
+               0  nintkl     16382
+
+ -- Testing maximum bit range minus                        2
+ inpdata(                        1 )=                    32766 bits= 
+                       18
+ inpdata(                        2 )=                    32766 bits= 
+                       18
+ inpdata(                        3 )=                    32766 bits= 
+                       18
+ inpdata(                        4 )=                    32766 bits= 
+                       18
+ inpdata(                        5 )=                    32766 bits= 
+                       18
+ inpdata(                        6 )=                        2 bits= 
+                        5
+ inpdata(                        7 )=                      126 bits= 
+                       10
+ inpdata(                        8 )=                      126 bits= 
+                       10
+ inpdata(                        9 )=                      126 bits= 
+                       10
+ inpdata(                       10 )=                        0 bits= 
+                        3
+    INPUT DATA                  OUTPUT DATA    
+
+intblk     32766  iblsym         0
+stn121     32766  ksym           2
+stn2       32766  k1s          126
+stn3       32766  k1f          126
+nintkl     32766  l1bl         126
+ksym           2  intblk     32766
+k1s          126  stn121     32766
+k1f          126  stn3       32766
+l1           126  stn1       32766
+iscr           0  stn2       32766
+               0  nintkl     32766
+
+ -- Testing maximum bit range minus                        1
+ inpdata(                        1 )=                    65534 bits= 
+                       18
+ inpdata(                        2 )=                    65534 bits= 
+                       18
+ inpdata(                        3 )=                    65534 bits= 
+                       18
+ inpdata(                        4 )=                    65534 bits= 
+                       18
+ inpdata(                        5 )=                    65534 bits= 
+                       18
+ inpdata(                        6 )=                        6 bits= 
+                        5
+ inpdata(                        7 )=                      254 bits= 
+                       10
+ inpdata(                        8 )=                      254 bits= 
+                       10
+ inpdata(                        9 )=                      254 bits= 
+                       10
+ inpdata(                       10 )=                        0 bits= 
+                        3
+    INPUT DATA                  OUTPUT DATA    
+
+intblk     65534  iblsym         0
+stn121     65534  ksym           6
+stn2       65534  k1s          254
+stn3       65534  k1f          254
+nintkl     65534  l1bl         254
+ksym           6  intblk     65534
+k1s          254  stn121     65534
+k1f          254  stn3       65534
+l1           254  stn1       65534
+iscr           0  stn2       65534
+               0  nintkl     65534
+
+ -- Testing maximum bit range minus                        0
+ inpdata(                        1 )=                   131070 bits= 
+                       18
+ inpdata(                        2 )=                   131070 bits= 
+                       18
+ inpdata(                        3 )=                   131070 bits= 
+                       18
+ inpdata(                        4 )=                   131070 bits= 
+                       18
+ inpdata(                        5 )=                   131070 bits= 
+                       18
+ inpdata(                        6 )=                       14 bits= 
+                        5
+ inpdata(                        7 )=                      510 bits= 
+                       10
+ inpdata(                        8 )=                      510 bits= 
+                       10
+ inpdata(                        9 )=                      510 bits= 
+                       10
+ inpdata(                       10 )=                        2 bits= 
+                        3
+    INPUT DATA                  OUTPUT DATA    
+
+intblk    131070  iblsym         2
+stn121    131070  ksym           8
+stn2      131070  k1s          510
+stn3      131070  k1f          510
+nintkl    131070  l1bl         510
+ksym           8  intblk    131070
+k1s          510  stn121    131070
+k1f          510  stn3      131070
+l1           510  stn1      131070
+iscr           2  stn2      131070
+               0  nintkl    131070
+
+ *****************************************************
+ New release has changed fil4w,fil4x header records
+ ** Testing coding/decoding for 4external integrals **
+ ** Using three 64bit words for record header       **
+current bit range for input variables:
+strtnf:        20
+stn121:        20
+stn3  :        20
+nintkl:        20
+lsym  :         4
+ksym  :         4
+l1s   :        10
+l1f   :        10
+k1s   :        10
+k1f   :        10
+k1l1  :        20
+
+ -- Testing maximum bit range -                        3
+    INPUT DATA                  OUTPUT DATA    
+
+strtnf     65534  intblk     65534
+stn121     65534  stn121     65534
+stn3       65534  stn3       65534
+nintkl     65534  nintkl     65534
+lsym           1  lsym           1
+ksym           1  ksym           1
+l1s           30  l1s           30
+l1f           30  l1f           30
+k1s           30  k1s           30
+k1f           30  k1f           30
+k1l1       65534  k1l1       65534
+
+ -- Testing maximum bit range -                        2
+    INPUT DATA                  OUTPUT DATA    
+
+strtnf    131070  intblk    131070
+stn121    131070  stn121    131070
+stn3      131070  stn3      131070
+nintkl    131070  nintkl    131070
+lsym           1  lsym           1
+ksym           1  ksym           1
+l1s           62  l1s           62
+l1f           62  l1f           62
+k1s           62  k1s           62
+k1f           62  k1f           62
+k1l1      131070  k1l1      131070
+
+ -- Testing maximum bit range -                        1
+    INPUT DATA                  OUTPUT DATA    
+
+strtnf    262142  intblk    262142
+stn121    262142  stn121    262142
+stn3      262142  stn3      262142
+nintkl    262142  nintkl    262142
+lsym           2  lsym           2
+ksym           2  ksym           2
+l1s          126  l1s          126
+l1f          126  l1f          126
+k1s          126  k1s          126
+k1f          126  k1f          126
+k1l1      262142  k1l1      262142
+
+ -- Testing maximum bit range -                        0
+    INPUT DATA                  OUTPUT DATA    
+
+strtnf    524286  intblk    524286
+stn121    524286  stn121    524286
+stn3      524286  stn3      524286
+nintkl    524286  nintkl    524286
+lsym           6  lsym           6
+ksym           6  ksym           6
+l1s          254  l1s          254
+l1f          254  l1f          254
+k1s          254  k1s          254
+k1f          254  k1f          254
+k1l1      524286  k1l1      524286
+
