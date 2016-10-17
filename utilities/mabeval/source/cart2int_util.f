@@ -916,6 +916,10 @@ c
       save qcsave
 c
 c-----------------------------------------------
+      one = 1d0
+      maxstep = 1d-1
+      maxiter = 1000
+      linonly = 0
 c # qq1 is the current set of internal coordinates,
 c # qq is the original set
 c # qq1 will be replaced by the current error

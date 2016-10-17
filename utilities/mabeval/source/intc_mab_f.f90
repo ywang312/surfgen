@@ -16,22 +16,22 @@ program intc_mab_f
   if (ios .eq. 0) then
           read(cmdstr, *) natoms
   else
-          stop "Usage: intc_mabeval.x [atoms] [geom file] [int1] [int2]"
+          stop "Usage: intc_mabeval.x [atoms]* [geom file] [int1] [int2]"
   end if
   call get_command_argument(2, value=gmfile, status=ios)
-  if (ios .ne. 0) stop "Usage: intc_mabeval.x [atoms] [geom file] [int1] [int2]"
+  if (ios .ne. 0) stop "Usage: intc_mabeval.x [atoms] [geom file]* [int1] [int2]"
   print "(A,A)",  "MEX Geometry file: ", trim(adjustl(gmfile))
   call get_command_argument(3, value=cmdstr, status=ios)
   if (ios .eq. 0) then
           read(cmdstr, *) intc(1)
   else
-          stop "Usage: intc_mabeval.x [atoms] [geom file] [int1] [int2]"
+          stop "Usage: intc_mabeval.x [atoms] [geom file] [int1]* [int2]"
   end if
   call get_command_argument(4, value=cmdstr, status=ios)
   if (ios .eq. 0) then
           read(cmdstr, *) intc(2)
   else
-          stop "Usage: intc_mabeval.x [atoms] [geom file] [int1] [int2]"
+          stop "Usage: intc_mabeval.x [atoms] [geom file] [int1] [int2]*"
   end if
 
   allocate(geom(3,natoms))
