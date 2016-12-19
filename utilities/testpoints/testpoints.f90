@@ -198,7 +198,6 @@ contains
           real*8, external :: ddot
 
           gh = ddot(na*3,g,1,h,1)
-          if (gh .lt. 1d-8) return
           hh = ddot(na*3,h,1,h,1)
           gg = ddot(na*3,g,1,g,1)
           atin = (2 * gh) / (hh - gg)
