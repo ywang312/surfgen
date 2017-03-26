@@ -1,7 +1,9 @@
 MABEVALOBJS := ioutil.o mabutil.o mabeval.o
+INTCDISPOBJS := ioutil.o cart2int_util.o intc_mabutil.o intc_displacements.o
 INTCMABFOBJS := ioutil.o cart2int_util.o intc_mabutil.o intc_mab_f.o
 INTCMABEVALOBJS := ioutil.o cart2int_util.o intc_mabutil.o intc_mabeval.o
 GHZPOSITIONOBJS := ioutil.o ghz_position.o
+GHZDISPLACEMENTOBJS := ioutil.o ghz_displacement.o
 COMPGDISTOBJS := ioutil.o compute_geomdist.o
 COLIBX:=colib.a
 UNIXDIR:=./UNIX
@@ -30,11 +32,15 @@ AR:= ar rv
 RANL:= ranlib
 RM:=rm -rf
 
-all: colib intc_mab_f ghz_position compute_geomdist mabeval
+all: colib intc_mab_f ghz_position ghz_displacement compute_geomdist mabeval
 
 mabeval: $(MABEVALOBJS)
 	$(FC) $(FFLAGS) -o mabeval.x $(MABEVALOBJS) $(SURFGEN)/lib/libsurfgen.a $(BLAS_LIB) -lgomp
 	cp mabeval.x ../bin/
+
+intc_displacements: colib $(INTCDISPOBJS)
+	$(FC) $(FFLAGS) -fbacktrace -o intc_displacements.x $(INTCDISPOBJS) $(SURFGEN)/lib/libsurfgen.a $(BLAS_LIB) -lgomp ./colib.a
+	cp intc_displacements.x ../bin/
 
 intc_mabeval: colib $(INTCMABEVALOBJS)
 	$(FC) $(FFLAGS) -fbacktrace -o intc_mabeval.x $(INTCMABEVALOBJS) $(SURFGEN)/lib/libsurfgen.a $(BLAS_LIB) -lgomp ./colib.a
@@ -47,6 +53,10 @@ intc_mab_f: colib $(INTCMABFOBJS)
 ghz_position: $(GHZPOSITIONOBJS)
 	$(FC) $(FLAGS) -o ghz_position.x $(GHZPOSITIONOBJS) $(BLAS_LIB) -lgomp
 	cp ghz_position.x ../bin/
+
+ghz_displacement: $(GHZDISPLACEMENTOBJS)
+	$(FC) $(FLAGS) -o ghz_displacement.x $(GHZDISPLACEMENTOBJS) $(BLAS_LIB) -lgomp
+	cp ghz_displacement.x ../bin/
 
 compute_geomdist: $(COMPGDISTOBJS)
 	$(FC) $(FLAGS) -o compute_geomdist.x $(COMPGDISTOBJS) $(BLAS_LIB) -lgomp

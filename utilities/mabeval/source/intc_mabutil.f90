@@ -143,6 +143,12 @@ contains
     
     call initPotential()
     call getInfo(natm, nst)
+
+    if (st1 .gt. nst .or. st2 .gt. nst) then
+            print "('Error! NSTATES=',i3,' Check input.')", nst
+            return
+    end if
+
     allocate(cg(na3, nst, nst))
     allocate(dcg(na3, nst, nst))
     allocate(e(nst))

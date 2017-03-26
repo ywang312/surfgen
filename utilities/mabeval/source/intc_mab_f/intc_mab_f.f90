@@ -11,7 +11,7 @@ program intc_mab_f
   double precision, dimension(:),allocatable :: fintc
   character(255) :: cmdstr, gmfile
   integer :: ios
-
+    
   call get_command_argument(1, value=cmdstr, status=ios)
   if (ios .eq. 0) then
           read(cmdstr, *) natoms
@@ -37,9 +37,30 @@ program intc_mab_f
   allocate(geom(3,natoms))
   allocate(fintc(3*natoms-6))
   call read_colgeom(gmfile, geom, natoms)
-  st1 = 1
-  st2 = 2
+
+  call read_inputfile(st1, st2)
+
   call evaluate_intc_f(natoms, geom, fintc, st1, st2)
-  print "(a,f15.8,f15.8)", 'Fij_x, Fij_y = ', fintc(intc(1)), fintc(intc(2))
+  print "(a,f15.8,a,f15.8)", 'Fij_x, Fij_y = ',fintc(intc(1)),',',fintc(intc(2))
   deallocate(geom, fintc)
+
+contains
+  subroutine read_inputfile(state1, state2)
+    use ioutil, only: get_unit
+    implicit none
+    integer, intent(out) :: state1, state2
+    integer :: flu, ios
+    namelist /general/ state1, state2
+    state1 = 1
+    state2 = 2
+    flu = get_unit()
+    open(file="intc_mab_f.in",unit=flu,status="unknown",action="read",iostat=ios)
+    if (ios .eq. 0) then
+            read(unit=flu,nml=general)
+            close(flu)
+    end if
+    return
+  end subroutine read_inputfile
+    
+    
 end program intc_mab_f

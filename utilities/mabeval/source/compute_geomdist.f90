@@ -29,5 +29,21 @@ program compute_geomdist
           gdist(1:3,ios) = gfinal(1:3,ios)-gstart(1:3,ios)
   end do
   call print_colgeom(gdist, natoms)
+  print "('Norm = ', f15.8)", compute_norm(gdist, natoms)
   deallocate(gstart, gfinal, gdist)
+contains
+  function compute_norm(vec, length) result(norm)
+    implicit none
+    double precision :: norm
+    integer, intent(in) :: length
+    double precision, dimension(3,length), intent(in) :: vec
+    integer :: i
+    double precision, external :: ddot
+    norm = 0d0
+    do i = 1, length
+            norm = norm + ddot(3, vec(1,i), 1, vec(1,i), 1)
+    end do
+    norm = sqrt(norm)
+    return
+  end function compute_norm
 end program compute_geomdist

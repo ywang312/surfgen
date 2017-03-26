@@ -27,6 +27,7 @@ program mabeval
   integer :: circdir ! circulation direction, >= 0: counterclockwise
   !                                           <  0: clockwise
   integer :: rotations ! number of rotations
+  integer :: print_level
   integer :: v1, v2 ! x, y vectors
   integer, dimension(:), allocatable :: v3 !z vectors
   logical :: energy_plot
@@ -53,19 +54,21 @@ program mabeval
   allocate(v3(3*natoms - 6))
   call read_mabinput(x0, y0, z0, rho, gphase, v1, v2, v3, energy_plot, &
           (3*natoms - 6), maxint, remtranrot, startangle, circdir,     &
-          rotations)
+          rotations, print_level)
   
   ! Evaluate MAB
   call evaluate_mab(geom, x0, y0, z0, rho, natoms, gphase, v1, v2, v3, &
-          maxint, remtranrot, startangle, circdir, rotations)
+          maxint, remtranrot, startangle, circdir, rotations, print_level)
 contains
   subroutine read_mabinput (x0, y0, z0, rho, gphase, vector1, vector2, vector3, &
-          energy_plot, na3, maxint, remtranrot, startangle, circdir, rotations)
+          energy_plot, na3, maxint, remtranrot, startangle, circdir, rotations, &
+          print_level)
     implicit none
     ! ..input scalars..
     integer, intent(in) :: na3
     ! ..output scalars..
     integer, intent(out) :: vector1, vector2, maxint, circdir, rotations
+    integer, intent(out) :: print_level
     double precision, intent(out) :: startangle
     ! ..output arrays..
     integer, dimension(na3), intent(out) :: vector3
@@ -79,7 +82,7 @@ contains
     character(255) :: flnm
     ! ..namelist ..
     namelist /general/ x0, y0, z0, rho, gphase, vector1, vector2, vector3, &
-            maxint, remtranrot, startangle, circdir, rotations
+            maxint, remtranrot, startangle, circdir, rotations, print_level
     namelist /plotting/ energy_plot
 
     x0=0d0
@@ -96,6 +99,7 @@ contains
     rotations = 1
     energy_plot = .false.
     remtranrot = .false.
+    print_level = 0
     flun=get_unit()
     flnm="mab.input"
     open(file=trim(adjustl(flnm)),unit=flun,action="read",position="rewind",&

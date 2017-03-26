@@ -10,6 +10,7 @@ module mabutil
   ! -- Change Log --
   ! 2016-07-21 - Created.
   !-------------------------------------------------------------------
+  use ioutil, only: atom_weights, atom_numbers, atom_names
   implicit none
   double precision :: MATH_PI = 4d0*datan(1d0)
   double precision :: AU2CM1 = 219474.63
@@ -29,6 +30,7 @@ contains
     ! ..input/output arrays..
     double precision, dimension(lv), intent(inout) :: geometry
 
+    if (zcoeff**2 .le. 1d-16) return
     geometry = geometry + zcoeff * zvector
     return
   end subroutine addzvec
@@ -374,7 +376,8 @@ contains
 
   !-------------------------------------------------------------------
   function compute_ftheta(xgeom,gv,hv,zv,lv,rval,atheta,nst,st1,st2,x0,y0,&
-          z0, cg, dcg, h, e, frho, fzv, fozv, ozv, ofij,init) result (val)
+          z0, cg, dcg, h, e, frho, fzv, fozv, ozv, ofij,init, plvl) result (val)
+    use ioutil, only: print_colgeom2
     implicit none
 
     ! ..input scalars..
@@ -382,7 +385,8 @@ contains
     ! nst = number of states
     ! st1 = lower state
     ! st2 = upper state
-    integer, intent(in) :: lv, nst, st1, st2
+    ! plvl = print level
+    integer, intent(in) :: lv, nst, st1, st2, plvl
     double precision, intent(in) :: rval, atheta, x0, y0, z0
     logical, intent(in) :: init
     
@@ -397,7 +401,8 @@ contains
     
     ! ..local scalars..
     double precision :: x, y, fx, fy, fth, dpfo
-
+    double precision :: xt, yt, zt
+    
     double precision :: val
     double precision, external :: ddot, dnrm2
     
@@ -417,6 +422,19 @@ contains
 
     call gh2geom(x, y, gv, hv, lv, geom)
     call addzvec(z0, zv, lv, geom)
+    ! test circulation
+    xt = ddot(lv, gv, 1, geom, 1)
+    yt = ddot(lv, hv, 1, geom, 1)
+    zt = ddot(lv, zv, 1, geom, 1)
+    print "('Location = (',f8.5,',',f8.5,',',f8.5,')')", xt, yt, zt
+    if ((abs(xt - x) .gt. 1d-5) .or. (abs(yt - y) .gt. 1d-5)) then
+            print "('*** WARNING: (x,y) differs from (g.G,h.G):')"
+            print "(5x,'(xt, x, yt, t) =',4f15.8)", xt, x, yt, y
+    end if
+    if (abs(zt - z0) .gt. 1d-5) then
+            print "('*** WARNING: z differs from z.G:')"
+            print "(5x,'(zt, z0) = ',4f15.8)", zt, z0
+    end if
     geom = geom + xgeom
 
     if (check_atom_dist(7, 13, geom, lv) .ge. 3.5) then
@@ -424,6 +442,12 @@ contains
     end if
     
     call EvaluateSurfgen(geom, e, cg, h, dcg)
+    if (plvl .gt. 4) then
+            print *, " -- current geometry --"
+            call print_colgeom2(geom,(lv/3),atom_names, atom_numbers, &
+                    atom_weights)
+            print *, " ----------------------"
+    end if
     fij = cg(1:lv, st1, st2)
     nfij = (-1d0)*fij
     if (ddot(lv, nfij, 1, ofij, 1) .gt. ddot(lv, fij, 1, ofij, 1)) then
@@ -575,7 +599,7 @@ contains
   !-------------------------------------------------------------------
   ! evaluate_mab: evaluate molecular aharanov-bohm effect.
   subroutine evaluate_mab(xgeom, x0, y0, z0, rho, natoms, gphase, v1, v2, v3,&
-          maxint, remtranrot, startangle, circdir, rotations)
+          maxint, remtranrot, startangle, circdir, rotations, plvl)
     implicit none
     ! ..input scalars..
     ! natoms = number of atoms
@@ -588,14 +612,14 @@ contains
     ! circdir = circulation direction. >=0 : counterclockwise
     !                                   <0 : clockwise
     ! rotations = number of rotations
+    ! plvl = print level
     integer, intent(in) :: natoms, v1, v2, circdir, rotations
     double precision, intent(in) :: x0, y0, z0, rho, gphase, startangle
     integer, intent(in) :: maxint
+    integer, intent(in) :: plvl
 
     ! ..input logicals..
     logical, intent(in) :: remtranrot
-    
-    integer :: plvl
     
     ! ..input arrays..
     ! xgeom = reference geometry
@@ -632,12 +656,12 @@ contains
     ! ..external functions..
     double precision, external :: ddot
     
-    plvl = 3
-    
     ! Initialize potential and evaluate surface at xgeom. Check to ensure
     ! two states are degenerate.
     call initPotential()
     call getInfo(natm, nst)
+    print *, "natm = ", natm
+    print *, "nst  = ", nst
     if (natm .ne. natoms) then
             print *, "*** Error: natm .ne. natoms! ***"
             print *, "natm = ", natm, " natoms = ", natoms
@@ -650,7 +674,17 @@ contains
     call EvaluateSurfgen(xgeom, e, cg, h, dcg)
     call find_degeneracy(e, nst, st1, st2, ios)
     print "('Adiabatic Energies: ', 5f18.2)", e(1:nst)*AU2CM1
-    if (ios .eq. 0) stop "*** No degeneracy found! ***"
+    if (ios .eq. 0) then
+            print *, "*** No degeneracy found! ***"
+            print *, "Continue? (1=yes,0=no)"
+            read *, ios
+            if (ios .eq. 0) stop "Stopping."
+            print *, "Enter states to evaluate MAB between."
+            print *, "st1: "
+            read *, st1
+            print *, "st2: "
+            read *, st2
+    end if
 
     ! Build, orthogonalize and normalize g and h vectors.
     allocate(gv(3*natoms))
@@ -688,7 +722,7 @@ contains
     ! Perform MAB analysis.
     call mab_analysis(xgeom, x0, y0, z0, rho, zspace(1,v1), zspace(1,v2), &
             zv, natoms*3, st1, st2, nst, maxint, ozv, startangle, &
-            circdir, rotations)
+            circdir, rotations, plvl)
     
     return
   end subroutine evaluate_mab
@@ -818,7 +852,7 @@ contains
   !-------------------------------------------------------------------
   ! mab_analysis: evaluates line integral S(fij)dR around conical intersection
   subroutine mab_analysis(xgeom, x0, y0, z0, rho, gv, hv, zv, lv, st1, st2, nst,&
-          maxint, ozv, sa, cdir, nrot)
+          maxint, ozv, sa, cdir, nrot, plvl)
     implicit none
 
     ! ..input scalars..
@@ -833,7 +867,7 @@ contains
     ! nrot = number of rotations
     integer, intent(in) :: lv, st1, st2, nst, cdir, nrot
     double precision, intent(in) :: x0, y0, z0, rho, sa
-    integer, intent(in) :: maxint
+    integer, intent(in) :: maxint, plvl
 
     ! ..input arrays..
     ! gv = normalized g vector
@@ -903,7 +937,7 @@ contains
     prev_fij = hv
     fija = compute_ftheta(xgeom, gv, hv, zv, lv, rval, atheta, nst, &
             st1, st2, x0, y0, z0, cgscr, dcgscr, hscr, escr, frhoa, &
-            fza, foza, ozv, prev_fij,.false.)
+            fza, foza, ozv, prev_fij,.false., plvl)
     print *, "fija(0) = ", fija
     do i = 1, maxint*nrot
             print *, "============================================"
@@ -912,7 +946,7 @@ contains
             xtheta = (atheta + btheta) / 2d0
             fijx = compute_ftheta(xgeom, gv, hv, zv, lv, rval, xtheta, nst, &
                     st1, st2, x0, y0, z0, cgscr, dcgscr, hscr, escr, frhox, &
-                    fzx, fozx, ozv, prev_fij,.false.)
+                    fzx, fozx, ozv, prev_fij,.false., plvl)
             print *, "fijx = ", fijx
             print *, "PREV FIJ: "
             print "(3f15.8)", prev_fij
@@ -920,7 +954,7 @@ contains
             print "(3f15.8)", cgscr(:,st1,st2)
             fijb = compute_ftheta(xgeom, gv, hv, zv, lv, rval, btheta, nst, &
                     st1, st2, x0, y0, z0, cgscr, dcgscr, hscr, escr, frhob, &
-                    fzb, fozb, ozv, prev_fij,.false.)
+                    fzb, fozb, ozv, prev_fij,.false., plvl)
             intgrl = intgrl + &
                     simpsons_rule(fija, fijx, fijb, atheta, xtheta, btheta)
             atheta = btheta

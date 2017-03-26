@@ -916,6 +916,10 @@ c
       save qcsave
 c
 c-----------------------------------------------
+      one = 1d0
+      maxstep = 1d-1
+      maxiter = 1000
+      linonly = 0
 c # qq1 is the current set of internal coordinates,
 c # qq is the original set
 c # qq1 will be replaced by the current error
@@ -1199,10 +1203,10 @@ C     LCORE IS THE MAXIMUM AVAILABLE MEMORY
       NREQ=NREQ+1
       ADDR=NADR(NREQ)+1
       IXX=ADDR+AMOUNT-1
-      IF (IXX.GT.LCORE) THEN
-         WRITE(*,*) 'MEMORY OVERFLOW,NEEDED',IXX,'AVAILABLE',LCORE
+c      IF (IXX.GT.LCORE) THEN
+c         WRITE(*,*) 'MEMORY OVERFLOW,NEEDED',IXX,'AVAILABLE',LCORE
 c         call bummer('MEMORY OVERFLOW,NEEDED',ixx,faterr)
-      END IF
+c      END IF
       IF (IXX.GT.MAXMEM) MAXMEM=IXX
       NADR(NREQ+1)=IXX
 C
@@ -1448,7 +1452,7 @@ c ##  set fixc forces to zero
  300  continue
 c
 ctm   call twocol (nlist,nq,qq,fi,'internal coordinates and forces')
-      call onecol (nlist,nq,qq,fi,'internal coordinates and forces')
+c      call onecol (nlist,nq,qq,fi,'internal coordinates and forces')
       call absmax(nq,fi,mxf,fmax1)
       fmax1=sign(fmax1,fi(mxf))
       write(nlist,400) mxf,fmax1

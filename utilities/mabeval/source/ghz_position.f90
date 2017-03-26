@@ -65,7 +65,9 @@ program ghz_position
   gm= gm - xgm
   x = ddot(natoms*3, gv, 1, gm, 1)
   y = ddot(natoms*3, hv, 1, gm, 1)
-  do i = 1, nzvec 
+  do i = 1, nzvec
+          print "('Norm g.z_i = ',f12.8)", ddot(natoms*3,zv(1:natoms*3,i),1,gv,1)
+          print "('Norm h.z_i = ',f12.8)", ddot(natoms*3,zv(1:natoms*3,i),1,hv,1)
           z = ddot(natoms*3, zv(1:natoms*3,i), 1, gm, 1)
           print "('(',f12.8,',',f12.8,',',f12.8,')')", x, y, z
   end do

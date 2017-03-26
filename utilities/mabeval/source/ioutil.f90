@@ -12,6 +12,8 @@ module ioutil
   ! 2016-08-31 Added: get_unit, read_colgeom, read_vector
   !-------------------------------------------------------------------
   implicit none
+  character(len=3), dimension(:), allocatable :: atom_names
+  double precision, dimension(:), allocatable :: atom_weights, atom_numbers
 contains
 
   !-------------------------------------------------------------------
@@ -51,6 +53,56 @@ contains
     end do
     return
   end subroutine print_colgeom
+
+  !-------------------------------------------------------------------
+  ! print_colgeom2: print columbus geometry with atom info
+  subroutine print_colgeom2 (g, na, name, num, wt)
+    implicit none
+
+    ! ..input scalars..
+    integer, intent(in) :: na
+
+    ! ..input arrays..
+    double precision, dimension(3,na), intent(in) :: g
+    double precision, dimension(na),   intent(in) :: num
+    double precision, dimension(na),   intent(in) :: wt
+    character(len=3), dimension(na),   intent(in) :: name
+    
+    ! ..local scalars..
+    integer :: i
+
+    do i = 1, na
+            print "(1x,1a,f7.1,4f14.8)", name(i), num(i), g(1,i), g(2,i), &
+                    g(3,i), wt(i)
+    end do
+    return
+  end subroutine print_colgeom2
+
+  !-------------------------------------------------------------------
+  ! print_colgeom2: print columbus geometry with atom info to *opened* file
+  subroutine print_colgeom2_fileout (g, na, name, num, wt, flunit)
+    
+    implicit none
+
+    ! ..input scalars..
+    integer, intent(in) :: na, flunit
+
+    ! ..input arrays..
+    double precision, dimension(3,na), intent(in) :: g
+    double precision, dimension(na),   intent(in) :: num
+    double precision, dimension(na),   intent(in) :: wt
+    character(len=3), dimension(na),   intent(in) :: name
+    
+    ! ..local scalars..
+    integer :: i
+
+    do i = 1, na
+            write (flunit, "(1x,1a,f7.1,4f14.8)") &
+                    name(i), num(i), g(1,i), g(2,i), g(3,i), wt(i)
+    end do
+    return
+  end subroutine print_colgeom2_fileout
+  
   !-------------------------------------------------------------------
   ! read_colgeom: read geometry in columbus format
   subroutine read_colgeom (flnm, gm, na)
@@ -59,18 +111,51 @@ contains
     integer, intent(in) :: na
     double precision, dimension(3,na), intent(out) :: gm
     integer :: i, flun, ios
+
+    if (.not. allocated(atom_weights)) allocate(atom_weights(na))
+    if (.not. allocated(atom_numbers)) allocate(atom_numbers(na))
+    if (.not. allocated(atom_names)) allocate(atom_names(na))
+    ! Open file
+    flun = get_unit()
+    open(unit=flun,file=flnm,status="old",iostat=ios)
+    if (ios.ne.0) then
+            print *, "*** Can't open input geometry file:"//trim(adjustl(flnm))
+            stop
+    end if
+    
+    ! Read geometry
+    do i = 1, na
+            read(flun,fmt="(1x,a,f7.1,f14.8,f14.8,f14.8,f14.8)") &
+                    atom_names(i),atom_numbers(i),gm(1,i),gm(2,i),gm(3,i), &
+                    atom_weights(i)
+    end do
+    close(flun)
+    return
+  end subroutine read_colgeom
+
+  !-------------------------------------------------------------------
+  ! read_colgeom2: read geometry in columbus format
+  subroutine read_colgeom2 (flnm, gm, na, masses, atoms, nums)
+    implicit none
+    character(255), intent(in) :: flnm
+    integer, intent(in) :: na
+    double precision, dimension(3,na), intent(out) :: gm
+    character(2), dimension(na), intent(out) :: atoms
+    double precision, dimension(na), intent(out) :: masses, nums
+    integer :: i, flun, ios
     
     ! Open file
     flun = get_unit()
     open(unit=flun,file=flnm,status="old",iostat=ios)
     if (ios .ne. 0) stop "*** Can't open input geometry file. ***"
-    ! Read geometry
+    ! Read geometry, atomic number, and mass
     do i = 1, na
-            read(flun,fmt="(11x,3f14.8,14x)") gm(1:3,i)
+            read(flun,fmt=*) atoms(i), nums(i), &
+                    gm(1,i), gm(2,i), gm(3,i), masses(i)
     end do
     close(flun)
     return
-  end subroutine read_colgeom
+  end subroutine read_colgeom2
 
   !---------------------------------------------------------
   ! read_vector: read vector from file
