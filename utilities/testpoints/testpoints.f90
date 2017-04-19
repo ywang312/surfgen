@@ -174,10 +174,12 @@ program testpoints
             if (mweight) then
                 print *, "ALERT: mass-weighted g, h and s being used!"
             end if
-            call print_molden_output(gvec, hvec, svec, nstates, &
-                natoms, atoms, cgeoms(:,i), mex, printl)    
             call rot_g_h_vectors(gvec(:,mex(2),mex(1)),hvec(:,mex(2),mex(1)),&
                 natoms) 
+            call print_molden_output(gvec, hvec, svec, nstates, &
+                natoms, atoms, cgeoms(:,i), mex, printl)    
+!            call rot_g_h_vectors(gvec(:,mex(2),mex(1)),hvec(:,mex(2),mex(1)),&
+!                natoms) 
             call express_s_in_ghplane(gvec(:,mex(2),mex(1)), &
                 hvec(:,mex(2),mex(1)), svec(:,mex(2),mex(1)), natoms)
     end if

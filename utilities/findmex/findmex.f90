@@ -38,10 +38,10 @@ program findmex
   call DisableEnergyScaling()
 
 ! read input values
-  shift=1d-4
-  gtol =1d-2
-  dtol =1d-4
-  maxd =1d0
+  shift=1d-1
+  gtol =1d-5
+  dtol =1d-5
+  maxd =1d-1
   evalcutoff=1d-9
   maxiter = 100
   scale = 1d0
@@ -109,14 +109,14 @@ program findmex
  
   ! print initial geometry information
   print *,"--------------- Initial Geometries ------------------"
-  call analysegeom(natm,cgeom,aname,anum,masses,1.9d0,.true.)
+  call analysegeom(natm,cgeom,aname,anum,masses,2.5d0,.true.)
 
   ! search for intersections
   call findx(natm,nst,cgeom,isurf1,isurf2,maxiter,shift,evalcutoff,gtol,dtol,maxd,scale,ncons,cons_atm,cons_val)
 
   ! print final geometry information
   print *,"---------------  Final Geometries  ------------------"
-  call analysegeom(natm,cgeom,aname,anum,masses,1.9d0,.true.)
+  call analysegeom(natm,cgeom,aname,anum,masses,2.5d0,.true.)
 ! deallocate arrays
   deallocate(masses)
   deallocate(anum)
@@ -400,8 +400,10 @@ subroutine findx(natoms,nstate,cgeom,surf1,surf2,maxiter,shift,evalcutoff,Etol,S
      call DGEMV('N',neq,neq,1d0,hess,neq,b1,1,0d0,b2,1)
      ! remove rotation and translations
      call DGEMV('T',3*natoms,6,1d0,transrot,3*natoms,b2,1,0d0,ovlp,1)
-     print "(A,6F10.4)","Overlap with translation/rotation: ",ovlp
+     print "(A,6F10.6)","Overlap with translation/rotation: ",ovlp
      call DGEMV('N',3*natoms,6,-1d0,transrot,3*natoms,ovlp,1,1d0,b2,1)
+     call DGEMV('T',3*natoms,6,1d0,transrot,3*natoms,b2,1,0d0,ovlp,1)
+     print "(A,6F10.6)","Overlap with translation/rotation: ",ovlp
      ! cgeom' = cgeom - H^-1.g
      nrmD=dnrm2(3*natoms,b2,1)
      if(nrmD>maxD)then

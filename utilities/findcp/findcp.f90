@@ -481,6 +481,7 @@ program findcp
   do i=1,3*natm
     print "(I5,F12.2)",i,w(i)
   end do
+  call compute_zeropt(natm, w, 3*natm)
  
   ! Print final geometry
   call analysegeom2(natm,cgeom,aname,anum,masses,new_geomfl)
@@ -499,6 +500,26 @@ program findcp
   deallocate(skip)
 
 end program findcp
+
+!*
+! compute_zeropt: compute and print zero point energy.
+!*
+subroutine compute_zeropt(na, freqs, nvibs)
+  implicit none
+  integer, intent(in) :: na, nvibs
+  double precision, dimension(nvibs), intent(in) :: freqs
+  integer :: i
+  double precision :: zp
+  zp = 0d0
+  do i = 1, nvibs
+          if (freqs(i) .gt. 0d0) then
+                  zp = zp + freqs(i)
+          end if
+  end do
+  zp = zp / 2d0
+  print "(A,f10.2)", "Zero point energy = ", zp
+  return
+end subroutine compute_zeropt
 
 !*
 ! print_ant_output: print geometry in ANT initial geometry format
