@@ -853,6 +853,7 @@ contains
   ! mab_analysis: evaluates line integral S(fij)dR around conical intersection
   subroutine mab_analysis(xgeom, x0, y0, z0, rho, gv, hv, zv, lv, st1, st2, nst,&
           maxint, ozv, sa, cdir, nrot, plvl)
+    use ioutil, only: print_colgeom2
     implicit none
 
     ! ..input scalars..
@@ -927,6 +928,12 @@ contains
     call addzvec(z0, zv, lv, geom0)
     geom0 = geom0 + xgeom
     print "(A,f8.6,A,f8.6,A,f8.6,A)", "Origin: (",x0,",",y0,",",z0,")"
+    if (plvl .gt. 6) then
+            print *, " -- origin geometry --"
+            call print_colgeom2(geom0,(lv/3),atom_names,atom_numbers, &
+                    atom_weights)
+            print *, " ---------------------"
+    end if
     print "('Number of rotations: ',i5)", nrot
     ! Integration loop. Compute each value for fTheta and Theta. Check
     ! continuity of fth values.
