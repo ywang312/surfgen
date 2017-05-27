@@ -701,7 +701,6 @@ CONTAINS
  !             Whether or not basis and term definitions will be written
  !             to file.
  SUBROUTINE writeHd(filename,flheader,writedef)
-<<<<<<< HEAD
      IMPLICIT NONE
      CHARACTER(255),INTENT(IN)        :: filename,flheader
      LOGICAL,INTENT(IN)               :: writedef
