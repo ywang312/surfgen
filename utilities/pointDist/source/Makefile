@@ -1,7 +1,7 @@
 # Makefile for pointDist.x
 OBJS	:= pointDist.o
 CC	:= icc
-COPT	:= -Ddebugging
+COPT	:= 
 # Executable
 EXE	:= pointDist.x
 

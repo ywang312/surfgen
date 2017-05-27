@@ -21,3 +21,4 @@ lib/*
 surfgen.xcodeproj/project.xcworkspace/xcshareddata/
 build.log*
 *.sl
+utilities/polyhes

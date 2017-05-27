@@ -104,7 +104,7 @@ ifdef DEBUGGING_SYMBOLS
    ifneq ($(findstring gfortran,$(COMPILER)),)
     DEBUGFLAG = -g -fbounds-check -fbacktrace -Wall -Wextra
    else
-    ifneq ($(findstring ifort,$(COMPILER)),)
+    ifneq ($(findstring ifort,$(shell $(COMPILER) --version)),)
         DEBUGFLAG = -g -check uninit -check bound -check pointers -traceback -debug
     else
         DEBUGFLAG = -g
@@ -118,7 +118,7 @@ ifdef DEBUGGING_SYMBOLS
      ifneq ($(findstring gfortran,$(COMPILER)),)
       CPOPT = -fdefault-integer-8 -m64
      else
-      ifneq ($(findstring ifort,$(COMPILER)),)
+      ifneq ($(findstring ifort,$(shell $(COMPILER) --version)),)
         CPOPT =  -i8
       endif
      endif
@@ -127,11 +127,11 @@ ifdef DEBUGGING_SYMBOLS
   LKOPT = 
 else
   # set default compiler flags
-  ifneq ($(findstring ifort,$(COMPILER)),)
+  ifneq ($(findstring ifort,$(shell $(COMPILER) --version)),)
     ifdef NO_I8
-      CPOPT    := -auto -assume byterecl -parallel -O3 -lpthread -openmp
+      CPOPT    := -auto -assume byterecl -parallel -O3 -lpthread -qopenmp
     else
-      CPOPT    := -auto  -assume byterecl -parallel -O3 -lpthread -openmp -no-opt-matmul -i8
+      CPOPT    := -auto  -assume byterecl -parallel -O3 -lpthread -qopenmp -no-opt-matmul -i8
     endif
     LKOPT    := -auto -lpthread -parallel
   else
@@ -158,32 +158,20 @@ endif
 ifndef LIBS
  ifndef BLAS_LIB
   ifdef NERSC_HOST  
-    # On NERSC.   Define proper MKL library pathes for hopper and carver
-    ifeq ($(NERSC_HOST),hopper)
-      $(info Setting LAPACK flags with Hopper)
-      MKLROOT=
-      BLAS_LIB=
-      LIBS=
+    # On NERSC.   Define proper MKL library pathes for cori and edison
+    ifeq ($(NERSC_HOST),cori)
+      $(info Setting LAPACK flags with Cori)
+      BLAS_LIB=-mkl
+      LIBS=$(BLAS_LIB)
       FC=ftn
-      CPOPT=
+      CPOPT=-qopenmp -i8 -assume byterecl -parallel -O3 -lpthread -qopenmp -no-opt-matmul
       FFLAGS=
       LDFLAGS=
     else
-      ifeq ($(NERSC_HOST),edison)
-        BLAS_LIB:=-Wl,--start-group  $(MKLROOT)/lib/intel64/libmkl_intel_ilp64.a $(MKLROOT)/lib/intel64/libmkl_intel_thread.a \
-            $(MKLROOT)/lib/intel64/libmkl_core.a -Wl,--end-group -lpthread -lm
-        LIBS:=$(BLAS_LIB)
-        FFLAGS:=-openmp -i8 -I$(MKLROOT)/include
-        LDFLAGS:=-openmp
-      else
-    # i am assuming carver here.   
-        MKLROOT=/usr/common/usg/intel/13.0.028/composer_xe_2013.1.117/mkl
-        BLAS_LIB:=-Wl,--start-group  $(MKLROOT)/lib/intel64/libmkl_intel_ilp64.a $(MKLROOT)/lib/intel64/libmkl_intel_thread.a \
-            $(MKLROOT)/lib/intel64/libmkl_core.a -Wl,--end-group -lpthread -lm
-        LIBS:=$(BLAS_LIB)
-        FFLAGS:=-openmp -i8 -I$(MKLROOT)/include
-        LDFLAGS:=-openmp
-      endif
+      BLAS_LIB:=-mkl
+      LIBS:=$(BLAS_LIB)
+      FFLAGS:=-qopenmp -i8 -I$(MKLROOT)/include
+      LDFLAGS:=-qopenmp
     endif
   else
     ifeq ($(OS),Darwin)  
@@ -215,7 +203,7 @@ ifndef LIBS
     ifneq ($(findstring mp,$(BLAS_LIB)),)
 	LDFLAGS :=
     else
-	LDFLAGS := -openmp
+	LDFLAGS := -qopenmp
     endif	
  endif #BLAS_LIB
 endif #ifndef $LIBS

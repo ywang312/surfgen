@@ -19,7 +19,7 @@
 !Hd, as well as geometry input. 
 program testpoints
   implicit none
-  integer,parameter  ::  MaxGeoms = 10000
+  integer,parameter  ::  MaxGeoms = 15000
   real*8,  parameter ::  au2ang = 0.529177249
   character(255)     ::  geomfl 
   integer            ::  npts, i,j,k,l,m,natoms,nstates,ios,ptid
@@ -268,6 +268,7 @@ contains
                           " occurred opening input file!**"
                   return
           end if
+          print *, "Input file found."    
           return
   end subroutine read_input_file
 

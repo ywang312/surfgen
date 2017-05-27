@@ -519,11 +519,11 @@ stloop: do k = s1,s2
         do s1=1,nstates
           do s2=1,nstates
             if(incener(i,s1,s2))then
-              if(e_exact(i,s1,s2))then                                      ! Exact equations
+              if(e_exact(i,s1,s2))then       ! Exact equations
                 nex=nex+1
                 if(nex>maxEqs)stop 'makeEqMap: nex>maxeqs'
                 exactEqs(nex,:)=(/i,s1,s2,0/)
-              else                                                          ! Least squares equations
+              else                           ! Least squares equations
                 nEqs=nEqs+1
                 if(nEqs>maxEqs)stop 'makeEqMap: neqs>maxeqs'
                 lseMap(nEqs,:)=(/i,s1,s2,0/)
@@ -1612,7 +1612,7 @@ stloop: do k = s1,s2
     bvec(nex+1:)=bvec(nex+1:)*weight
     bvec = bvec*bvec
     if(plvl>1) &
-    print "(2(A,E13.6,A,4I4))","Max Error:  Ex=",sqrt(maxval(bvec(1:nex))), "@",eqmap(maxloc(bvec(1:nex)),:), &
+    print "(2(A,E13.6,A,4I6))","Max Error:  Ex=",sqrt(maxval(bvec(1:nex))), "@",eqmap(maxloc(bvec(1:nex)),:), &
                                         ",  LS=",sqrt(maxval(bvec(nex+1:))),"@",eqmap(maxloc(bvec(nex+1:))+nex,:)
     LSErr = sqrt(sum(bvec(nex+1:))/sum(weight*weight))
 !    print "(A,I6,A,4I4,A,E12.5)","eq#",maxloc(bvec(1+nex:))+nex,":",eqmap(nex+maxloc(bvec(1+nex:)),:),", err=",sqrt(maxval(bvec(1+nex:)))
@@ -1809,7 +1809,7 @@ stloop: do k = s1,s2
     allocate(pbas(npoints*(nvibs+1)*ll*rr,npb(k)))
     allocate(pbasw(npoints*(nvibs+1)*ll*rr,npb(k)))
     memsize=memsize+pbasmem*2
-
+    
 ! evaluate and tabulate value and gradients of basis at all data points
     pbas = 0D0
     n1 = 1
@@ -2391,7 +2391,8 @@ stloop: do k = s1,s2
         weight(i)=gWeight(pt,s1,s2)*ptWeights(pt)
       end if
     end do 
-  END SUBROUTINE updateWeights 
+  END SUBROUTINE updateWeights
+
 END MODULE
 !---------------------------------------------
 ! Transform Hd with a block-by-block transformation ZBas
@@ -2475,9 +2476,9 @@ SUBROUTINE makesurf()
   DOUBLE PRECISION                               :: adif,nrmener,avgener,lag,gmin, dmin, dinc, disp
   double precision                               :: LSErr,ExErr
   DOUBLE PRECISION                               :: nrmgrad,avggrad,nrmD
-  CHARACTER(4)                                   :: c1,c2
-  CHARACTER(16),dimension(npoints)               :: rlabs
-  CHARACTER(16),dimension(nvibs*2)               :: clabs
+  CHARACTER(5)                                   :: c1,c2
+  CHARACTER(17),dimension(npoints)               :: rlabs
+  CHARACTER(17),dimension(nvibs*2)               :: clabs
   double precision,dimension(npoints,nstates,nstates)   :: errGrad,errGradh
   double precision,dimension(ncoord)             :: errgrd
   double precision,dimension(ncoord,3*natoms)    :: binv
@@ -2530,6 +2531,8 @@ SUBROUTINE makesurf()
   call readCkl(guide)
   cklguide = ckl
   ckl = 0d0
+
+  ! load
   !----------------------------------
   ! Begin self-consistent iterations
   !----------------------------------
@@ -2767,7 +2770,7 @@ SUBROUTINE makesurf()
           if(m<=dispgeoms(l)%nvibs)errGrad(l,i,i)=errGrad(l,i,i)+gradtable(k,2*m)**2!*dispgeoms(l)%scale(m)
         enddo !m=1,dispgeoms(i)%nvibs
         errGrad(l,i,i)=sqrt(errGrad(l,i,i))
-        write(c2,'(i4)')l
+        write(c2,'(i5)')l
         rlabs(k) = ' GM '//trim(adjustl(c2))
       enddo!l=1,npoints
       call printMatrix(OUTFILE,rlabs,clabs,int(8 ),npoints,k,2*nvibs,gradtable,int(13),int(8))
@@ -2798,7 +2801,7 @@ SUBROUTINE makesurf()
         errGrad(l,j,i)=errGrad(l,i,j)
         errGradh(l,i,j)=sqrt(errGradh(l,i,j))
         errGradh(l,j,i)=sqrt(errGradh(l,j,i))/2
-        write(c2,'(i4)')l
+        write(c2,'(i5)')l
         rlabs(k) = ' GM '//trim(adjustl(c2))
       enddo!l=1,npoints
       call printMatrix(OUTFILE,rlabs,clabs,int(8 ),npoints,k,2*nvibs,gradtable,int(13),int(8))
@@ -2824,7 +2827,7 @@ SUBROUTINE makesurf()
         enertable(j,2*k)   = NaN
     end if
    enddo!k=1,nstates
-   write(c2,'(i4)')j
+   write(c2,'(i5)')j
    rlabs(j) = ' GM '//trim(adjustl(c2))
   enddo!j=1,npoints
   call printMatrix(OUTFILE,rlabs,clabs,2*nstates,npoints,npoints,2*nstates,enertable,int(14),int(4))
@@ -3670,9 +3673,9 @@ SUBROUTINE printDisps(type,npts)
 
   INTEGER                         :: i,j,k,npr
   DOUBLE PRECISION,dimension(ncoord,npts) :: disps
-  CHARACTER(4)                    :: str
-  CHARACTER(16),dimension(ncoord) :: rlabs
-  CHARACTER(16),dimension(npts)   :: clabs
+  CHARACTER(5)                    :: str
+  CHARACTER(17),dimension(ncoord) :: rlabs
+  CHARACTER(17),dimension(npts)   :: clabs
   DOUBLE PRECISION :: NaN, enbuffer(nstates)
 
   if(type/=0)then

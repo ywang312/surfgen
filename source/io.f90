@@ -817,12 +817,12 @@ END FUNCTION filename
 SUBROUTINE printMatrix(ofile,rlabs,clabs,pcols,LDM,nr,nc,mat,fld,dcml)
   IMPLICIT NONE
   INTEGER,INTENT(IN)                     :: ofile,pcols,nr,nc,fld,dcml,LDM
-  CHARACTER(16),dimension(nr),INTENT(IN) :: rlabs
-  CHARACTER(16),dimension(nc),INTENT(IN) :: clabs
+  CHARACTER(17),dimension(nr),INTENT(IN) :: rlabs
+  CHARACTER(17),dimension(nc),INTENT(IN) :: clabs
   DOUBLE PRECISION,dimension(LDM,nc),INTENT(IN) :: mat
   INTEGER                                :: i,j,k,ilo,ihi,nbatch
   INTEGER                                :: rlen,clen,flen,lspace,rspace
-  CHARACTER(4)                           :: rlstr,clstr,lstr,rstr
+  CHARACTER(5)                           :: rlstr,clstr,lstr,rstr
   CHARACTER(255)                         :: FMT1,FMT2,FMT3,FMT4
   flen = fld
   rlen = 0
@@ -836,19 +836,19 @@ SUBROUTINE printMatrix(ofile,rlabs,clabs,pcols,LDM,nr,nc,mat,fld,dcml)
    if(j.gt.clen)clen = j
   enddo
 
-  write(rlstr,'(i4)')rlen
-  write(clstr,'(i4)')clen
+  write(rlstr,'(i5)')rlen
+  write(clstr,'(i5)')clen
   FMT1 = '(/,'//trim(adjustl(rlstr))//'x)'
   FMT2 = '(a'//trim(adjustl(rlstr))//')'
   rspace = int((flen-clen)/2.)
   lspace = flen - clen - rspace
   if(rspace.lt.0)rspace=0
   if(lspace.lt.1)lspace=1
-  write(lstr,'(i4)')lspace
-  write(rstr,'(i4)')rspace
+  write(lstr,'(i5)')lspace
+  write(rstr,'(i5)')rspace
   FMT3 = '('//trim(adjustl(lstr))//'x,a'//trim(adjustl(clstr))//','//trim(adjustl(rstr))//'x)'
-  write(lstr,'(i4)')flen-1
-  write(rstr,'(i4)')dcml
+  write(lstr,'(i5)')flen-1
+  write(rstr,'(i5)')dcml
   FMT4 = '(x,F'//trim(adjustl(lstr))//'.'//trim(adjustl(rstr))//')'
 
   nbatch = Ceiling(1.*nc/pcols)
