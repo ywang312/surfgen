@@ -174,10 +174,12 @@ program testpoints
             if (mweight) then
                 print *, "ALERT: mass-weighted g, h and s being used!"
             end if
-            call print_molden_output(gvec, hvec, svec, nstates, &
-                natoms, atoms, cgeoms(:,i), mex, printl)    
             call rot_g_h_vectors(gvec(:,mex(2),mex(1)),hvec(:,mex(2),mex(1)),&
                 natoms) 
+            call print_molden_output(gvec, hvec, svec, nstates, &
+                natoms, atoms, cgeoms(:,i), mex, printl)    
+!            call rot_g_h_vectors(gvec(:,mex(2),mex(1)),hvec(:,mex(2),mex(1)),&
+!                natoms) 
             call express_s_in_ghplane(gvec(:,mex(2),mex(1)), &
                 hvec(:,mex(2),mex(1)), svec(:,mex(2),mex(1)), natoms)
     end if
@@ -198,7 +200,6 @@ contains
           real*8, external :: ddot
 
           gh = ddot(na*3,g,1,h,1)
-          if (gh .lt. 1d-8) return
           hh = ddot(na*3,h,1,h,1)
           gg = ddot(na*3,g,1,g,1)
           atin = (2 * gh) / (hh - gg)

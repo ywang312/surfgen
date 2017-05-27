@@ -13,6 +13,7 @@ test/surfgen.out
 test/surfgen.log
 utilities/*/test
 utilities/*/*.x
+utilities/polyhes/
 bin/setsgenvars.*
 source/*.o
 source/*.mod

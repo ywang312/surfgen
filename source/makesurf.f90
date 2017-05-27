@@ -795,7 +795,6 @@ stloop: do k = s1,s2
       ! fill in the LSE block
       CALL DSYRK('U','T',ncons,nEqPt,1d0,AMat(nExPt+1,1),&
          LDA,dble(1),NE(nex+1,nex+1),ncons+nex)
-      
       neqTot = neqTot+nEqPt
       nexTot = nexTot+nExPt  
       ! print the progression bar
@@ -807,6 +806,7 @@ stloop: do k = s1,s2
         end if!pc>pc_last
       end if!printlvl>0
     end do!i
+
     if(printlvl>0)print *,"      [ DONE ]"
     deallocate(AMat)
     deallocate(bvec)
