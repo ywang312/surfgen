@@ -258,6 +258,72 @@ contains
   !-------------------------------------------------------------------
 
   !===================================================================
+  ! get_ghvec_intc: get g and h vectors in internal coordiantes
+  subroutine get_ghvec_intc (natoms, st1, st2, geom, gintc, hintc, mw)
+    use ioutil, only: get_unit, atom_weights
+    use mabutil, only: build_gvector, build_hvector, orthog_ghvecs
+    implicit none
+    integer, intent(in) :: natoms, st1, st2
+    double precision, dimension(3,natoms), intent(inout) :: geom
+    logical, intent(in) :: mw
+    double precision, dimension(3*natoms-6), intent(out) :: gintc, hintc
+    integer :: intcfl_unit
+    integer, dimension(6,1782)  :: ibcode
+    integer, dimension(20,594) :: ibcontr
+    double precision, dimension(54,594) :: bmat
+    double precision, dimension(600,594) :: b
+    double precision, dimension(594) :: qq
+    character(8), dimension(600) :: labr, labc
+    integer :: natm, nst
+    double precision, dimension(:,:,:), allocatable :: cg, dcg
+    double precision, dimension(:,:), allocatable :: h
+    double precision, dimension(:), allocatable :: gcart, hcart
+    double precision, dimension(:), allocatable :: e
+    integer :: na3, nintc
+    integer :: mxf
+    double precision :: maxforce
+
+    na3=3*natoms
+    nintc=na3-6
+    
+    call initPotential()
+    call getInfo(natm, nst)
+
+    if (st1 .gt. nst .or. st2 .gt. nst) then
+            print "('Error! NSTATES=',i3,' Check input.')", nst
+            return
+    end if
+
+    allocate(cg(na3, nst, nst))
+    allocate(dcg(na3, nst, nst))
+    allocate(e(nst))
+    allocate(h(nst,nst))
+    allocate(gcart(na3))
+    allocate(hcart(na3))
+    call EvaluateSurfgen(geom, e, cg, h, dcg)
+    call build_gvector(cg, natoms, nst, st1, st2, gcart)
+    call build_hvector(cg, natoms, nst, st1, st2, hcart, e)
+    if (mw) then
+            call mass_weight_vector(gcart, natoms, atom_weights)
+            call mass_weight_vector(hcart, natoms, atom_weights)
+    end if
+    call orthog_ghvecs(gcart, hcart, natoms)
+    
+
+    intcfl_unit = get_unit()
+    call convertgeom_bohr2ang(geom, natoms)
+    call open_intcfl_file(intcfl_unit)
+    call read_intcfl(intcfl_unit, natoms, ibcode, ibcontr)
+    call generate_bmat(natoms, geom, ibcode, ibcontr, bmat, qq)
+
+    call intforc(nintc,na3,bmat,ibcontr,gcart,gintc,qq,mxf,maxforce)
+    call intforc(nintc,na3,bmat,ibcontr,hcart,hintc,qq,mxf,maxforce)
+    
+    return
+  end subroutine get_ghvec_intc
+  !-------------------------------------------------------------------
+  
+  !===================================================================
   ! intc_mabanalysis: perform mab analysis
   subroutine intc_mabanalysis (natm, nst, ibcode, ibcontr, bmat, qq_0, &
           c1_0, c2_0, epsilon, c1, c2, maxi, circdir, rots, geom_ang_0,&
@@ -362,6 +428,22 @@ contains
     end do
     return
   end subroutine make_complete_bmat
+  !-------------------------------------------------------------------
+
+  !===================================================================
+  subroutine mass_weight_vector (vec, natm, aweights)
+    implicit none
+    integer, intent(in) :: natm
+    double precision, dimension(natm), intent(in) :: aweights
+    double precision, dimension(3*natm), intent(inout) :: vec
+    integer :: i
+    do i = 1, natm
+            vec(i*3-2) = vec(i*3-2)/dsqrt(aweights(i))
+            vec(i*3-1) = vec(i*3-1)/dsqrt(aweights(i))
+            vec(i*3)   = vec(i*3)  /dsqrt(aweights(i))
+    end do
+    return
+  end subroutine mass_weight_vector
   !-------------------------------------------------------------------
   
   !===================================================================

@@ -1,10 +1,11 @@
 MABEVALOBJS := ioutil.o mabutil.o mabeval.o
-INTCDISPOBJS := ioutil.o cart2int_util.o intc_mabutil.o intc_displacements.o
-INTCMABFOBJS := ioutil.o cart2int_util.o intc_mabutil.o intc_mab_f.o
-INTCMABEVALOBJS := ioutil.o cart2int_util.o intc_mabutil.o intc_mabeval.o
+INTCDISPOBJS := ioutil.o cart2int_util.o mabutil.o intc_mabutil.o intc_displacements.o
+INTCMABFOBJS := ioutil.o cart2int_util.o mabutil.o intc_mabutil.o intc_mab_f.o
+INTCMABEVALOBJS := ioutil.o cart2int_util.o mabutil.o intc_mabutil.o intc_mabeval.o
 GHZPOSITIONOBJS := ioutil.o ghz_position.o
 GHZDISPLACEMENTOBJS := ioutil.o ghz_displacement.o
 COMPGDISTOBJS := ioutil.o compute_geomdist.o
+MKGHINTCOBJS := ioutil.o cart2int_util.o mabutil.o intc_mabutil.o mkgh_intc.o
 COLIBX:=colib.a
 UNIXDIR:=./UNIX
 COLIBDIR:=./colib
@@ -22,9 +23,23 @@ COLIBSRCF:= $(addprefix $(COLIBDIR)/,$(COLIBF))
 UNIXOBJS := $(addprefix $(UNIXDIR)/,$(UNIXO))
 UNIXSRCC := $(addprefix $(UNIXDIR)/,$(UNIXC))
 
-FC:=gfortran
-FFLAGS:=-g -fdefault-integer-8 -frecord-marker=4 -O3
-CC:=cc
+#use predefined fortran compiler
+ifdef FC 
+	FC := $(FC)
+else
+	FC:=gfortran
+	CC:=cc
+endif
+
+ifneq ($(findstring ifort, $(shell $(FC) --version)),)
+	FFLAGS:=-g -i8 -O3 -auto -assume byterecl -traceback
+	CC:=icc
+else
+	FFLAGS:=-g -fdefault-integer-8 -frecord-marker=4 -O3 -fbacktrace \
+		-fno-align-commons
+endif
+
+# Cflags are the same
 CFLAGS:=-Wall -std=c11 -march=native -funroll-loops -ffast-math \
 	          -fomit-frame-pointer -fstrict-aliasing -O3
 CCDEF  := -DFLUSH -DINT64 -DEXTNAME
@@ -32,22 +47,22 @@ AR:= ar rv
 RANL:= ranlib
 RM:=rm -rf
 
-all: colib intc_mab_f ghz_position ghz_displacement compute_geomdist mabeval
+all: colib intc_mab_f ghz_position ghz_displacement compute_geomdist mabeval mkgh_intc
 
 mabeval: $(MABEVALOBJS)
 	$(FC) $(FFLAGS) -o mabeval.x $(MABEVALOBJS) $(SURFGEN)/lib/libsurfgen.a $(BLAS_LIB) -lgomp
 	cp mabeval.x ../bin/
 
 intc_displacements: colib $(INTCDISPOBJS)
-	$(FC) $(FFLAGS) -fbacktrace -o intc_displacements.x $(INTCDISPOBJS) $(SURFGEN)/lib/libsurfgen.a $(BLAS_LIB) -lgomp ./colib.a
+	$(FC) $(FFLAGS) -o intc_displacements.x $(INTCDISPOBJS) $(SURFGEN)/lib/libsurfgen.a $(BLAS_LIB) -lgomp ./colib.a
 	cp intc_displacements.x ../bin/
 
 intc_mabeval: colib $(INTCMABEVALOBJS)
-	$(FC) $(FFLAGS) -fbacktrace -o intc_mabeval.x $(INTCMABEVALOBJS) $(SURFGEN)/lib/libsurfgen.a $(BLAS_LIB) -lgomp ./colib.a
+	$(FC) $(FFLAGS) -o intc_mabeval.x $(INTCMABEVALOBJS) $(SURFGEN)/lib/libsurfgen.a $(BLAS_LIB) -lgomp ./colib.a
 	cp intc_mabeval.x ../bin/
 
 intc_mab_f: colib $(INTCMABFOBJS)
-	$(FC) $(FFLAGS) -fbacktrace -o intc_mab_f.x $(INTCMABFOBJS) $(SURFGEN)/lib/libsurfgen.a $(BLAS_LIB) -lgomp ./colib.a
+	$(FC) $(FFLAGS) -o intc_mab_f.x $(INTCMABFOBJS) $(SURFGEN)/lib/libsurfgen.a $(BLAS_LIB) -lgomp ./colib.a
 	cp intc_mab_f.x ../bin/
 
 ghz_position: $(GHZPOSITIONOBJS)
@@ -62,6 +77,10 @@ compute_geomdist: $(COMPGDISTOBJS)
 	$(FC) $(FLAGS) -o compute_geomdist.x $(COMPGDISTOBJS) $(BLAS_LIB) -lgomp
 	cp compute_geomdist.x ../bin/
 
+mkgh_intc: colib $(MKGHINTCOBJS)
+	$(FC) $(FLAGS) -o mkgh_intc.x $(MKGHINTCOBJS) $(SURFGEN)/lib/libsurfgen.a $(BLAS_LIB) -lgomp ./colib.a
+	cp mkgh_intc.x ../bin/
+
 colib: $(COLIBOBJS) $(UNIXOBJS)
 	$(AR) $(COLIBX) $(COLIBOBJS) $(UNIXOBJS)
 	$(RANL) $(COLIBX)
@@ -71,15 +90,15 @@ clean:
 	rm -rf ./colib/colib*.o ./*.o ./*.mod ./*.x ./*.a
 
 $(UNIXDIR)/%.o: $(UNIXDIR)/%.c
-	$(CC) -c -DFLUSH -DINT64 -DEXTNAME -o $@ $< $(CFLAGS) -Wno-implicit-function-declaration
+	$(CC) -c -DFLUSH -DINT64 -DEXTNAME -o $@ $< $(CFLAGS)
 
 $(COLIBDIR)/%.o: $(COLIBDIR)/%.f
-	$(FC) -g -fbacktrace -c -o $@ $< $(CPOPS) $(FFLAGS)
+	$(FC) -g -c -o $@ $< $(CPOPS) $(FFLAGS)
 
 
 %.o:%.f90
-	$(FC) $(FFLAGS) -fbacktrace -c -o $@ $<
+	$(FC) $(FFLAGS) -c -o $@ $<
 
 %.o:%.f
-	$(FC) $(FFLAGS) -fbacktrace -fno-align-commons -c -o $@ $<
+	$(FC) $(FFLAGS) -c -o $@ $<
 
