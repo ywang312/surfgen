@@ -785,7 +785,8 @@ contains
     double precision :: rhs
     integer :: i
     double precision, parameter :: rtol = 1d-8
-    
+
+    rho = 0d0
     
     return
   end subroutine get_ellipse_rho
