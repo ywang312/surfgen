@@ -1,0 +1,1869 @@
+
+    Report from: Interprocedural optimizations [ipo]
+
+  WHOLE PROGRAM (SAFE) [EITHER METHOD]: false
+  WHOLE PROGRAM (SEEN) [TABLE METHOD]: false
+  WHOLE PROGRAM (READ) [OBJECT READER METHOD]: false
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+In the inlining report below:
+   "sz" refers to the "size" of the routine. The smaller a routine's size,
+      the more likely it is to be inlined.
+   "isz" refers to the "inlined size" of the routine. This is the amount
+      the calling routine will grow if the called routine is inlined into it.
+      The compiler generally limits the amount a routine can grow by having
+      routines inlined into it.
+
+Begin optimization report for: READIRREPS
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (READIRREPS) [1/13=7.7%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(374,12)
+  -> EXTERN: (382,8) DEALLOCIRREPS
+  -> EXTERN: (383,3) for_open
+  -> EXTERN: (385,13) for_stop_core
+  -> EXTERN: (386,3) for_read_seq_fmt
+  -> EXTERN: (387,3) for_read_seq_lis
+  -> EXTERN: (388,17) for_write_seq_lis
+  -> EXTERN: (389,17) for_write_seq_lis
+  -> EXTERN: (389,17) for_write_seq_lis_xmit
+  -> EXTERN: (389,32) for_trim
+  -> EXTERN: (390,17) for_write_seq_lis
+  -> EXTERN: (390,17) for_write_seq_lis_xmit
+  -> EXTERN: (391,3) for_alloc_allocatable
+  -> EXTERN: (391,3) for_check_mult_overflow64
+  -> EXTERN: (393,5) for_read_seq_fmt
+  -> EXTERN: (394,19) for_write_seq_fmt_xmit
+  -> EXTERN: (394,19) for_write_seq_fmt
+  -> EXTERN: (394,55) for_trim
+  -> EXTERN: (394,60) for_adjustl
+  -> EXTERN: (395,5) for_read_seq_lis
+  -> EXTERN: (395,5) for_read_seq_lis_xmit
+  -> EXTERN: (397,5) for_write_int_fmt
+  -> EXTERN: (398,5) for_check_mult_overflow64
+  -> EXTERN: (398,5) for_alloc_allocatable
+  -> EXTERN: (401,9) for_read_seq_lis
+  -> EXTERN: (401,9) for_read_seq_lis_xmit
+  -> EXTERN: (401,9) __resetsp_inlined
+  -> EXTERN: (401,9) _alloca
+  -> EXTERN: (401,9) __getsp_inlined
+  -> EXTERN: (402,23) for_write_seq_fmt
+  -> EXTERN: (402,23) _alloca
+  -> EXTERN: (402,23) __getsp_inlined
+  -> EXTERN: (402,23) __resetsp_inlined
+  -> EXTERN: (402,38) for_trim
+  -> EXTERN: (402,49) for_concat
+  -> EXTERN: (402,49) _alloca
+  -> EXTERN: (404,21) for_write_seq_lis
+  -> EXTERN: (407,9) for_close
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(391,3)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15310: loop was not vectorized: operation cannot be vectorized
+   remark #25439: unrolled with remainder by 2  
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(391,3)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(392,3)
+   remark #25096: Loop Interchange not done due to: Imperfect Loop Nest (Either at Source or due to other Compiler Transformations)
+   remark #25451: Advice: Loop Interchange, if possible, might help loopnest. Suggested Permutation: ( 1 2 3 ) --> ( 3 1 2 ) 
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed OUTPUT dependence between 999 line 393 and 999 line 404
+   remark #17106: parallel dependence: assumed OUTPUT dependence between 999 line 404 and 999 line 393
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(399,5)
+      remark #25096: Loop Interchange not done due to: Imperfect Loop Nest (Either at Source or due to other Compiler Transformations)
+      remark #25451: Advice: Loop Interchange, if possible, might help loopnest. Suggested Permutation: ( 1 2 ) --> ( 2 1 ) 
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed ANTI dependence between cnpi_mp_irrep_ line 401 and cnpi_mp_irrep_ line 401
+      remark #17106: parallel dependence: assumed FLOW dependence between cnpi_mp_irrep_ line 401 and cnpi_mp_irrep_ line 401
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(400,7)
+         remark #17104: loop was not parallelized: existence of parallel dependence
+         remark #17106: parallel dependence: assumed ANTI dependence between cnpi_mp_irrep_ line 401 and cnpi_mp_irrep_ line 401
+         remark #17106: parallel dependence: assumed FLOW dependence between cnpi_mp_irrep_ line 401 and cnpi_mp_irrep_ line 401
+         remark #15542: loop was not vectorized: inner loop was already vectorized
+
+         LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(401,9)
+            remark #17108: loop was not parallelized: insufficient computational work
+            remark #15388: vectorization support: reference 1128 has aligned access
+            remark #15300: LOOP WAS VECTORIZED
+            remark #15449: unmasked aligned unit stride stores: 1 
+            remark #15460: masked strided loads: 1 
+            remark #15475: --- begin vector loop cost summary ---
+            remark #15476: scalar loop cost: 4 
+            remark #15477: vector loop cost: 2.500 
+            remark #15478: estimated potential speedup: 1.600 
+            remark #15479: lightweight vector operations: 2 
+            remark #15481: heavy-overhead vector operations: 1 
+            remark #15488: --- end vector loop cost summary ---
+         LOOP END
+
+         LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(401,9)
+         <Remainder>
+         LOOP END
+
+         LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(401,25)
+            remark #17108: loop was not parallelized: insufficient computational work
+            remark #15388: vectorization support: reference 1128 has aligned access
+            remark #15300: LOOP WAS VECTORIZED
+            remark #15448: unmasked aligned unit stride loads: 1 
+            remark #15462: unmasked indexed (or gather) loads: 1 
+            remark #15475: --- begin vector loop cost summary ---
+            remark #15476: scalar loop cost: 4 
+            remark #15477: vector loop cost: 2.500 
+            remark #15478: estimated potential speedup: 1.590 
+            remark #15479: lightweight vector operations: 2 
+            remark #15481: heavy-overhead vector operations: 1 
+            remark #15488: --- end vector loop cost summary ---
+         LOOP END
+
+         LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(401,25)
+         <Remainder>
+         LOOP END
+
+         LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(402,23)
+            remark #17108: loop was not parallelized: insufficient computational work
+            remark #15388: vectorization support: reference 1138 has aligned access
+            remark #15300: LOOP WAS VECTORIZED
+            remark #15449: unmasked aligned unit stride stores: 1 
+            remark #15460: masked strided loads: 1 
+            remark #15475: --- begin vector loop cost summary ---
+            remark #15476: scalar loop cost: 4 
+            remark #15477: vector loop cost: 2.500 
+            remark #15478: estimated potential speedup: 1.600 
+            remark #15479: lightweight vector operations: 2 
+            remark #15481: heavy-overhead vector operations: 1 
+            remark #15488: --- end vector loop cost summary ---
+         LOOP END
+
+         LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(402,23)
+         <Remainder>
+         LOOP END
+      LOOP END
+   LOOP END
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(391,3):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to increase the width of stores
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(391,3):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (1, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(391,3):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to increase the width of stores
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(391,3):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (1, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(391,3):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to increase the width of stores
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(391,3):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (1, 0)
+===========================================================================
+
+Begin optimization report for: CLEANUP
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (CLEANUP) [2/13=15.4%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(566,12)
+  -> EXTERN: (573,25) for_dealloc_allocatable
+  -> EXTERN: (574,25) for_dealloc_allocatable
+  -> EXTERN: (575,26) for_dealloc_allocatable
+  -> EXTERN: (576,27) for_dealloc_allocatable
+  -> EXTERN: (577,26) for_dealloc_allocatable
+  -> EXTERN: (579,17) for_write_seq_lis
+  -> EXTERN: (580,8) DEALLOCIRREPS
+  -> EXTERN: (581,17) for_write_seq_lis
+  -> EXTERN: (582,8) DEALLOCPCYCLE
+  -> EXTERN: (583,17) for_write_seq_lis
+  -> EXTERN: (584,8) CLEANHDDATA
+  -> EXTERN: (586,17) for_write_seq_lis
+  -> EXTERN: (589,40) for_dealloc_allocatable
+  -> EXTERN: (590,40) for_dealloc_allocatable
+  -> EXTERN: (592,5) for_dealloc_allocatable
+  -> EXTERN: (592,5) for_dealloc_allocatable
+  -> EXTERN: (592,5) for_dealloc_allocatable
+  -> EXTERN: (592,5) for_dealloc_allocatable
+  -> EXTERN: (595,3) for_write_seq_fmt
+  -> EXTERN: (596,9) for_close
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(588,5)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between progdata_mp_coordset_ line 589 and progdata_mp_coordset_ line 590
+   remark #17106: parallel dependence: assumed FLOW dependence between progdata_mp_coordset_ line 590 and progdata_mp_coordset_ line 589
+   remark #15382: vectorization support: call to function for_dealloc_allocatable cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(589,40) ]
+   remark #15382: vectorization support: call to function for_dealloc_allocatable cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(590,40) ]
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed ANTI dependence between progdata_mp_coordset_ line 589 and progdata_mp_coordset_ line 590
+   remark #15346: vector dependence: assumed FLOW dependence between progdata_mp_coordset_ line 590 and progdata_mp_coordset_ line 589
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(592,5)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed OUTPUT dependence between  line 592 and  line 592
+   remark #17106: parallel dependence: assumed OUTPUT dependence between  line 592 and  line 592
+   remark #15382: vectorization support: call to function for_dealloc_allocatable cannot be vectorized
+   remark #15382: vectorization support: call to function for_dealloc_allocatable cannot be vectorized
+   remark #15382: vectorization support: call to function for_dealloc_allocatable cannot be vectorized
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed OUTPUT dependence between  line 592 and  line 592
+   remark #15346: vector dependence: assumed OUTPUT dependence between  line 592 and  line 592
+LOOP END
+===========================================================================
+
+Begin optimization report for: READCOLGEOM
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (READCOLGEOM) [3/13=23.1%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(602,12)
+  -> EXTERN: (613,9) GETFLUNIT
+  -> EXTERN: (614,3) __resetsp_inlined
+  -> EXTERN: (614,3) for_write_seq_fmt_xmit
+  -> EXTERN: (614,3) for_write_seq_fmt_xmit
+  -> EXTERN: (614,3) for_write_seq_fmt_xmit
+  -> EXTERN: (614,3) for_write_seq_fmt
+  -> EXTERN: (614,3) __getsp_inlined
+  -> EXTERN: (614,64) for_trim
+  -> EXTERN: (614,69) _alloca
+  -> EXTERN: (614,69) for_adjustl
+  -> EXTERN: (614,77) _alloca
+  -> EXTERN: (615,3) __resetsp_inlined
+  -> EXTERN: (615,3) for_open
+  -> EXTERN: (615,3) __getsp_inlined
+  -> EXTERN: (615,24) for_trim
+  -> EXTERN: (615,29) _alloca
+  -> EXTERN: (615,29) for_adjustl
+  -> EXTERN: (615,37) _alloca
+  -> EXTERN: (618,5) for_write_seq_lis
+  -> EXTERN: (618,5) for_write_seq_lis_xmit
+  -> EXTERN: (618,5) for_write_seq_lis_xmit
+  -> EXTERN: (618,5) __resetsp_inlined
+  -> EXTERN: (618,5) __getsp_inlined
+  -> EXTERN: (618,38) for_trim
+  -> EXTERN: (618,43) for_adjustl
+  -> EXTERN: (618,43) _alloca
+  -> EXTERN: (618,51) _alloca
+  -> EXTERN: (620,11) for_close
+  -> EXTERN: (625,5) for_read_seq_lis_xmit
+  -> EXTERN: (625,5) for_read_seq_lis_xmit
+  -> EXTERN: (625,5) for_read_seq_lis_xmit
+  -> EXTERN: (625,5) for_read_seq_lis_xmit
+  -> EXTERN: (625,5) for_read_seq_lis_xmit
+  -> EXTERN: (625,5) for_read_seq_lis
+  -> EXTERN: (627,9) for_write_seq_lis_xmit
+  -> EXTERN: (627,9) for_write_seq_lis_xmit
+  -> EXTERN: (627,9) for_write_seq_lis_xmit
+  -> EXTERN: (627,9) for_write_seq_lis
+  -> EXTERN: (629,15) for_close
+  -> EXTERN: (634,9) for_close
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(624,4)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed FLOW dependence between 1914 line 625 and 1914 line 629
+   remark #17106: parallel dependence: assumed ANTI dependence between 1914 line 629 and 1914 line 625
+   remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(625,5)
+      remark #17102: loop was not parallelized: not a parallelization candidate
+      remark #15523: loop was not vectorized: cannot compute loop iteration count before executing the loop.
+   LOOP END
+LOOP END
+
+
+Non-optimizable loops:
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(633,3)
+   remark #15341: loop was not vectorized: nonstandard loop is not a vectorization candidate
+   remark #17102: loop was not parallelized: not a parallelization candidate
+LOOP END
+===========================================================================
+
+Begin optimization report for: WRITECOLGEOM
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (WRITECOLGEOM) [4/13=30.8%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(640,12)
+  -> EXTERN: (651,3) __resetsp_inlined
+  -> EXTERN: (651,3) for_open
+  -> EXTERN: (651,3) __getsp_inlined
+  -> EXTERN: (651,24) for_trim
+  -> EXTERN: (651,29) _alloca
+  -> EXTERN: (651,29) for_adjustl
+  -> EXTERN: (651,37) _alloca
+  -> EXTERN: (652,3) for_rewind
+  -> EXTERN: (654,4) for_write_seq_fmt
+  -> EXTERN: (654,4) for_write_seq_fmt_xmit
+  -> EXTERN: (654,4) for_write_seq_fmt_xmit
+  -> EXTERN: (654,4) for_write_seq_fmt_xmit
+  -> EXTERN: (654,4) for_write_seq_fmt_xmit
+  -> EXTERN: (654,21) for_adjustl
+  -> EXTERN: (657,9) for_close
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(653,3)
+   remark #25096: Loop Interchange not done due to: Imperfect Loop Nest (Either at Source or due to other Compiler Transformations)
+   remark #25451: Advice: Loop Interchange, if possible, might help loopnest. Suggested Permutation: ( 1 2 ) --> ( 2 1 ) 
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed FLOW dependence between 2122 line 654 and 2122 line 654
+   remark #17106: parallel dependence: assumed ANTI dependence between 2122 line 654 and 2122 line 654
+   remark #15382: vectorization support: call to function for_adjustl cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(654,21) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(654,4) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt_xmit cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(654,4) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt_xmit cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(654,4) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt_xmit cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(654,4) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt_xmit cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(654,4) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt_xmit cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(654,4) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt_xmit cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(654,4) ]
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed FLOW dependence between 2122 line 654 and 2122 line 654
+   remark #15346: vector dependence: assumed ANTI dependence between 2122 line 654 and 2122 line 654
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(654,4)
+      remark #25436: completely unrolled by 3   (pre-vector) 
+   LOOP END
+LOOP END
+===========================================================================
+
+Begin optimization report for: READENER
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (READENER) [5/13=38.5%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(673,12)
+  -> EXTERN: (684,9) GETFLUNIT
+  -> EXTERN: (685,3) __resetsp_inlined
+  -> EXTERN: (685,3) for_open
+  -> EXTERN: (685,3) __getsp_inlined
+  -> EXTERN: (685,24) for_trim
+  -> EXTERN: (685,29) _alloca
+  -> EXTERN: (685,29) for_adjustl
+  -> EXTERN: (685,37) _alloca
+  -> EXTERN: (688,6) for_write_seq_lis
+  -> EXTERN: (691,3) for_read_seq_fmt
+  -> EXTERN: (693,5) for_read_seq_lis
+  -> EXTERN: (693,5) for_read_seq_lis_xmit
+  -> EXTERN: (697,5) for_rewind
+  -> EXTERN: (703,5) for_read_seq_lis
+  -> EXTERN: (706,15) for_close
+  -> EXTERN: (710,9) for_close
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(702,3)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed FLOW dependence between 2158 line 703 and 2158 line 706
+   remark #17106: parallel dependence: assumed ANTI dependence between 2158 line 706 and 2158 line 703
+   remark #15520: loop was not vectorized: loop with early exits cannot be vectorized unless it meets search loop idiom criteria
+LOOP END
+===========================================================================
+
+Begin optimization report for: READGRADS
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (READGRADS) [6/13=46.2%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(716,12)
+  -> EXTERN: (724,9) GETFLUNIT
+  -> EXTERN: (725,3) __resetsp_inlined
+  -> EXTERN: (725,3) for_open
+  -> EXTERN: (725,3) __getsp_inlined
+  -> EXTERN: (725,24) for_trim
+  -> EXTERN: (725,29) _alloca
+  -> EXTERN: (725,29) for_adjustl
+  -> EXTERN: (725,37) _alloca
+  -> EXTERN: (729,11) for_close
+  -> EXTERN: (735,5) for_read_seq_lis_xmit
+  -> EXTERN: (735,5) for_read_seq_lis_xmit
+  -> EXTERN: (735,5) for_read_seq_lis_xmit
+  -> EXTERN: (735,5) for_read_seq_lis
+  -> EXTERN: (738,15) for_close
+  -> EXTERN: (743,9) for_close
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(734,4)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed FLOW dependence between 2273 line 735 and 2273 line 738
+   remark #17106: parallel dependence: assumed ANTI dependence between 2273 line 738 and 2273 line 735
+   remark #15520: loop was not vectorized: loop with early exits cannot be vectorized unless it meets search loop idiom criteria
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(735,5)
+      remark #17102: loop was not parallelized: not a parallelization candidate
+      remark #15523: loop was not vectorized: cannot compute loop iteration count before executing the loop.
+   LOOP END
+LOOP END
+
+
+Non-optimizable loops:
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(742,3)
+   remark #15341: loop was not vectorized: nonstandard loop is not a vectorization candidate
+   remark #17102: loop was not parallelized: not a parallelization candidate
+LOOP END
+===========================================================================
+
+Begin optimization report for: READHESSIAN
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (READHESSIAN) [7/13=53.8%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(750,12)
+  -> EXTERN: (760,3) __resetsp_inlined
+  -> EXTERN: (760,3) for_open
+  -> EXTERN: (760,3) __getsp_inlined
+  -> EXTERN: (760,24) for_trim
+  -> EXTERN: (760,29) _alloca
+  -> EXTERN: (760,29) for_adjustl
+  -> EXTERN: (760,37) _alloca
+  -> EXTERN: (764,4) for_read_seq_fmt_xmit
+  -> EXTERN: (764,4) for_read_seq_fmt
+  -> EXTERN: (764,4) for_read_seq_fmt_xmit
+  -> EXTERN: (768,9) for_close
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(760,3)
+   remark #17102: loop was not parallelized: not a parallelization candidate
+   remark #15521: loop was not vectorized: explicitly compute the iteration count before executing the loop or try using canonical loop form
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(764,4)
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed OUTPUT dependence between ARGBLOCK_REC_169 line 764 and ARGBLOCK_REC_169 line 764
+      remark #17106: parallel dependence: assumed OUTPUT dependence between BLKFIELD_354 line 764 and BLKFIELD_354 line 764
+      remark #15382: vectorization support: call to function for_read_seq_fmt_xmit cannot be vectorized
+      remark #15344: loop was not vectorized: vector dependence prevents vectorization
+      remark #15346: vector dependence: assumed OUTPUT dependence between ARGBLOCK_REC_169 line 764 and ARGBLOCK_REC_169 line 764
+      remark #15346: vector dependence: assumed OUTPUT dependence between BLKFIELD_354 line 764 and BLKFIELD_354 line 764
+   LOOP END
+LOOP END
+===========================================================================
+
+Begin optimization report for: FILENAME
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (FILENAME) [8/13=61.5%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(778,10)
+  -> EXTERN: (786,3) for_write_int_fmt
+  -> EXTERN: (787,3) for_write_int_fmt
+  -> EXTERN: (790,5) for_cpystr
+  -> EXTERN: (791,7) for_f90_index
+  -> EXTERN: (792,12) memcpy
+  -> EXTERN: (793,13) for_cpystr
+  -> EXTERN: (795,5) for_cpystr
+  -> EXTERN: (796,7) for_f90_index
+  -> EXTERN: (797,12) memcpy
+  -> EXTERN: (798,7) for_f90_index
+  -> EXTERN: (799,12) memcpy
+  -> EXTERN: (800,13) for_cpystr
+  -> EXTERN: (803,3) for_cpystr
+  -> EXTERN: (803,14) for_trim
+  -> EXTERN: (803,19) for_adjustl
+
+===========================================================================
+
+Begin optimization report for: PRINTMATRIX
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (PRINTMATRIX) [9/13=69.2%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(817,12)
+  -> EXTERN: (831,8) for_len_trim
+  -> EXTERN: (835,8) for_len_trim
+  -> EXTERN: (839,3) for_write_int_fmt
+  -> EXTERN: (840,3) for_write_int_fmt
+  -> EXTERN: (841,3) for_concat
+  -> EXTERN: (841,17) for_trim
+  -> EXTERN: (841,22) for_adjustl
+  -> EXTERN: (842,3) for_concat
+  -> EXTERN: (842,16) for_trim
+  -> EXTERN: (842,21) for_adjustl
+  -> EXTERN: (847,3) for_write_int_fmt
+  -> EXTERN: (848,3) for_write_int_fmt
+  -> EXTERN: (850,5) for_concat
+  -> EXTERN: (850,17) for_trim
+  -> EXTERN: (850,22) for_adjustl
+  -> EXTERN: (850,45) for_trim
+  -> EXTERN: (850,50) for_adjustl
+  -> EXTERN: (850,72) for_trim
+  -> EXTERN: (850,77) for_adjustl
+  -> EXTERN: (852,5) for_concat
+  -> EXTERN: (852,17) for_trim
+  -> EXTERN: (852,22) for_adjustl
+  -> EXTERN: (852,45) for_trim
+  -> EXTERN: (852,50) for_adjustl
+  -> EXTERN: (854,3) for_write_seq_lis
+  -> EXTERN: (855,3) for_write_int_fmt
+  -> EXTERN: (856,3) for_write_int_fmt
+  -> EXTERN: (857,3) for_concat
+  -> EXTERN: (857,18) for_trim
+  -> EXTERN: (857,23) for_adjustl
+  -> EXTERN: (857,44) for_trim
+  -> EXTERN: (857,49) for_adjustl
+  -> EXTERN: (859,12) ceilf
+  -> EXTERN: (863,4) for_write_seq_fmt
+  -> EXTERN: (863,16) for_trim
+  -> EXTERN: (865,5) for_write_seq_fmt
+  -> EXTERN: (865,17) for_trim
+  -> EXTERN: (867,4) for_write_seq_fmt
+  -> EXTERN: (869,5) for_write_seq_fmt
+  -> EXTERN: (869,17) for_trim
+  -> EXTERN: (871,6) for_write_seq_fmt
+  -> EXTERN: (871,18) for_trim
+  -> EXTERN: (873,5) for_write_seq_fmt
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(830,3)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between rlen line 832 and rlen line 832
+   remark #17106: parallel dependence: assumed FLOW dependence between rlen line 832 and rlen line 832
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed ANTI dependence between rlen line 832 and rlen line 832
+   remark #15346: vector dependence: assumed FLOW dependence between rlen line 832 and rlen line 832
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(834,3)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between clen line 836 and clen line 836
+   remark #17106: parallel dependence: assumed FLOW dependence between clen line 836 and clen line 836
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed ANTI dependence between clen line 836 and clen line 836
+   remark #15346: vector dependence: assumed FLOW dependence between clen line 836 and clen line 836
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(860,3)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed OUTPUT dependence between 2487 line 863 and 2487 line 873
+   remark #17106: parallel dependence: assumed OUTPUT dependence between 2487 line 873 and 2487 line 863
+   remark #15382: vectorization support: call to function for_trim cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(863,16) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(863,4) ]
+   remark #15382: vectorization support: call to function for_trim cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(865,17) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(865,5) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(867,4) ]
+   remark #15382: vectorization support: call to function for_trim cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(869,17) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(869,5) ]
+   remark #15382: vectorization support: call to function for_trim cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(871,18) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(871,6) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(873,5) ]
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed OUTPUT dependence between 2487 line 863 and 2487 line 873
+   remark #15346: vector dependence: assumed OUTPUT dependence between 2487 line 873 and 2487 line 863
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(864,4)
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed OUTPUT dependence between 2487 line 865 and 2487 line 865
+      remark #17106: parallel dependence: assumed OUTPUT dependence between 2487 line 865 and 2487 line 865
+      remark #15382: vectorization support: call to function for_trim cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(865,17) ]
+      remark #15382: vectorization support: call to function for_write_seq_fmt cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(865,5) ]
+      remark #15344: loop was not vectorized: vector dependence prevents vectorization
+      remark #15346: vector dependence: assumed OUTPUT dependence between 2487 line 865 and 2487 line 865
+      remark #15346: vector dependence: assumed OUTPUT dependence between 2487 line 865 and 2487 line 865
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(868,4)
+      remark #25096: Loop Interchange not done due to: Imperfect Loop Nest (Either at Source or due to other Compiler Transformations)
+      remark #25451: Advice: Loop Interchange, if possible, might help loopnest. Suggested Permutation: ( 1 2 ) --> ( 2 1 ) 
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed OUTPUT dependence between 2487 line 869 and 2487 line 873
+      remark #17106: parallel dependence: assumed OUTPUT dependence between 2487 line 873 and 2487 line 869
+      remark #15382: vectorization support: call to function for_trim cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(869,17) ]
+      remark #15382: vectorization support: call to function for_write_seq_fmt cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(869,5) ]
+      remark #15382: vectorization support: call to function for_trim cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(871,18) ]
+      remark #15382: vectorization support: call to function for_write_seq_fmt cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(871,6) ]
+      remark #15382: vectorization support: call to function for_write_seq_fmt cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(873,5) ]
+      remark #15344: loop was not vectorized: vector dependence prevents vectorization
+      remark #15346: vector dependence: assumed OUTPUT dependence between 2487 line 869 and 2487 line 873
+      remark #15346: vector dependence: assumed OUTPUT dependence between 2487 line 873 and 2487 line 869
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(870,5)
+         remark #17104: loop was not parallelized: existence of parallel dependence
+         remark #17106: parallel dependence: assumed OUTPUT dependence between 2487 line 871 and 2487 line 871
+         remark #17106: parallel dependence: assumed OUTPUT dependence between 2487 line 871 and 2487 line 871
+         remark #15382: vectorization support: call to function for_trim cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(871,18) ]
+         remark #15382: vectorization support: call to function for_write_seq_fmt cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(871,6) ]
+         remark #15344: loop was not vectorized: vector dependence prevents vectorization
+         remark #15346: vector dependence: assumed OUTPUT dependence between 2487 line 871 and 2487 line 871
+         remark #15346: vector dependence: assumed OUTPUT dependence between 2487 line 871 and 2487 line 871
+      LOOP END
+   LOOP END
+LOOP END
+===========================================================================
+
+Begin optimization report for: READCOORDS
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (READCOORDS) [10/13=76.9%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(6,12)
+  -> EXTERN: (23,10) GETFLUNIT
+  -> EXTERN: (30,17) for_write_seq_lis
+  -> EXTERN: (31,3) for_open
+  -> EXTERN: (33,3) for_read_seq_fmt
+  -> EXTERN: (35,3) for_read_seq_lis_xmit
+  -> EXTERN: (35,3) for_read_seq_lis
+  -> EXTERN: (36,29) for_stop_core
+  -> EXTERN: (38,26) for_dealloc_allocatable
+  -> EXTERN: (38,26) for_dealloc_allocatable
+  -> EXTERN: (38,26) for_dealloc_allocatable
+  -> EXTERN: (38,26) for_dealloc_allocatable
+  -> EXTERN: (39,3) for_alloc_allocatable
+  -> EXTERN: (39,3) for_check_mult_overflow64
+  -> EXTERN: (41,17) for_write_seq_lis
+  -> EXTERN: (41,17) for_write_seq_lis_xmit
+  -> EXTERN: (41,17) for_write_seq_lis_xmit
+  -> EXTERN: (42,3) for_alloc_allocatable
+  -> EXTERN: (42,3) for_check_mult_overflow64
+  -> EXTERN: (46,5) for_read_seq_fmt
+  -> EXTERN: (47,5) for_read_seq_lis_xmit
+  -> EXTERN: (47,5) for_read_seq_lis_xmit
+  -> EXTERN: (47,5) for_read_seq_lis
+  -> EXTERN: (50,5) for_read_seq_lis
+  -> EXTERN: (51,15) for_stop_core
+  -> EXTERN: (53,28) for_stop_core
+  -> EXTERN: (59,19) for_write_seq_fmt_xmit
+  -> EXTERN: (59,19) for_write_seq_fmt_xmit
+  -> EXTERN: (59,19) for_write_seq_fmt_xmit
+  -> EXTERN: (59,19) for_write_seq_fmt_xmit
+  -> EXTERN: (59,19) for_write_seq_fmt
+  -> EXTERN: (60,70) for_trim
+  -> EXTERN: (62,36) for_dealloc_allocatable
+  -> EXTERN: (63,5) for_alloc_allocatable
+  -> EXTERN: (64,5) for_read_seq_lis
+  -> EXTERN: (65,15) for_stop_core
+  -> EXTERN: (79,13) for_write_seq_lis
+  -> EXTERN: (80,18) for_stop_core
+  -> EXTERN: (84,9) for_check_mult_overflow64
+  -> EXTERN: (84,9) for_alloc_allocatable
+  -> EXTERN: (110,9) for_check_mult_overflow64
+  -> EXTERN: (110,9) for_alloc_allocatable
+  -> EXTERN: (112,9) for_dealloc_allocatable
+  -> EXTERN: (121,9) for_alloc_allocatable
+  -> EXTERN: (121,9) for_check_mult_overflow64
+  -> EXTERN: (127,22) reorderoop_
+  -> EXTERN: (129,22) reorderoop2_
+  -> EXTERN: (146,41) for_dealloc_allocatable
+  -> EXTERN: (147,9) for_alloc_allocatable
+  -> EXTERN: (147,9) for_check_mult_overflow64
+  -> EXTERN: (149,9) for_dealloc_allocatable
+  -> EXTERN: (161,64) for_stop_core
+  -> EXTERN: (166,9) for_alloc_allocatable
+  -> EXTERN: (166,9) for_check_mult_overflow64
+  -> EXTERN: (171,16) reorderdot4_
+  -> EXTERN: (186,41) for_dealloc_allocatable
+  -> EXTERN: (187,9) for_alloc_allocatable
+  -> EXTERN: (187,9) for_check_mult_overflow64
+  -> EXTERN: (189,9) for_dealloc_allocatable
+  -> EXTERN: (203,13) for_write_seq_lis
+  -> EXTERN: (204,18) for_stop_core
+  -> EXTERN: (208,9) for_alloc_allocatable
+  -> EXTERN: (208,9) for_check_mult_overflow64
+  -> EXTERN: (236,9) for_alloc_allocatable
+  -> EXTERN: (236,9) for_check_mult_overflow64
+  -> EXTERN: (238,9) for_dealloc_allocatable
+  -> EXTERN: (246,9) for_alloc_allocatable
+  -> EXTERN: (246,9) for_check_mult_overflow64
+  -> EXTERN: (250,16) reorderabend_
+  -> EXTERN: (268,9) for_alloc_allocatable
+  -> EXTERN: (268,9) for_check_mult_overflow64
+  -> EXTERN: (270,9) for_dealloc_allocatable
+  -> EXTERN: (276,9) for_write_seq_lis_xmit
+  -> EXTERN: (276,9) for_write_seq_lis
+  -> EXTERN: (277,14) for_stop_core
+  -> EXTERN: (282,5) for_check_mult_overflow64
+  -> EXTERN: (282,5) for_alloc_allocatable
+  -> EXTERN: (292,5) for_write_seq_lis
+  -> EXTERN: (293,5) for_write_seq_lis
+  -> EXTERN: (299,21) for_write_seq_fmt
+  -> EXTERN: (299,21) for_write_seq_fmt_xmit
+  -> EXTERN: (299,21) for_write_seq_fmt_xmit
+  -> EXTERN: (299,21) for_write_seq_fmt_xmit
+  -> EXTERN: (299,21) for_write_seq_fmt_xmit
+  -> EXTERN: (302,21) for_write_seq_fmt
+  -> EXTERN: (302,21) for_write_seq_fmt_xmit
+  -> EXTERN: (302,21) for_write_seq_fmt_xmit
+  -> EXTERN: (302,21) for_write_seq_fmt_xmit
+  -> EXTERN: (302,21) for_write_seq_fmt_xmit
+  -> EXTERN: (305,21) for_write_seq_fmt
+  -> EXTERN: (305,21) for_write_seq_fmt_xmit
+  -> EXTERN: (305,21) for_write_seq_fmt_xmit
+  -> EXTERN: (305,21) for_write_seq_fmt_xmit
+  -> EXTERN: (305,21) for_write_seq_fmt_xmit
+  -> EXTERN: (308,21) for_write_seq_fmt
+  -> EXTERN: (308,21) for_write_seq_fmt_xmit
+  -> EXTERN: (308,21) for_write_seq_fmt_xmit
+  -> EXTERN: (308,21) for_write_seq_fmt_xmit
+  -> EXTERN: (308,21) for_write_seq_fmt_xmit
+  -> EXTERN: (311,21) for_write_seq_fmt
+  -> EXTERN: (311,21) for_write_seq_fmt_xmit
+  -> EXTERN: (311,21) for_write_seq_fmt_xmit
+  -> EXTERN: (311,21) for_write_seq_fmt_xmit
+  -> EXTERN: (311,21) for_write_seq_fmt_xmit
+  -> EXTERN: (314,21) for_write_seq_fmt
+  -> EXTERN: (314,21) for_write_seq_fmt_xmit
+  -> EXTERN: (314,21) for_write_seq_fmt_xmit
+  -> EXTERN: (314,21) for_write_seq_fmt_xmit
+  -> EXTERN: (314,21) for_write_seq_fmt_xmit
+  -> EXTERN: (317,26) for_stop_core
+  -> EXTERN: (319,13) for_write_seq_fmt
+  -> EXTERN: (326,26) for_dealloc_allocatable
+  -> EXTERN: (327,3) for_alloc_allocatable
+  -> EXTERN: (327,3) for_check_mult_overflow64
+  -> EXTERN: (338,3) for_alloc_allocatable
+  -> EXTERN: (338,3) for_check_mult_overflow64
+  -> EXTERN: (339,3) for_alloc_allocatable
+  -> EXTERN: (339,3) for_check_mult_overflow64
+  -> EXTERN: (352,3) for_write_int_fmt
+  -> EXTERN: (353,17) for_write_seq_lis
+  -> EXTERN: (353,17) for_write_seq_lis_xmit
+  -> EXTERN: (353,17) for_write_seq_lis_xmit
+  -> EXTERN: (356,5) for_read_seq_lis_xmit
+  -> EXTERN: (356,5) for_read_seq_lis
+  -> EXTERN: (357,15) for_stop_core
+  -> EXTERN: (359,9) for_write_seq_fmt
+  -> EXTERN: (360,9) for_write_seq_fmt
+  -> EXTERN: (361,9) for_write_seq_fmt_xmit
+  -> EXTERN: (361,9) for_write_seq_fmt
+  -> EXTERN: (367,9) for_close
+  -> EXTERN: (368,3) for_dealloc_allocatable
+  -> EXTERN: (370,1) for_dealloc_allocatable
+  -> EXTERN: (370,1) for_dealloc_allocatable
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(38,26)
+   remark #17102: loop was not parallelized: not a parallelization candidate
+   remark #15523: loop was not vectorized: cannot compute loop iteration count before executing the loop.
+   remark #25456: Number of Array Refs Scalar Replaced In Loop: 1
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(39,3)
+   remark #17102: loop was not parallelized: not a parallelization candidate
+   remark #15523: loop was not vectorized: cannot compute loop iteration count before executing the loop.
+   remark #25456: Number of Array Refs Scalar Replaced In Loop: 2
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(248,9)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed OUTPUT dependence between rawcoord line 249 and rawcoord line 250
+   remark #17106: parallel dependence: assumed OUTPUT dependence between rawcoord line 250 and rawcoord line 249
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(253,11)
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(254,20)
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15448: unmasked aligned unit stride loads: 1 
+         remark #15450: unmasked unaligned unit stride loads: 1 
+         remark #15475: --- begin vector loop cost summary ---
+         remark #15476: scalar loop cost: 37 
+         remark #15477: vector loop cost: 12.500 
+         remark #15478: estimated potential speedup: 2.050 
+         remark #15479: lightweight vector operations: 20 
+         remark #15480: medium-overhead vector operations: 2 
+         remark #15488: --- end vector loop cost summary ---
+         remark #25015: Estimate of max trip count of loop=2
+      LOOP END
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(262,17)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15389: vectorization support: reference TMPCOORD has unaligned access
+      remark #15388: vectorization support: reference newcrd has aligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15427: loop was completely unrolled
+      remark #15399: vectorization support: unroll factor set to 2
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15448: unmasked aligned unit stride loads: 1 
+      remark #15451: unmasked unaligned unit stride stores: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 4 
+      remark #15477: vector loop cost: 6.000 
+      remark #15478: estimated potential speedup: 1.060 
+      remark #15479: lightweight vector operations: 2 
+      remark #15481: heavy-overhead vector operations: 1 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(249,11)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference rawcoord has aligned access
+      remark #15389: vectorization support: reference progdata_mp_coordset_ has unaligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+      remark #15399: vectorization support: unroll factor set to 2
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15450: unmasked unaligned unit stride loads: 1 
+      remark #15458: masked indexed (or gather) loads: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 5 
+      remark #15477: vector loop cost: 20.000 
+      remark #15478: estimated potential speedup: 0.390 
+      remark #15479: lightweight vector operations: 10 
+      remark #15480: medium-overhead vector operations: 2 
+      remark #15488: --- end vector loop cost summary ---
+      remark #25436: completely unrolled by 4  
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(269,9)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between progdata_mp_coordset_ line 269 and progdata_mp_coordset_ line 269
+   remark #17106: parallel dependence: assumed FLOW dependence between progdata_mp_coordset_ line 269 and progdata_mp_coordset_ line 269
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(269,9)
+      remark #25401: memcopy(with guard) generated
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed ANTI dependence between progdata_mp_coordset_ line 269 and progdata_mp_coordset_ line 269
+      remark #17106: parallel dependence: assumed FLOW dependence between progdata_mp_coordset_ line 269 and progdata_mp_coordset_ line 269
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(269,9)
+      <Peeled, Multiversioned v2>
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(269,9)
+      <Multiversioned v2>
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15388: vectorization support: reference progdata_mp_coordset_ has aligned access
+         remark #15389: vectorization support: reference TMPCOORD has unaligned access
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+         remark #15449: unmasked aligned unit stride stores: 1 
+         remark #15450: unmasked unaligned unit stride loads: 1 
+         remark #15475: --- begin vector loop cost summary ---
+         remark #15476: scalar loop cost: 4 
+         remark #15477: vector loop cost: 2.500 
+         remark #15478: estimated potential speedup: 1.560 
+         remark #15479: lightweight vector operations: 1 
+         remark #15480: medium-overhead vector operations: 2 
+         remark #15488: --- end vector loop cost summary ---
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(269,9)
+      <Remainder, Multiversioned v2>
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(210,9)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between progdata_mp_coordset_ line 221 and progdata_mp_coordset_ line 230
+   remark #17106: parallel dependence: assumed FLOW dependence between progdata_mp_coordset_ line 230 and progdata_mp_coordset_ line 221
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed FLOW dependence between newcrd line 211 and newcrd line 231
+   remark #15346: vector dependence: assumed ANTI dependence between newcrd line 231 and newcrd line 211
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(221,13)
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #15520: loop was not vectorized: loop with early exits cannot be vectorized unless it meets search loop idiom criteria
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(231,17)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15389: vectorization support: reference TMPCOORD has unaligned access
+      remark #15388: vectorization support: reference newcrd has aligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+      remark #15448: unmasked aligned unit stride loads: 1 
+      remark #15451: unmasked unaligned unit stride stores: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 4 
+      remark #15477: vector loop cost: 3.000 
+      remark #15478: estimated potential speedup: 0.920 
+      remark #15479: lightweight vector operations: 2 
+      remark #15481: heavy-overhead vector operations: 1 
+      remark #15488: --- end vector loop cost summary ---
+      remark #25436: completely unrolled by 3  
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(237,9)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between progdata_mp_coordset_ line 237 and progdata_mp_coordset_ line 237
+   remark #17106: parallel dependence: assumed FLOW dependence between progdata_mp_coordset_ line 237 and progdata_mp_coordset_ line 237
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(237,9)
+      remark #25401: memcopy(with guard) generated
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed ANTI dependence between progdata_mp_coordset_ line 237 and progdata_mp_coordset_ line 237
+      remark #17106: parallel dependence: assumed FLOW dependence between progdata_mp_coordset_ line 237 and progdata_mp_coordset_ line 237
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(237,9)
+      <Peeled, Multiversioned v2>
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(237,9)
+      <Multiversioned v2>
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15388: vectorization support: reference progdata_mp_coordset_ has aligned access
+         remark #15389: vectorization support: reference TMPCOORD has unaligned access
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+         remark #15449: unmasked aligned unit stride stores: 1 
+         remark #15450: unmasked unaligned unit stride loads: 1 
+         remark #15475: --- begin vector loop cost summary ---
+         remark #15476: scalar loop cost: 4 
+         remark #15477: vector loop cost: 2.500 
+         remark #15478: estimated potential speedup: 1.560 
+         remark #15479: lightweight vector operations: 1 
+         remark #15480: medium-overhead vector operations: 2 
+         remark #15488: --- end vector loop cost summary ---
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(237,9)
+      <Remainder, Multiversioned v2>
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(86,9)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between progdata_mp_coordset_ line 96 and progdata_mp_coordset_ line 104
+   remark #17106: parallel dependence: assumed FLOW dependence between progdata_mp_coordset_ line 104 and progdata_mp_coordset_ line 96
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed FLOW dependence between newcrd line 87 and newcrd line 105
+   remark #15346: vector dependence: assumed ANTI dependence between newcrd line 105 and newcrd line 87
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(96,13)
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #15520: loop was not vectorized: loop with early exits cannot be vectorized unless it meets search loop idiom criteria
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(105,17)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15389: vectorization support: reference TMPCOORD has unaligned access
+      remark #15388: vectorization support: reference newcrd has aligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+      remark #15448: unmasked aligned unit stride loads: 1 
+      remark #15451: unmasked unaligned unit stride stores: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 4 
+      remark #15477: vector loop cost: 3.000 
+      remark #15478: estimated potential speedup: 0.880 
+      remark #15479: lightweight vector operations: 2 
+      remark #15481: heavy-overhead vector operations: 1 
+      remark #15488: --- end vector loop cost summary ---
+      remark #25436: completely unrolled by 2  
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(111,9)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between progdata_mp_coordset_ line 111 and progdata_mp_coordset_ line 111
+   remark #17106: parallel dependence: assumed FLOW dependence between progdata_mp_coordset_ line 111 and progdata_mp_coordset_ line 111
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(111,9)
+      remark #25401: memcopy(with guard) generated
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed ANTI dependence between progdata_mp_coordset_ line 111 and progdata_mp_coordset_ line 111
+      remark #17106: parallel dependence: assumed FLOW dependence between progdata_mp_coordset_ line 111 and progdata_mp_coordset_ line 111
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(111,9)
+      <Peeled, Multiversioned v2>
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(111,9)
+      <Multiversioned v2>
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15388: vectorization support: reference progdata_mp_coordset_ has aligned access
+         remark #15389: vectorization support: reference TMPCOORD has unaligned access
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+         remark #15449: unmasked aligned unit stride stores: 1 
+         remark #15450: unmasked unaligned unit stride loads: 1 
+         remark #15475: --- begin vector loop cost summary ---
+         remark #15476: scalar loop cost: 4 
+         remark #15477: vector loop cost: 2.500 
+         remark #15478: estimated potential speedup: 1.560 
+         remark #15479: lightweight vector operations: 1 
+         remark #15480: medium-overhead vector operations: 2 
+         remark #15488: --- end vector loop cost summary ---
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(111,9)
+      <Remainder, Multiversioned v2>
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(124,9)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed OUTPUT dependence between rawcoord line 125 and rawcoord line 129
+   remark #17106: parallel dependence: assumed OUTPUT dependence between rawcoord line 129 and rawcoord line 125
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(133,13)
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(134,20)
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15448: unmasked aligned unit stride loads: 1 
+         remark #15450: unmasked unaligned unit stride loads: 1 
+         remark #15475: --- begin vector loop cost summary ---
+         remark #15476: scalar loop cost: 37 
+         remark #15477: vector loop cost: 12.500 
+         remark #15478: estimated potential speedup: 2.050 
+         remark #15479: lightweight vector operations: 20 
+         remark #15480: medium-overhead vector operations: 2 
+         remark #15488: --- end vector loop cost summary ---
+         remark #25015: Estimate of max trip count of loop=2
+      LOOP END
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(141,17)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15389: vectorization support: reference TMPCOORD has unaligned access
+      remark #15388: vectorization support: reference ordoop has aligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15427: loop was completely unrolled
+      remark #15399: vectorization support: unroll factor set to 2
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15448: unmasked aligned unit stride loads: 1 
+      remark #15451: unmasked unaligned unit stride stores: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 4 
+      remark #15477: vector loop cost: 6.000 
+      remark #15478: estimated potential speedup: 1.060 
+      remark #15479: lightweight vector operations: 2 
+      remark #15481: heavy-overhead vector operations: 1 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(125,13)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference rawcoord has aligned access
+      remark #15389: vectorization support: reference progdata_mp_coordset_ has unaligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+      remark #15399: vectorization support: unroll factor set to 2
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15450: unmasked unaligned unit stride loads: 1 
+      remark #15458: masked indexed (or gather) loads: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 5 
+      remark #15477: vector loop cost: 20.000 
+      remark #15478: estimated potential speedup: 0.390 
+      remark #15479: lightweight vector operations: 10 
+      remark #15480: medium-overhead vector operations: 2 
+      remark #15488: --- end vector loop cost summary ---
+      remark #25436: completely unrolled by 4  
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(148,9)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between progdata_mp_coordset_ line 148 and progdata_mp_coordset_ line 148
+   remark #17106: parallel dependence: assumed FLOW dependence between progdata_mp_coordset_ line 148 and progdata_mp_coordset_ line 148
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(148,9)
+      remark #25401: memcopy(with guard) generated
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed ANTI dependence between progdata_mp_coordset_ line 148 and progdata_mp_coordset_ line 148
+      remark #17106: parallel dependence: assumed FLOW dependence between progdata_mp_coordset_ line 148 and progdata_mp_coordset_ line 148
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(148,9)
+      <Peeled, Multiversioned v2>
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(148,9)
+      <Multiversioned v2>
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15388: vectorization support: reference progdata_mp_coordset_ has aligned access
+         remark #15389: vectorization support: reference TMPCOORD has unaligned access
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+         remark #15449: unmasked aligned unit stride stores: 1 
+         remark #15450: unmasked unaligned unit stride loads: 1 
+         remark #15475: --- begin vector loop cost summary ---
+         remark #15476: scalar loop cost: 4 
+         remark #15477: vector loop cost: 2.500 
+         remark #15478: estimated potential speedup: 1.560 
+         remark #15479: lightweight vector operations: 1 
+         remark #15480: medium-overhead vector operations: 2 
+         remark #15488: --- end vector loop cost summary ---
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(148,9)
+      <Remainder, Multiversioned v2>
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(159,9)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed OUTPUT dependence between  line 161 and  line 161
+   remark #17106: parallel dependence: assumed OUTPUT dependence between  line 161 and  line 161
+   remark #15382: vectorization support: call to function for_stop_core cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(161,64) ]
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed OUTPUT dependence between  line 161 and  line 161
+   remark #15346: vector dependence: assumed OUTPUT dependence between  line 161 and  line 161
+   remark #25436: completely unrolled by 3  
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(160,11)
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed OUTPUT dependence between  line 161 and  line 161
+      remark #17106: parallel dependence: assumed OUTPUT dependence between  line 161 and  line 161
+      remark #15527: loop was not vectorized: function call to for_stop_core cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(161,64) ]
+      remark #25435: completely unrolled (triangular loop)
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(160,11)
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(160,11)
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(169,9)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed OUTPUT dependence between rawcoord line 170 and rawcoord line 171
+   remark #17106: parallel dependence: assumed OUTPUT dependence between rawcoord line 171 and rawcoord line 170
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(174,11)
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(175,16)
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15427: loop was completely unrolled
+         remark #15399: vectorization support: unroll factor set to 2
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15448: unmasked aligned unit stride loads: 1 
+         remark #15450: unmasked unaligned unit stride loads: 1 
+         remark #15475: --- begin vector loop cost summary ---
+         remark #15476: scalar loop cost: 20 
+         remark #15477: vector loop cost: 17.000 
+         remark #15478: estimated potential speedup: 1.420 
+         remark #15479: lightweight vector operations: 13 
+         remark #15480: medium-overhead vector operations: 2 
+         remark #15488: --- end vector loop cost summary ---
+      LOOP END
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(182,15)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15389: vectorization support: reference TMPCOORD has unaligned access
+      remark #15388: vectorization support: reference ordoop has aligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15427: loop was completely unrolled
+      remark #15399: vectorization support: unroll factor set to 2
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15448: unmasked aligned unit stride loads: 1 
+      remark #15451: unmasked unaligned unit stride stores: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 4 
+      remark #15477: vector loop cost: 6.000 
+      remark #15478: estimated potential speedup: 1.060 
+      remark #15479: lightweight vector operations: 2 
+      remark #15481: heavy-overhead vector operations: 1 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(170,11)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference rawcoord has aligned access
+      remark #15389: vectorization support: reference progdata_mp_coordset_ has unaligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+      remark #15399: vectorization support: unroll factor set to 2
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15450: unmasked unaligned unit stride loads: 1 
+      remark #15458: masked indexed (or gather) loads: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 5 
+      remark #15477: vector loop cost: 20.000 
+      remark #15478: estimated potential speedup: 0.390 
+      remark #15479: lightweight vector operations: 10 
+      remark #15480: medium-overhead vector operations: 2 
+      remark #15488: --- end vector loop cost summary ---
+      remark #25436: completely unrolled by 4  
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(188,9)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between progdata_mp_coordset_ line 188 and progdata_mp_coordset_ line 188
+   remark #17106: parallel dependence: assumed FLOW dependence between progdata_mp_coordset_ line 188 and progdata_mp_coordset_ line 188
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(188,9)
+      remark #25401: memcopy(with guard) generated
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed ANTI dependence between progdata_mp_coordset_ line 188 and progdata_mp_coordset_ line 188
+      remark #17106: parallel dependence: assumed FLOW dependence between progdata_mp_coordset_ line 188 and progdata_mp_coordset_ line 188
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(188,9)
+      <Peeled, Multiversioned v2>
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(188,9)
+      <Multiversioned v2>
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15388: vectorization support: reference progdata_mp_coordset_ has aligned access
+         remark #15389: vectorization support: reference TMPCOORD has unaligned access
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+         remark #15449: unmasked aligned unit stride stores: 1 
+         remark #15450: unmasked unaligned unit stride loads: 1 
+         remark #15475: --- begin vector loop cost summary ---
+         remark #15476: scalar loop cost: 4 
+         remark #15477: vector loop cost: 2.500 
+         remark #15478: estimated potential speedup: 1.560 
+         remark #15479: lightweight vector operations: 1 
+         remark #15480: medium-overhead vector operations: 2 
+         remark #15488: --- end vector loop cost summary ---
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(188,9)
+      <Remainder, Multiversioned v2>
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(283,5)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(283,5)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference progdata_mp_coordset_ has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(284,9) ]
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 3 
+   remark #15477: vector loop cost: 6.000 
+   remark #15478: estimated potential speedup: 1.920 
+   remark #15479: lightweight vector operations: 2 
+   remark #15480: medium-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(283,5)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(305,21)
+   remark #25401: memcopy(with guard) generated
+   remark #25401: memcopy(with guard) generated
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference 771 has aligned access
+   remark #15389: vectorization support: reference progdata_mp_coordset_ has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15427: loop was completely unrolled
+   remark #15399: vectorization support: unroll factor set to 2
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15450: unmasked unaligned unit stride loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 4 
+   remark #15477: vector loop cost: 5.000 
+   remark #15478: estimated potential speedup: 1.230 
+   remark #15479: lightweight vector operations: 1 
+   remark #15480: medium-overhead vector operations: 2 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(302,21)
+   remark #25401: memcopy(with guard) generated
+   remark #25401: memcopy(with guard) generated
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference 747 has aligned access
+   remark #15389: vectorization support: reference progdata_mp_coordset_ has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15450: unmasked unaligned unit stride loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 4 
+   remark #15477: vector loop cost: 2.500 
+   remark #15478: estimated potential speedup: 1.000 
+   remark #15479: lightweight vector operations: 1 
+   remark #15480: medium-overhead vector operations: 2 
+   remark #15488: --- end vector loop cost summary ---
+   remark #25436: completely unrolled by 3  
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(299,21)
+   remark #25401: memcopy(with guard) generated
+   remark #25401: memcopy(with guard) generated
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference 723 has aligned access
+   remark #15389: vectorization support: reference progdata_mp_coordset_ has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15450: unmasked unaligned unit stride loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 4 
+   remark #15477: vector loop cost: 2.500 
+   remark #15478: estimated potential speedup: 1.000 
+   remark #15479: lightweight vector operations: 1 
+   remark #15480: medium-overhead vector operations: 2 
+   remark #15488: --- end vector loop cost summary ---
+   remark #25436: completely unrolled by 2  
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(308,21)
+   remark #25401: memcopy(with guard) generated
+   remark #25401: memcopy(with guard) generated
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference 795 has aligned access
+   remark #15389: vectorization support: reference progdata_mp_coordset_ has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15427: loop was completely unrolled
+   remark #15399: vectorization support: unroll factor set to 2
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15450: unmasked unaligned unit stride loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 4 
+   remark #15477: vector loop cost: 5.000 
+   remark #15478: estimated potential speedup: 1.230 
+   remark #15479: lightweight vector operations: 1 
+   remark #15480: medium-overhead vector operations: 2 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(311,21)
+   remark #25401: memcopy(with guard) generated
+   remark #25401: memcopy(with guard) generated
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference 819 has aligned access
+   remark #15389: vectorization support: reference progdata_mp_coordset_ has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15427: loop was completely unrolled
+   remark #15399: vectorization support: unroll factor set to 2
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15450: unmasked unaligned unit stride loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 4 
+   remark #15477: vector loop cost: 5.000 
+   remark #15478: estimated potential speedup: 1.230 
+   remark #15479: lightweight vector operations: 1 
+   remark #15480: medium-overhead vector operations: 2 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(314,21)
+   remark #25401: memcopy(with guard) generated
+   remark #25401: memcopy(with guard) generated
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference 843 has aligned access
+   remark #15389: vectorization support: reference progdata_mp_coordset_ has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15427: loop was completely unrolled
+   remark #15399: vectorization support: unroll factor set to 2
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15450: unmasked unaligned unit stride loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 4 
+   remark #15477: vector loop cost: 5.000 
+   remark #15478: estimated potential speedup: 1.230 
+   remark #15479: lightweight vector operations: 1 
+   remark #15480: medium-overhead vector operations: 2 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(329,3)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed OUTPUT dependence between progdata_mp_coordmap_ line 332 and progdata_mp_coordmap_ line 332
+   remark #17106: parallel dependence: assumed OUTPUT dependence between progdata_mp_coordmap_ line 332 and progdata_mp_coordmap_ line 332
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(330,5)
+   <Peeled>
+      remark #25456: Number of Array Refs Scalar Replaced In Loop: 1
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(330,5)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15389: vectorization support: reference progdata_mp_coordmap_ has unaligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(332,9) ]
+      remark #15388: vectorization support: reference progdata_mp_coordmap_ has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(333,9) ]
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15399: vectorization support: unroll factor set to 2
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15442: entire loop may be executed in remainder
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15451: unmasked unaligned unit stride stores: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 5 
+      remark #15477: vector loop cost: 4.620 
+      remark #15478: estimated potential speedup: 1.050 
+      remark #15479: lightweight vector operations: 7 
+      remark #15480: medium-overhead vector operations: 1 
+      remark #15481: heavy-overhead vector operations: 1 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(330,5)
+   <Remainder>
+      remark #25456: Number of Array Refs Scalar Replaced In Loop: 1
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(341,3)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(341,3)
+      remark #25408: memset generated
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed OUTPUT dependence between progdata_mp_coordcond_ line 341 and progdata_mp_coordcond_ line 341
+      remark #17106: parallel dependence: assumed OUTPUT dependence between progdata_mp_coordcond_ line 341 and progdata_mp_coordcond_ line 341
+      remark #15398: loop was not vectorized: loop was transformed to memset or memcpy
+      remark #25015: Estimate of max trip count of loop=1
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(341,3)
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15388: vectorization support: reference progdata_mp_coordcond_ has aligned access
+         remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+         remark #15449: unmasked aligned unit stride stores: 1 
+         remark #15475: --- begin vector loop cost summary ---
+         remark #15476: scalar loop cost: 2 
+         remark #15477: vector loop cost: 1.500 
+         remark #15478: estimated potential speedup: 0.820 
+         remark #15479: lightweight vector operations: 2 
+         remark #15480: medium-overhead vector operations: 1 
+         remark #15488: --- end vector loop cost summary ---
+         remark #25439: unrolled with remainder by 2  
+         remark #25015: Estimate of max trip count of loop=12
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(341,3)
+      <Remainder>
+         remark #25015: Estimate of max trip count of loop=12
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(344,3)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed OUTPUT dependence between progdata_mp_coordcond_ line 347 and progdata_mp_coordcond_ line 347
+   remark #17106: parallel dependence: assumed OUTPUT dependence between progdata_mp_coordcond_ line 347 and progdata_mp_coordcond_ line 347
+   remark #17106: parallel dependence: assumed OUTPUT dependence between ncoordcond line 346 and ncoordcond line 346
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed OUTPUT dependence between progdata_mp_coordcond_ line 347 and progdata_mp_coordcond_ line 347
+   remark #15346: vector dependence: assumed OUTPUT dependence between progdata_mp_coordcond_ line 347 and progdata_mp_coordcond_ line 347
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(347,5)
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed OUTPUT dependence between progdata_mp_coordcond_ line 347 and progdata_mp_coordcond_ line 347
+      remark #17106: parallel dependence: assumed OUTPUT dependence between progdata_mp_coordcond_ line 347 and progdata_mp_coordcond_ line 347
+      remark #15388: vectorization support: reference progdata_mp_coordset_ has aligned access
+      remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+      remark #15399: vectorization support: unroll factor set to 4
+      remark #15448: unmasked aligned unit stride loads: 1 
+      remark #15459: masked indexed (or scatter) stores: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 4 
+      remark #15477: vector loop cost: 68.000 
+      remark #15478: estimated potential speedup: 0.230 
+      remark #15479: lightweight vector operations: 10 
+      remark #15480: medium-overhead vector operations: 1 
+      remark #15481: heavy-overhead vector operations: 1 
+      remark #15488: --- end vector loop cost summary ---
+      remark #25439: unrolled with remainder by 2  
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(347,5)
+   <Remainder>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(354,3)
+   remark #25096: Loop Interchange not done due to: Imperfect Loop Nest (Either at Source or due to other Compiler Transformations)
+   remark #25451: Advice: Loop Interchange, if possible, might help loopnest. Suggested Permutation: ( 1 2 3 ) --> ( 1 3 2 ) 
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed FLOW dependence between ncoordcond line 355 and ncoordcond line 355
+   remark #17106: parallel dependence: assumed OUTPUT dependence between ncoordcond line 355 and ncoordcond line 355
+   remark #15382: vectorization support: call to function for_read_seq_lis cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(356,5) ]
+   remark #15382: vectorization support: call to function for_read_seq_lis_xmit cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(356,5) ]
+   remark #15382: vectorization support: call to function for_stop_core cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(357,15) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(359,9) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(360,9) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(361,9) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt_xmit cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(361,9) ]
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed FLOW dependence between ncoordcond line 355 and ncoordcond line 355
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(363,5)
+      remark #25096: Loop Interchange not done due to: Imperfect Loop Nest (Either at Source or due to other Compiler Transformations)
+      remark #25451: Advice: Loop Interchange, if possible, might help loopnest. Suggested Permutation: ( 1 2 ) --> ( 2 1 ) 
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed OUTPUT dependence between progdata_mp_coordcond_ line 364 and progdata_mp_coordcond_ line 364
+      remark #17106: parallel dependence: assumed OUTPUT dependence between progdata_mp_coordcond_ line 364 and progdata_mp_coordcond_ line 364
+      remark #15344: loop was not vectorized: vector dependence prevents vectorization
+      remark #15346: vector dependence: assumed OUTPUT dependence between progdata_mp_coordcond_ line 364 and progdata_mp_coordcond_ line 364
+      remark #15346: vector dependence: assumed OUTPUT dependence between progdata_mp_coordcond_ line 364 and progdata_mp_coordcond_ line 364
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(364,9)
+         remark #17104: loop was not parallelized: existence of parallel dependence
+         remark #17106: parallel dependence: assumed OUTPUT dependence between progdata_mp_coordcond_ line 364 and progdata_mp_coordcond_ line 364
+         remark #17106: parallel dependence: assumed OUTPUT dependence between progdata_mp_coordcond_ line 364 and progdata_mp_coordcond_ line 364
+         remark #15388: vectorization support: reference progdata_mp_coordset_ has aligned access
+         remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+         remark #15399: vectorization support: unroll factor set to 4
+         remark #15448: unmasked aligned unit stride loads: 1 
+         remark #15459: masked indexed (or scatter) stores: 1 
+         remark #15475: --- begin vector loop cost summary ---
+         remark #15476: scalar loop cost: 4 
+         remark #15477: vector loop cost: 68.000 
+         remark #15478: estimated potential speedup: 0.230 
+         remark #15479: lightweight vector operations: 10 
+         remark #15480: medium-overhead vector operations: 1 
+         remark #15481: heavy-overhead vector operations: 1 
+         remark #15488: --- end vector loop cost summary ---
+         remark #25439: unrolled with remainder by 2  
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(364,9)
+      <Remainder>
+      LOOP END
+   LOOP END
+LOOP END
+
+
+Non-optimizable loops:
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(288,3)
+   remark #15534: loop was not vectorized: loop contains arithmetic if or computed goto. Consider using if-then-else statement.    [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(67,17) ]
+   remark #17102: loop was not parallelized: not a parallelization candidate
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(322,5)
+   remark #15536: loop was not vectorized: inner loop throttling prevents vectorization of this outer loop. Refer to inner loop message for more details.
+   remark #17102: loop was not parallelized: not a parallelization candidate
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(321,9)
+      remark #15534: loop was not vectorized: loop contains arithmetic if or computed goto. Consider using if-then-else statement.    [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(297,26) ]
+      remark #17102: loop was not parallelized: not a parallelization candidate
+   LOOP END
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(21,42):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(20,42):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(39,3):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to increase the width of stores
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(39,3):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (1, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(269,9):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(269,9):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(269,9):remark #34026: call to memcpy implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(237,9):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(237,9):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(237,9):remark #34026: call to memcpy implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(111,9):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(111,9):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(111,9):remark #34026: call to memcpy implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(148,9):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(148,9):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(148,9):remark #34026: call to memcpy implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(188,9):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(188,9):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(188,9):remark #34026: call to memcpy implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(341,3):remark #34014: optimization advice for memset: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(341,3):remark #34026: call to memset implemented as a call to optimized library version
+===========================================================================
+
+Begin optimization report for: PRINTTITLE
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (PRINTTITLE) [11/13=84.6%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(523,12)
+  -> EXTERN: (532,8) getver_
+  -> EXTERN: (534,3) for_open
+  -> EXTERN: (535,3) for_write_seq_fmt
+  -> EXTERN: (536,3) for_write_seq_fmt
+  -> EXTERN: (537,3) for_write_seq_fmt
+  -> EXTERN: (538,3) for_write_seq_fmt
+  -> EXTERN: (539,3) for_write_seq_fmt
+  -> EXTERN: (540,3) for_write_seq_fmt
+  -> EXTERN: (541,3) for_write_seq_fmt
+  -> EXTERN: (542,3) __resetsp_inlined
+  -> EXTERN: (542,3) for_write_seq_fmt
+  -> EXTERN: (542,3) __getsp_inlined
+  -> EXTERN: (542,36) for_concat
+  -> EXTERN: (542,36) _alloca
+  -> EXTERN: (542,38) for_trim
+  -> EXTERN: (543,3) for_write_seq_fmt
+  -> EXTERN: (544,3) for_write_seq_fmt
+  -> EXTERN: (545,3) for_write_seq_fmt
+  -> EXTERN: (546,3) for_write_seq_fmt
+  -> EXTERN: (547,3) for_write_seq_fmt
+  -> EXTERN: (548,3) for_write_seq_fmt
+  -> EXTERN: (549,3) for_write_seq_fmt
+  -> EXTERN: (550,3) __resetsp_inlined
+  -> EXTERN: (550,3) for_write_seq_fmt
+  -> EXTERN: (550,3) __getsp_inlined
+  -> EXTERN: (550,36) for_concat
+  -> EXTERN: (550,36) _alloca
+  -> EXTERN: (551,3) for_write_seq_fmt
+  -> EXTERN: (552,3) for_write_seq_fmt
+
+===========================================================================
+
+Begin optimization report for: FILTERHD
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (FILTERHD) [12/13=92.3%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(475,13)
+  -> EXTERN: (483,8) GETFLUNIT
+  -> EXTERN: (484,4) for_open
+  -> EXTERN: (484,23) for_trim
+  -> EXTERN: (484,28) for_adjustl
+  -> EXTERN: (487,6) for_write_seq_lis
+  -> EXTERN: (487,6) __resetsp_inlined
+  -> EXTERN: (487,6) __getsp_inlined
+  -> EXTERN: (487,36) _alloca
+  -> EXTERN: (487,36) for_concat
+  -> EXTERN: (487,38) for_trim
+  -> EXTERN: (487,43) for_adjustl
+  -> EXTERN: (490,4) for_read_seq_fmt
+  -> EXTERN: (491,26) for_stop_core
+  -> EXTERN: (493,21) for_write_seq_fmt
+  -> EXTERN: (493,21) for_write_seq_fmt_xmit
+  -> EXTERN: (495,6) for_read_seq_lis
+  -> EXTERN: (496,6) for_check_mult_overflow64
+  -> EXTERN: (496,6) for_alloc_allocatable
+  -> EXTERN: (497,6) for_read_seq_lis
+  -> EXTERN: (498,11) FILTERBLOCK
+  -> EXTERN: (499,6) for_dealloc_allocatable
+  -> EXTERN: (501,10) for_close
+  -> EXTERN: (502,19) for_write_seq_lis
+  -> EXTERN: (506,11) LNBLOCK
+  -> EXTERN: (508,4) for_write_seq_lis
+  -> EXTERN: (511,6) for_write_seq_fmt_xmit
+  -> EXTERN: (511,6) for_write_seq_fmt_xmit
+  -> EXTERN: (511,6) for_write_seq_fmt_xmit
+  -> EXTERN: (511,6) for_write_seq_fmt
+  -> EXTERN: (511,47) NBASBLK
+  -> EXTERN: (512,12) NBASBLK
+  -> EXTERN: (514,4) for_write_seq_fmt_xmit
+  -> EXTERN: (514,4) for_write_seq_fmt
+  -> EXTERN: (515,2) for_dealloc_allocatable
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(492,4)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed OUTPUT dependence between 1383 line 493 and 1383 line 497
+   remark #17106: parallel dependence: assumed OUTPUT dependence between 1383 line 497 and 1383 line 493
+   remark #15382: vectorization support: call to function for_write_seq_fmt cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(493,21) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt_xmit cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(493,21) ]
+   remark #15382: vectorization support: call to function for_read_seq_lis cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(495,6) ]
+   remark #15382: vectorization support: call to function for_check_mult_overflow64 cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(496,6) ]
+   remark #15382: vectorization support: call to function for_alloc_allocatable cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(496,6) ]
+   remark #15382: vectorization support: call to function for_read_seq_lis cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(497,6) ]
+   remark #15382: vectorization support: call to function FILTERBLOCK cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(498,11) ]
+   remark #15382: vectorization support: call to function for_dealloc_allocatable cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(499,6) ]
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed OUTPUT dependence between 1383 line 493 and 1383 line 497
+   remark #15346: vector dependence: assumed OUTPUT dependence between 1383 line 497 and 1383 line 493
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(503,4)
+   remark #17102: loop was not parallelized: not a parallelization candidate
+   remark #15521: loop was not vectorized: explicitly compute the iteration count before executing the loop or try using canonical loop form
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(510,4)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed OUTPUT dependence between 1383 line 511 and 1383 line 511
+   remark #17106: parallel dependence: assumed OUTPUT dependence between 1383 line 511 and 1383 line 511
+   remark #15382: vectorization support: call to function for_write_seq_fmt cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(511,6) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt_xmit cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(511,6) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt_xmit cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(511,6) ]
+   remark #15382: vectorization support: call to function NBASBLK cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(511,47) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt_xmit cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(511,6) ]
+   remark #15382: vectorization support: call to function NBASBLK cannot be vectorized   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(512,12) ]
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed OUTPUT dependence between 1383 line 511 and 1383 line 511
+   remark #15346: vector dependence: assumed OUTPUT dependence between 1383 line 511 and 1383 line 511
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(482,41):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+===========================================================================
+
+Begin optimization report for: INITIALIZE
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (INITIALIZE) [13/13=100.0%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(414,12)
+  -> EXTERN: (414,12) _alloca
+  -> EXTERN: (414,12) __getsp_inlined
+  -> EXTERN: (425,17) for_write_seq_lis
+  -> EXTERN: (426,17) for_write_seq_lis
+  -> EXTERN: (427,8) GENATOMPERM
+  -> EXTERN: (429,5) for_write_seq_lis
+  -> EXTERN: (431,9) for_write_seq_fmt_xmit
+  -> EXTERN: (431,9) for_write_seq_fmt_xmit
+  -> EXTERN: (431,9) for_write_seq_fmt
+  -> EXTERN: (432,9) for_write_seq_fmt
+  -> EXTERN: (432,9) _alloca
+  -> EXTERN: (432,9) __getsp_inlined
+  -> EXTERN: (432,9) __resetsp_inlined
+  -> EXTERN: (435,17) for_write_seq_lis
+  -> EXTERN: (436,8) SELECTATOMPERM
+  -> EXTERN: (437,19) for_write_seq_lis
+  -> EXTERN: (439,5) for_write_seq_lis
+  -> EXTERN: (440,5) for_stop_core
+  -> (443,8) READCOORDS (isz = 5525) (sz = 5528)
+     [[ Inlining would exceed -inline-max-size value (5528>253) <1>]]
+  -> EXTERN: (444,17) for_write_seq_lis
+  -> EXTERN: (445,8) GENCOORDPERM
+  -> EXTERN: (446,8) INITHD
+  -> EXTERN: (447,17) for_write_seq_lis
+  -> EXTERN: (448,8) GENTERMLIST
+  -> EXTERN: (449,17) for_write_seq_lis
+  -> EXTERN: (450,8) PARTITIONTERMS
+  -> EXTERN: (452,17) for_write_seq_lis
+  -> EXTERN: (453,8) GETBLOCKSYM
+  -> EXTERN: (454,17) for_write_seq_lis
+  -> EXTERN: (455,8) GENMAPTAB
+  -> EXTERN: (456,6) for_trim
+  -> EXTERN: (456,11) for_adjustl
+  -> EXTERN: (456,28) for_cpstr
+  -> EXTERN: (457,19) __getsp_inlined
+  -> EXTERN: (457,19) for_write_seq_lis
+  -> EXTERN: (457,19) __resetsp_inlined
+  -> EXTERN: (457,67) for_trim
+  -> EXTERN: (457,72) for_adjustl
+  -> EXTERN: (457,89) _alloca
+  -> EXTERN: (457,89) for_concat
+  -> (458,10) FILTERHD (isz = 535) (sz = 542)
+     [[ Inlining would exceed -inline-max-size value (542>253) <1>]]
+  -> EXTERN: (465,8) ALLOCATEHD
+  -> EXTERN: (466,13) for_cpstr
+  -> EXTERN: (467,10) READHD
+  -> (469,8) PRINTTITLE (isz = 395) (sz = 400)
+     [[ Inlining would exceed -inline-max-size value (400>253) <1>]]
+  -> EXTERN: (470,17) for_write_seq_lis
+  -> EXTERN: (471,1) __resetsp_inlined
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(430,5)
+   remark #25096: Loop Interchange not done due to: Imperfect Loop Nest (Either at Source or due to other Compiler Transformations)
+   remark #25451: Advice: Loop Interchange, if possible, might help loopnest. Suggested Permutation: ( 1 2 ) --> ( 2 1 ) 
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed OUTPUT dependence between 1204 line 431 and 1204 line 432
+   remark #17106: parallel dependence: assumed OUTPUT dependence between 1204 line 432 and 1204 line 431
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(432,9)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference 1275 has aligned access
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15460: masked strided loads: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 4 
+      remark #15477: vector loop cost: 2.500 
+      remark #15478: estimated potential speedup: 1.600 
+      remark #15479: lightweight vector operations: 1 
+      remark #15480: medium-overhead vector operations: 2 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(432,9)
+   <Remainder>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(462,3)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference eguess has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(463,5) ]
+   remark #15410: vectorization support: conversion from int to float will be emulated   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(463,20) ]
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 9 
+   remark #15477: vector loop cost: 17.000 
+   remark #15478: estimated potential speedup: 2.020 
+   remark #15479: lightweight vector operations: 5 
+   remark #15480: medium-overhead vector operations: 1 
+   remark #15487: type converts: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(462,3)
+<Remainder>
+   remark #15388: vectorization support: reference eguess has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(463,5) ]
+   remark #15410: vectorization support: conversion from int to float will be emulated   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(463,20) ]
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/io.f90(462,3)
+<Remainder>
+LOOP END
+===========================================================================
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINING FOOTNOTES:
+
+<1> The subprogram is larger than the inliner would normally inline.  Use the
+    option -inline-max-size to increase the size of any subprogram that would
+    normally be inlined, add "!DIR$ATTRIBUTES FORCEINLINE" to the
+    declaration of the called function, or add "!DIR$ FORCEINLINE" before
+    the call site.
+

@@ -1,0 +1,705 @@
+
+    Report from: Interprocedural optimizations [ipo]
+
+  WHOLE PROGRAM (SAFE) [EITHER METHOD]: false
+  WHOLE PROGRAM (SEEN) [TABLE METHOD]: false
+  WHOLE PROGRAM (READ) [OBJECT READER METHOD]: false
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+In the inlining report below:
+   "sz" refers to the "size" of the routine. The smaller a routine's size,
+      the more likely it is to be inlined.
+   "isz" refers to the "inlined size" of the routine. This is the amount
+      the calling routine will grow if the called routine is inlined into it.
+      The compiler generally limits the amount a routine can grow by having
+      routines inlined into it.
+
+Begin optimization report for: diis._
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (diis._) [1/6=16.7%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(7,8)
+
+===========================================================================
+
+Begin optimization report for: DIIS::INITDIIS
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (DIIS::INITDIIS) [2/6=33.3%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(48,13)
+  -> EXTERN: (57,4) for_alloc_allocatable
+  -> EXTERN: (57,4) for_check_mult_overflow64
+  -> EXTERN: (58,4) for_alloc_allocatable
+  -> EXTERN: (58,4) for_check_mult_overflow64
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(59,4)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(59,4)
+      remark #25408: memset generated
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed OUTPUT dependence between diis_mp_cdata_ line 59 and diis_mp_cdata_ line 59
+      remark #17106: parallel dependence: assumed OUTPUT dependence between diis_mp_cdata_ line 59 and diis_mp_cdata_ line 59
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+      remark #25015: Estimate of max trip count of loop=1
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(59,4)
+      <Peeled>
+         remark #25015: Estimate of max trip count of loop=12
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(59,4)
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15388: vectorization support: reference diis_mp_cdata_ has aligned access
+         remark #15399: vectorization support: unroll factor set to 2
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+         remark #15449: unmasked aligned unit stride stores: 1 
+         remark #15475: --- begin vector loop cost summary ---
+         remark #15476: scalar loop cost: 4 
+         remark #15477: vector loop cost: 1.500 
+         remark #15478: estimated potential speedup: 1.500 
+         remark #15479: lightweight vector operations: 3 
+         remark #15488: --- end vector loop cost summary ---
+         remark #25015: Estimate of max trip count of loop=1
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(59,4)
+      <Remainder>
+         remark #25015: Estimate of max trip count of loop=12
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(60,4)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(60,4)
+      remark #25408: memset generated
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed OUTPUT dependence between diis_mp_ddata_ line 60 and diis_mp_ddata_ line 60
+      remark #17106: parallel dependence: assumed OUTPUT dependence between diis_mp_ddata_ line 60 and diis_mp_ddata_ line 60
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+      remark #25015: Estimate of max trip count of loop=1
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(60,4)
+      <Peeled>
+         remark #25015: Estimate of max trip count of loop=12
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(60,4)
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15388: vectorization support: reference diis_mp_ddata_ has aligned access
+         remark #15399: vectorization support: unroll factor set to 2
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+         remark #15449: unmasked aligned unit stride stores: 1 
+         remark #15475: --- begin vector loop cost summary ---
+         remark #15476: scalar loop cost: 4 
+         remark #15477: vector loop cost: 1.500 
+         remark #15478: estimated potential speedup: 1.500 
+         remark #15479: lightweight vector operations: 3 
+         remark #15488: --- end vector loop cost summary ---
+         remark #25015: Estimate of max trip count of loop=1
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(60,4)
+      <Remainder>
+         remark #25015: Estimate of max trip count of loop=12
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(61,4)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(61,4)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference initparam has aligned access
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15462: unmasked indexed (or gather) loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 4 
+   remark #15477: vector loop cost: 2.500 
+   remark #15478: estimated potential speedup: 1.560 
+   remark #15479: lightweight vector operations: 2 
+   remark #15481: heavy-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(61,4)
+<Remainder>
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(59,4):remark #34014: optimization advice for memset: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(59,4):remark #34026: call to memset implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(60,4):remark #34014: optimization advice for memset: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(60,4):remark #34026: call to memset implemented as a call to optimized library version
+===========================================================================
+
+Begin optimization report for: DIIS::PUSHDIIS
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (DIIS::PUSHDIIS) [3/6=50.0%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(76,13)
+  -> EXTERN: (90,6) for_check_mult_overflow64
+  -> EXTERN: (90,6) for_alloc_allocatable
+  -> EXTERN: (91,6) for_check_mult_overflow64
+  -> EXTERN: (91,6) for_alloc_allocatable
+  -> EXTERN: (92,6) for_check_mult_overflow64
+  -> EXTERN: (92,6) for_alloc_allocatable
+  -> EXTERN: (93,6) for_check_mult_overflow64
+  -> EXTERN: (93,6) for_alloc_allocatable
+  -> EXTERN: (94,6) for_check_mult_overflow64
+  -> EXTERN: (94,6) for_alloc_allocatable
+  -> EXTERN: (95,11) dsyrk_
+  -> EXTERN: (98,11) dsyevr_
+  -> EXTERN: (100,6) for_check_mult_overflow64
+  -> EXTERN: (100,6) for_alloc_allocatable
+  -> EXTERN: (101,6) for_check_mult_overflow64
+  -> EXTERN: (101,6) for_alloc_allocatable
+  -> EXTERN: (102,11) dsyevr_
+  -> EXTERN: (112,11) dgemv_
+  -> EXTERN: (114,11) dgemv_
+  -> EXTERN: (116,6) for_dealloc_allocatable
+  -> EXTERN: (117,6) for_dealloc_allocatable
+  -> EXTERN: (118,6) for_dealloc_allocatable
+  -> EXTERN: (119,6) for_dealloc_allocatable
+  -> EXTERN: (120,6) for_dealloc_allocatable
+  -> EXTERN: (121,6) for_dealloc_allocatable
+  -> EXTERN: (122,6) for_dealloc_allocatable
+  -> EXTERN: (127,2) for_dealloc_allocatable
+  -> EXTERN: (127,2) for_dealloc_allocatable
+  -> EXTERN: (127,2) for_dealloc_allocatable
+  -> EXTERN: (127,2) for_dealloc_allocatable
+  -> EXTERN: (127,2) for_dealloc_allocatable
+  -> EXTERN: (127,2) for_dealloc_allocatable
+  -> EXTERN: (127,2) for_dealloc_allocatable
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(85,4)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(85,4)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference newparam has aligned access
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15460: masked strided loads: 1 
+   remark #15462: unmasked indexed (or gather) loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 6 
+   remark #15477: vector loop cost: 18.000 
+   remark #15478: estimated potential speedup: 1.310 
+   remark #15479: lightweight vector operations: 3 
+   remark #15480: medium-overhead vector operations: 1 
+   remark #15481: heavy-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(85,4)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(86,4)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(86,4)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference newparam has aligned access
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15462: unmasked indexed (or gather) loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 4 
+   remark #15477: vector loop cost: 2.500 
+   remark #15478: estimated potential speedup: 1.560 
+   remark #15479: lightweight vector operations: 2 
+   remark #15481: heavy-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(86,4)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(96,6)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(96,6)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference B has aligned access
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 4 
+   remark #15477: vector loop cost: 3.000 
+   remark #15478: estimated potential speedup: 4.370 
+   remark #15479: lightweight vector operations: 3 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(96,6)
+<Remainder>
+   remark #15388: vectorization support: reference B has aligned access
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(96,6)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(105,6)
+<Peeled, Distributed chunk1>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(105,6)
+<Distributed chunk1>
+   remark #25426: Loop Distributed (2 way) 
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference W has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(107,10) ]
+   remark #15388: vectorization support: reference W has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(107,10) ]
+   remark #15388: vectorization support: reference W has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(109,10) ]
+   remark #15388: vectorization support: reference W has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(109,10) ]
+   remark #15301: PARTIAL LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15452: unmasked strided loads: 1 
+   remark #15455: masked aligned unit stride stores: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 48 
+   remark #15477: vector loop cost: 29.000 
+   remark #15478: estimated potential speedup: 1.630 
+   remark #15479: lightweight vector operations: 21 
+   remark #15481: heavy-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(105,6)
+<Remainder, Distributed chunk1>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(126,4)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(126,4)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference newparam has aligned access
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15462: unmasked indexed (or gather) loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 4 
+   remark #15477: vector loop cost: 2.500 
+   remark #15478: estimated potential speedup: 1.560 
+   remark #15479: lightweight vector operations: 2 
+   remark #15481: heavy-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(126,4)
+<Remainder>
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(81,57):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(81,51):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(80,55):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(80,53):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(80,51):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(79,53):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(79,51):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+===========================================================================
+
+Begin optimization report for: DIIS::CLEANDIIS
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (DIIS::CLEANDIIS) [4/6=66.7%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(130,13)
+  -> EXTERN: (136,24) for_dealloc_allocatable
+  -> EXTERN: (137,24) for_dealloc_allocatable
+
+===========================================================================
+
+Begin optimization report for: DIIS::INITDIISG
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (DIIS::INITDIISG) [5/6=83.3%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(151,13)
+  -> EXTERN: (160,4) for_alloc_allocatable
+  -> EXTERN: (160,4) for_check_mult_overflow64
+  -> EXTERN: (161,4) for_alloc_allocatable
+  -> EXTERN: (161,4) for_check_mult_overflow64
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(162,4)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(162,4)
+      remark #25408: memset generated
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed OUTPUT dependence between diis_mp_cdata_ line 162 and diis_mp_cdata_ line 162
+      remark #17106: parallel dependence: assumed OUTPUT dependence between diis_mp_cdata_ line 162 and diis_mp_cdata_ line 162
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+      remark #25015: Estimate of max trip count of loop=1
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(162,4)
+      <Peeled>
+         remark #25015: Estimate of max trip count of loop=12
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(162,4)
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15388: vectorization support: reference diis_mp_cdata_ has aligned access
+         remark #15399: vectorization support: unroll factor set to 2
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+         remark #15449: unmasked aligned unit stride stores: 1 
+         remark #15475: --- begin vector loop cost summary ---
+         remark #15476: scalar loop cost: 4 
+         remark #15477: vector loop cost: 1.500 
+         remark #15478: estimated potential speedup: 1.500 
+         remark #15479: lightweight vector operations: 3 
+         remark #15488: --- end vector loop cost summary ---
+         remark #25015: Estimate of max trip count of loop=1
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(162,4)
+      <Remainder>
+         remark #25015: Estimate of max trip count of loop=12
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(163,4)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(163,4)
+      remark #25408: memset generated
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed OUTPUT dependence between diis_mp_ddata_ line 163 and diis_mp_ddata_ line 163
+      remark #17106: parallel dependence: assumed OUTPUT dependence between diis_mp_ddata_ line 163 and diis_mp_ddata_ line 163
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+      remark #25015: Estimate of max trip count of loop=1
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(163,4)
+      <Peeled>
+         remark #25015: Estimate of max trip count of loop=12
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(163,4)
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15388: vectorization support: reference diis_mp_ddata_ has aligned access
+         remark #15399: vectorization support: unroll factor set to 2
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+         remark #15449: unmasked aligned unit stride stores: 1 
+         remark #15475: --- begin vector loop cost summary ---
+         remark #15476: scalar loop cost: 4 
+         remark #15477: vector loop cost: 1.500 
+         remark #15478: estimated potential speedup: 1.500 
+         remark #15479: lightweight vector operations: 3 
+         remark #15488: --- end vector loop cost summary ---
+         remark #25015: Estimate of max trip count of loop=1
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(163,4)
+      <Remainder>
+         remark #25015: Estimate of max trip count of loop=12
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(164,4)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(164,4)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference initparam has aligned access
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15462: unmasked indexed (or gather) loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 4 
+   remark #15477: vector loop cost: 2.500 
+   remark #15478: estimated potential speedup: 1.560 
+   remark #15479: lightweight vector operations: 2 
+   remark #15481: heavy-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(164,4)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(165,4)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(165,4)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference initgrad has aligned access
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15462: unmasked indexed (or gather) loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 4 
+   remark #15477: vector loop cost: 2.500 
+   remark #15478: estimated potential speedup: 1.560 
+   remark #15479: lightweight vector operations: 2 
+   remark #15481: heavy-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(165,4)
+<Remainder>
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(162,4):remark #34014: optimization advice for memset: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(162,4):remark #34026: call to memset implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(163,4):remark #34014: optimization advice for memset: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(163,4):remark #34026: call to memset implemented as a call to optimized library version
+===========================================================================
+
+Begin optimization report for: DIIS::PUSHDIISG
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (DIIS::PUSHDIISG) [6/6=100.0%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(175,13)
+  -> EXTERN: (193,6) for_check_mult_overflow64
+  -> EXTERN: (193,6) for_alloc_allocatable
+  -> EXTERN: (194,6) for_check_mult_overflow64
+  -> EXTERN: (194,6) for_alloc_allocatable
+  -> EXTERN: (195,6) for_check_mult_overflow64
+  -> EXTERN: (195,6) for_alloc_allocatable
+  -> EXTERN: (196,6) for_check_mult_overflow64
+  -> EXTERN: (196,6) for_alloc_allocatable
+  -> EXTERN: (197,6) for_check_mult_overflow64
+  -> EXTERN: (197,6) for_alloc_allocatable
+  -> EXTERN: (198,11) dsyrk_
+  -> EXTERN: (201,11) dsyevr_
+  -> EXTERN: (203,6) for_check_mult_overflow64
+  -> EXTERN: (203,6) for_alloc_allocatable
+  -> EXTERN: (204,6) for_check_mult_overflow64
+  -> EXTERN: (204,6) for_alloc_allocatable
+  -> EXTERN: (205,11) dsyevr_
+  -> EXTERN: (215,11) dgemv_
+  -> EXTERN: (217,11) dgemv_
+  -> EXTERN: (219,6) for_dealloc_allocatable
+  -> EXTERN: (220,6) for_dealloc_allocatable
+  -> EXTERN: (221,6) for_dealloc_allocatable
+  -> EXTERN: (222,6) for_dealloc_allocatable
+  -> EXTERN: (223,6) for_dealloc_allocatable
+  -> EXTERN: (224,6) for_dealloc_allocatable
+  -> EXTERN: (225,6) for_dealloc_allocatable
+  -> EXTERN: (228,2) for_dealloc_allocatable
+  -> EXTERN: (228,2) for_dealloc_allocatable
+  -> EXTERN: (228,2) for_dealloc_allocatable
+  -> EXTERN: (228,2) for_dealloc_allocatable
+  -> EXTERN: (228,2) for_dealloc_allocatable
+  -> EXTERN: (228,2) for_dealloc_allocatable
+  -> EXTERN: (228,2) for_dealloc_allocatable
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(185,4)
+   remark #25401: memcopy(with guard) generated
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between optparam line 185 and optparam line 185
+   remark #17106: parallel dependence: assumed FLOW dependence between optparam line 185 and optparam line 185
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(185,4)
+   <Peeled, Multiversioned v2>
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(185,4)
+   <Multiversioned v2>
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference optparam has aligned access
+      remark #15389: vectorization support: reference newparam has unaligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15442: entire loop may be executed in remainder
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15450: unmasked unaligned unit stride loads: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 4 
+      remark #15477: vector loop cost: 2.250 
+      remark #15478: estimated potential speedup: 1.720 
+      remark #15479: lightweight vector operations: 2 
+      remark #15480: medium-overhead vector operations: 1 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(185,4)
+   <Remainder, Multiversioned v2>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(186,4)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(186,4)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference newparam has aligned access
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15462: unmasked indexed (or gather) loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 4 
+   remark #15477: vector loop cost: 2.500 
+   remark #15478: estimated potential speedup: 1.560 
+   remark #15479: lightweight vector operations: 2 
+   remark #15481: heavy-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(186,4)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(187,4)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(187,4)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference newgrad has aligned access
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15462: unmasked indexed (or gather) loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 4 
+   remark #15477: vector loop cost: 2.500 
+   remark #15478: estimated potential speedup: 1.560 
+   remark #15479: lightweight vector operations: 2 
+   remark #15481: heavy-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(187,4)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(199,6)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(199,6)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference B has aligned access
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 4 
+   remark #15477: vector loop cost: 3.000 
+   remark #15478: estimated potential speedup: 4.370 
+   remark #15479: lightweight vector operations: 3 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(199,6)
+<Remainder>
+   remark #15388: vectorization support: reference B has aligned access
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(199,6)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(208,6)
+<Peeled, Distributed chunk1>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(208,6)
+<Distributed chunk1>
+   remark #25426: Loop Distributed (2 way) 
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference W has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(210,10) ]
+   remark #15388: vectorization support: reference W has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(210,10) ]
+   remark #15388: vectorization support: reference W has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(212,10) ]
+   remark #15388: vectorization support: reference W has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(212,10) ]
+   remark #15301: PARTIAL LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15452: unmasked strided loads: 1 
+   remark #15455: masked aligned unit stride stores: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 48 
+   remark #15477: vector loop cost: 29.000 
+   remark #15478: estimated potential speedup: 1.630 
+   remark #15479: lightweight vector operations: 21 
+   remark #15481: heavy-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(208,6)
+<Remainder, Distributed chunk1>
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(181,57):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(181,51):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(180,55):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(180,53):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(180,51):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(179,53):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(179,51):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(185,4):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(185,4):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/diis.f90(185,4):remark #34026: call to memcpy implemented as a call to optimized library version
+===========================================================================

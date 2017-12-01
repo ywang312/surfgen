@@ -1,0 +1,174 @@
+
+    Report from: Interprocedural optimizations [ipo]
+
+  WHOLE PROGRAM (SAFE) [EITHER METHOD]: false
+  WHOLE PROGRAM (SEEN) [TABLE METHOD]: false
+  WHOLE PROGRAM (READ) [OBJECT READER METHOD]: false
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+In the inlining report below:
+   "sz" refers to the "size" of the routine. The smaller a routine's size,
+      the more likely it is to be inlined.
+   "isz" refers to the "inlined size" of the routine. This is the amount
+      the calling routine will grow if the called routine is inlined into it.
+      The compiler generally limits the amount a routine can grow by having
+      routines inlined into it.
+
+Begin optimization report for: progdata._
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (progdata._) [1/2=50.0%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/progdata.f90(2,8)
+
+===========================================================================
+
+Begin optimization report for: PROGDATA::GENATOMLIST
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (PROGDATA::GENATOMLIST) [2/2=100.0%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/progdata.f90(174,13)
+  -> EXTERN: (180,27) for_dealloc_allocatable
+  -> EXTERN: (181,28) for_dealloc_allocatable
+  -> EXTERN: (182,24) for_dealloc_allocatable
+  -> EXTERN: (184,3) for_alloc_allocatable
+  -> EXTERN: (184,3) for_check_mult_overflow64
+  -> EXTERN: (185,3) for_alloc_allocatable
+  -> EXTERN: (185,3) for_check_mult_overflow64
+  -> EXTERN: (186,3) for_alloc_allocatable
+  -> EXTERN: (186,3) for_check_mult_overflow64
+  -> EXTERN: (194,5) for_write_int_fmt
+  -> EXTERN: (195,5) __getsp_inlined
+  -> EXTERN: (195,5) for_write_seq_fmt
+  -> EXTERN: (195,5) __resetsp_inlined
+  -> EXTERN: (195,35) for_trim
+  -> EXTERN: (195,46) _alloca
+  -> EXTERN: (195,46) for_concat
+  -> EXTERN: (196,5) for_write_int_fmt
+  -> EXTERN: (197,5) __getsp_inlined
+  -> EXTERN: (197,5) for_write_seq_fmt
+  -> EXTERN: (197,5) __resetsp_inlined
+  -> EXTERN: (197,35) for_trim
+  -> EXTERN: (197,46) _alloca
+  -> EXTERN: (197,46) for_concat
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/progdata.f90(183,15)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/progdata.f90(183,15)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference atmgrp has aligned access
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 6 
+   remark #15477: vector loop cost: 10.000 
+   remark #15478: estimated potential speedup: 2.260 
+   remark #15479: lightweight vector operations: 4 
+   remark #15480: medium-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/progdata.f90(183,15)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/progdata.f90(187,3)
+   remark #25401: memcopy(with guard) generated
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between progdata_mp_atoms_ line 187 and progdata_mp_atoms_ line 187
+   remark #17106: parallel dependence: assumed FLOW dependence between progdata_mp_atoms_ line 187 and progdata_mp_atoms_ line 187
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/progdata.f90(187,3)
+   <Peeled, Multiversioned v2>
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/progdata.f90(187,3)
+   <Multiversioned v2>
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference progdata_mp_atoms_ has aligned access
+      remark #15389: vectorization support: reference atmgrp has unaligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15442: entire loop may be executed in remainder
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15450: unmasked unaligned unit stride loads: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 4 
+      remark #15477: vector loop cost: 2.500 
+      remark #15478: estimated potential speedup: 1.560 
+      remark #15479: lightweight vector operations: 1 
+      remark #15480: medium-overhead vector operations: 2 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/progdata.f90(187,3)
+   <Remainder, Multiversioned v2>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/progdata.f90(188,3)
+   remark #25408: memset generated
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed OUTPUT dependence between progdata_mp_atomcount_ line 188 and progdata_mp_atomcount_ line 188
+   remark #17106: parallel dependence: assumed OUTPUT dependence between progdata_mp_atomcount_ line 188 and progdata_mp_atomcount_ line 188
+   remark #15398: loop was not vectorized: loop was transformed to memset or memcpy
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/progdata.f90(188,3)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference progdata_mp_atomcount_ has aligned access
+      remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 2 
+      remark #15477: vector loop cost: 1.500 
+      remark #15478: estimated potential speedup: 0.820 
+      remark #15479: lightweight vector operations: 2 
+      remark #15480: medium-overhead vector operations: 1 
+      remark #15488: --- end vector loop cost summary ---
+      remark #25439: unrolled with remainder by 2  
+      remark #25015: Estimate of max trip count of loop=12
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/progdata.f90(188,3)
+   <Remainder>
+      remark #25015: Estimate of max trip count of loop=12
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/progdata.f90(189,3)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed FLOW dependence between progdata_mp_atomcount_ line 190 and progdata_mp_atomcount_ line 191
+   remark #17106: parallel dependence: assumed ANTI dependence between progdata_mp_atomcount_ line 191 and progdata_mp_atomcount_ line 190
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed FLOW dependence between progdata_mp_atomcount_ line 190 and progdata_mp_atomcount_ line 191
+   remark #15346: vector dependence: assumed ANTI dependence between progdata_mp_atomcount_ line 191 and progdata_mp_atomcount_ line 190
+   remark #25439: unrolled with remainder by 2  
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/progdata.f90(189,3)
+<Remainder>
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/progdata.f90(187,3):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/progdata.f90(187,3):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/progdata.f90(187,3):remark #34026: call to memcpy implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/progdata.f90(188,3):remark #34014: optimization advice for memset: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/progdata.f90(188,3):remark #34026: call to memset implemented as a call to optimized library version
+===========================================================================

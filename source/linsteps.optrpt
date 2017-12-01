@@ -1,0 +1,1089 @@
+
+    Report from: Interprocedural optimizations [ipo]
+
+  WHOLE PROGRAM (SAFE) [EITHER METHOD]: false
+  WHOLE PROGRAM (SEEN) [TABLE METHOD]: false
+  WHOLE PROGRAM (READ) [OBJECT READER METHOD]: false
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+In the inlining report below:
+   "sz" refers to the "size" of the routine. The smaller a routine's size,
+      the more likely it is to be inlined.
+   "isz" refers to the "inlined size" of the routine. This is the amount
+      the calling routine will grow if the called routine is inlined into it.
+      The compiler generally limits the amount a routine can grow by having
+      routines inlined into it.
+
+Begin optimization report for: TAKELINSTEP
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (TAKELINSTEP) [1/5=20.0%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(31,14)
+  -> EXTERN: (31,14) _alloca
+  -> EXTERN: (31,14) _alloca
+  -> EXTERN: (31,14) _alloca
+  -> EXTERN: (31,14) _alloca
+  -> EXTERN: (31,14) _alloca
+  -> EXTERN: (31,14) _alloca
+  -> EXTERN: (31,14) __getsp_inlined
+  -> EXTERN: (84,15) for_write_seq_fmt
+  -> EXTERN: (84,15) for_write_seq_fmt_xmit
+  -> EXTERN: (84,15) for_write_seq_fmt_xmit
+  -> EXTERN: (84,15) for_write_seq_fmt_xmit
+  -> EXTERN: (85,42) dnrm2_
+  -> CP_CLONE (86,10) TAKELINSTEP:ADDDISP..0 (isz = 496) (sz = 501)
+     [[ Unable to inline callsite  <1>]]
+  -> (95,14) TAKELINSTEP:ADDDISP (isz = 496) (sz = 501)
+     [[ Unable to inline callsite  <1>]]
+  -> (98,14) TAKELINSTEP:GETBESTDISP (isz = 92) (sz = 103)
+     [[ Unable to inline callsite  <1>]]
+  -> (100,14) TAKELINSTEP:ADDDISP (isz = 496) (sz = 501)
+     [[ Unable to inline callsite  <1>]]
+  -> EXTERN: (106,15) for_write_seq_fmt
+  -> EXTERN: (106,15) for_write_seq_fmt_xmit
+  -> EXTERN: (106,15) for_write_seq_fmt_xmit
+  -> EXTERN: (106,15) for_write_seq_fmt_xmit
+  -> EXTERN: (113,3) __resetsp_inlined
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(72,5)
+   remark #25420: Collapsed with loop at line 72 
+   remark #25408: memset generated
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed OUTPUT dependence between origin line 72 and origin line 72
+   remark #17106: parallel dependence: assumed OUTPUT dependence between origin line 72 and origin line 72
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(72,5)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference origin has aligned access
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 2 
+      remark #15477: vector loop cost: 1.500 
+      remark #15478: estimated potential speedup: 1.330 
+      remark #15479: lightweight vector operations: 2 
+      remark #15480: medium-overhead vector operations: 1 
+      remark #15488: --- end vector loop cost summary ---
+      remark #25015: Estimate of max trip count of loop=6
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(72,5)
+   <Remainder>
+      remark #25015: Estimate of max trip count of loop=12
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(72,5)
+      remark #25408: memset generated
+      remark #25421: Loop eliminated in Collapsing 
+
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(81,5)
+   remark #25401: memcopy(with guard) generated
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between dcils line 81 and dcils line 81
+   remark #17106: parallel dependence: assumed FLOW dependence between dcils line 81 and dcils line 81
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(81,5)
+   <Multiversioned v2>
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference dcils has aligned access
+      remark #15389: vectorization support: reference dci has unaligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15450: unmasked unaligned unit stride loads: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 4 
+      remark #15477: vector loop cost: 2.250 
+      remark #15478: estimated potential speedup: 1.760 
+      remark #15479: lightweight vector operations: 2 
+      remark #15480: medium-overhead vector operations: 1 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(81,5)
+   <Remainder, Multiversioned v2>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(82,5)
+   remark #25401: memcopy(with guard) generated
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between dlamls line 82 and dlamls line 82
+   remark #17106: parallel dependence: assumed FLOW dependence between dlamls line 82 and dlamls line 82
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(82,5)
+   <Multiversioned v2>
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference dlamls has aligned access
+      remark #15389: vectorization support: reference dlam has unaligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15450: unmasked unaligned unit stride loads: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 4 
+      remark #15477: vector loop cost: 2.250 
+      remark #15478: estimated potential speedup: 1.760 
+      remark #15479: lightweight vector operations: 2 
+      remark #15480: medium-overhead vector operations: 1 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(82,5)
+   <Remainder, Multiversioned v2>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(83,23)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(83,23)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference dci has aligned access
+   remark #15399: vectorization support: unroll factor set to 8
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 11 
+   remark #15477: vector loop cost: 20.000 
+   remark #15478: estimated potential speedup: 3.680 
+   remark #15479: lightweight vector operations: 10 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(83,23)
+<Remainder>
+   remark #15388: vectorization support: reference dci has aligned access
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(83,23)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(83,44)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(83,44)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference dlam has aligned access
+   remark #15399: vectorization support: unroll factor set to 8
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 11 
+   remark #15477: vector loop cost: 20.000 
+   remark #15478: estimated potential speedup: 3.680 
+   remark #15479: lightweight vector operations: 10 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(83,44)
+<Remainder>
+   remark #15388: vectorization support: reference dlam has aligned access
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(83,44)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(93,5)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #15520: loop was not vectorized: loop with early exits cannot be vectorized unless it meets search loop idiom criteria
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(108,5)
+   remark #25401: memcopy(with guard) generated
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between dci line 108 and dci line 108
+   remark #17106: parallel dependence: assumed FLOW dependence between dci line 108 and dci line 108
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(108,5)
+   <Peeled, Multiversioned v2>
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(108,5)
+   <Multiversioned v2>
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference dci has aligned access
+      remark #15389: vectorization support: reference dcils has unaligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15442: entire loop may be executed in remainder
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15450: unmasked unaligned unit stride loads: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 4 
+      remark #15477: vector loop cost: 2.250 
+      remark #15478: estimated potential speedup: 1.720 
+      remark #15479: lightweight vector operations: 2 
+      remark #15480: medium-overhead vector operations: 1 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(108,5)
+   <Remainder, Multiversioned v2>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(109,5)
+   remark #25401: memcopy(with guard) generated
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between dlam line 109 and dlam line 109
+   remark #17106: parallel dependence: assumed FLOW dependence between dlam line 109 and dlam line 109
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(109,5)
+   <Peeled, Multiversioned v2>
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(109,5)
+   <Multiversioned v2>
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference dlam has aligned access
+      remark #15389: vectorization support: reference dlamls has unaligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15442: entire loop may be executed in remainder
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15450: unmasked unaligned unit stride loads: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 4 
+      remark #15477: vector loop cost: 2.250 
+      remark #15478: estimated potential speedup: 1.720 
+      remark #15479: lightweight vector operations: 2 
+      remark #15480: medium-overhead vector operations: 1 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(109,5)
+   <Remainder, Multiversioned v2>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(110,5)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(110,5)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference dvec has aligned access
+   remark #15388: vectorization support: reference dvec has aligned access
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 6 
+   remark #15477: vector loop cost: 5.000 
+   remark #15478: estimated potential speedup: 4.040 
+   remark #15479: lightweight vector operations: 5 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(110,5)
+<Remainder>
+   remark #15388: vectorization support: reference dvec has aligned access
+   remark #15388: vectorization support: reference dvec has aligned access
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(110,5)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(111,5)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(111,5)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference hvec has aligned access
+   remark #15388: vectorization support: reference hvec has aligned access
+   remark #15389: vectorization support: reference dvec has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15450: unmasked unaligned unit stride loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 6 
+   remark #15477: vector loop cost: 11.000 
+   remark #15478: estimated potential speedup: 2.050 
+   remark #15479: lightweight vector operations: 4 
+   remark #15480: medium-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(111,5)
+<Remainder>
+   remark #15388: vectorization support: reference hvec has aligned access
+   remark #15388: vectorization support: reference hvec has aligned access
+   remark #15389: vectorization support: reference dvec has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(111,5)
+<Remainder>
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(72,5):remark #34014: optimization advice for memset: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(72,5):remark #34026: call to memset implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(81,5):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(81,5):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(81,5):remark #34026: call to memcpy implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(82,5):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(82,5):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(82,5):remark #34026: call to memcpy implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(108,5):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(108,5):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(108,5):remark #34026: call to memcpy implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(109,5):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(109,5):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(109,5):remark #34026: call to memcpy implemented as a call to optimized library version
+===========================================================================
+
+Begin optimization report for: TAKELINSTEP:ADDDISP..0
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (TAKELINSTEP:ADDDISP..0) [2/5=40.0%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(115,16)
+  CLONED FROM: TAKELINSTEP:ADDDISP(0x00000000,0x3ff00000)
+  -> EXTERN: (115,16) __getsp_inlined
+  -> EXTERN: (115,16) _alloca
+  -> EXTERN: (115,16) _alloca
+  -> EXTERN: (115,16) _alloca
+  -> EXTERN: (121,25) for_stop_core
+  -> EXTERN: (126,12) EVALUATEERROR
+  -> EXTERN: (127,12) GETERROR
+  -> EXTERN: (128,12) GETCGRAD
+  -> EXTERN: (129,12) OPTLAG
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt
+  -> EXTERN: (150,5) __resetsp_inlined
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(124,7)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference hnew has aligned access
+   remark #15389: vectorization support: reference  has unaligned access
+   remark #15389: vectorization support: reference  has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15450: unmasked unaligned unit stride loads: 2 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 6 
+   remark #15477: vector loop cost: 17.000 
+   remark #15478: estimated potential speedup: 1.380 
+   remark #15479: lightweight vector operations: 3 
+   remark #15480: medium-overhead vector operations: 2 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(124,7)
+<Remainder>
+   remark #15388: vectorization support: reference hnew has aligned access
+   remark #15389: vectorization support: reference  has unaligned access
+   remark #15389: vectorization support: reference  has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(124,7)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(125,7)
+   remark #25408: memset generated
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed OUTPUT dependence between hnew line 125 and hnew line 125
+   remark #17106: parallel dependence: assumed OUTPUT dependence between hnew line 125 and hnew line 125
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(125,7)
+   <Peeled>
+      remark #25015: Estimate of max trip count of loop=12
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(125,7)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference hnew has aligned access
+      remark #15399: vectorization support: unroll factor set to 2
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 4 
+      remark #15477: vector loop cost: 1.500 
+      remark #15478: estimated potential speedup: 1.500 
+      remark #15479: lightweight vector operations: 3 
+      remark #15488: --- end vector loop cost summary ---
+      remark #25015: Estimate of max trip count of loop=1
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(125,7)
+   <Remainder>
+      remark #25015: Estimate of max trip count of loop=12
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,23)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,23)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference dcils has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,47) ]
+   remark #15399: vectorization support: unroll factor set to 8
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 11 
+   remark #15477: vector loop cost: 20.000 
+   remark #15478: estimated potential speedup: 3.680 
+   remark #15479: lightweight vector operations: 10 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,23)
+<Remainder>
+   remark #15388: vectorization support: reference dcils has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,47) ]
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,23)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,52)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,52)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference dlamls has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,75) ]
+   remark #15399: vectorization support: unroll factor set to 8
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 11 
+   remark #15477: vector loop cost: 20.000 
+   remark #15478: estimated potential speedup: 3.680 
+   remark #15479: lightweight vector operations: 10 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,52)
+<Remainder>
+   remark #15388: vectorization support: reference dlamls has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,75) ]
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,52)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(134,7)
+   remark #17102: loop was not parallelized: not a parallelization candidate
+   remark #15521: loop was not vectorized: explicitly compute the iteration count before executing the loop or try using canonical loop form
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(145,9)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between  line 145 and  line 145
+   remark #17106: parallel dependence: assumed FLOW dependence between  line 145 and  line 145
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(145,9)
+      remark #25401: memcopy(with guard) generated
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed ANTI dependence between  line 145 and  line 145
+      remark #17106: parallel dependence: assumed FLOW dependence between  line 145 and  line 145
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(145,9)
+      <Peeled, Multiversioned v2>
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(145,9)
+      <Multiversioned v2>
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15388: vectorization support: reference  has aligned access
+         remark #15389: vectorization support: reference jaco2 has unaligned access
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+         remark #15449: unmasked aligned unit stride stores: 1 
+         remark #15450: unmasked unaligned unit stride loads: 1 
+         remark #15475: --- begin vector loop cost summary ---
+         remark #15476: scalar loop cost: 4 
+         remark #15477: vector loop cost: 1.250 
+         remark #15478: estimated potential speedup: 3.000 
+         remark #15479: lightweight vector operations: 3 
+         remark #15488: --- end vector loop cost summary ---
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(145,9)
+      <Remainder, Multiversioned v2>
+      LOOP END
+   LOOP END
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(125,7):remark #34014: optimization advice for memset: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(125,7):remark #34026: call to memset implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(145,9):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(145,9):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(145,9):remark #34026: call to memcpy implemented as a call to optimized library version
+===========================================================================
+
+Begin optimization report for: TAKELINSTEP:GETBESTDISP
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (TAKELINSTEP:GETBESTDISP) [3/5=60.0%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(154,16)
+  -> (171,16) TAKELINSTEP:INTERPSTEP (isz = 420) (sz = 433)
+     [[ Unable to inline callsite  <1>]]
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(165,7)
+   remark #17102: loop was not parallelized: not a parallelization candidate
+   remark #15521: loop was not vectorized: explicitly compute the iteration count before executing the loop or try using canonical loop form
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(167,9)
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed OUTPUT dependence between success line 168 and success line 168
+      remark #17106: parallel dependence: assumed OUTPUT dependence between success line 168 and success line 168
+      remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+      remark #15399: vectorization support: unroll factor set to 2
+      remark #15452: unmasked strided loads: 1 
+      remark #15460: masked strided loads: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 21 
+      remark #15477: vector loop cost: 53.000 
+      remark #15478: estimated potential speedup: 0.790 
+      remark #15479: lightweight vector operations: 17 
+      remark #15480: medium-overhead vector operations: 2 
+      remark #15481: heavy-overhead vector operations: 1 
+      remark #15488: --- end vector loop cost summary ---
+      remark #25439: unrolled with remainder by 2  
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(167,9)
+   <Remainder>
+   LOOP END
+LOOP END
+===========================================================================
+
+Begin optimization report for: TAKELINSTEP:INTERPSTEP
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (TAKELINSTEP:INTERPSTEP) [4/5=80.0%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(189,16)
+  -> EXTERN: (189,16) _alloca
+  -> EXTERN: (189,16) _alloca
+  -> EXTERN: (189,16) __getsp_inlined
+  -> EXTERN: (206,9) __getsp_inlined
+  -> EXTERN: (206,9) __resetsp_inlined
+  -> EXTERN: (206,16) dnrm2_
+  -> EXTERN: (206,37) _alloca
+  -> EXTERN: (212,5) __resetsp_inlined
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(197,7)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(197,7)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference dgvec has aligned access
+   remark #15389: vectorization support: reference dlamls has unaligned access
+   remark #15389: vectorization support: reference dlamls has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15450: unmasked unaligned unit stride loads: 2 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 6 
+   remark #15477: vector loop cost: 17.000 
+   remark #15478: estimated potential speedup: 1.370 
+   remark #15479: lightweight vector operations: 3 
+   remark #15480: medium-overhead vector operations: 2 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(197,7)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(198,7)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference dgvec has aligned access
+   remark #15389: vectorization support: reference dcils has unaligned access
+   remark #15389: vectorization support: reference dcils has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15450: unmasked unaligned unit stride loads: 2 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 6 
+   remark #15477: vector loop cost: 17.000 
+   remark #15478: estimated potential speedup: 1.380 
+   remark #15479: lightweight vector operations: 3 
+   remark #15480: medium-overhead vector operations: 2 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(198,7)
+<Remainder>
+   remark #15388: vectorization support: reference dgvec has aligned access
+   remark #15389: vectorization support: reference dcils has unaligned access
+   remark #15389: vectorization support: reference dcils has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(198,7)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(199,7)
+   remark #25045: Fused Loops: ( 199 200 )
+
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference dgvec has aligned access
+   remark #15388: vectorization support: reference dgvec has aligned access
+   remark #15388: vectorization support: reference dgvec has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(200,23) ]
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15301: FUSED LOOP WAS VECTORIZED
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 47 
+   remark #15477: vector loop cost: 15.000 
+   remark #15478: estimated potential speedup: 8.390 
+   remark #15479: lightweight vector operations: 15 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(200,14)
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(199,7)
+<Remainder>
+   remark #15388: vectorization support: reference dgvec has aligned access
+   remark #15388: vectorization support: reference dgvec has aligned access
+   remark #15388: vectorization support: reference dgvec has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(200,23) ]
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+   remark #25456: Number of Array Refs Scalar Replaced In Loop: 1
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(199,7)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(202,9)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference g0vec has aligned access
+   remark #15389: vectorization support: reference dcils has unaligned access
+   remark #15389: vectorization support: reference dcils has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15450: unmasked unaligned unit stride loads: 2 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 11 
+   remark #15477: vector loop cost: 21.000 
+   remark #15478: estimated potential speedup: 1.990 
+   remark #15479: lightweight vector operations: 8 
+   remark #15480: medium-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(202,9)
+<Remainder>
+   remark #15388: vectorization support: reference g0vec has aligned access
+   remark #15389: vectorization support: reference dcils has unaligned access
+   remark #15389: vectorization support: reference dcils has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(202,9)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(203,9)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(203,9)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference g0vec has aligned access
+   remark #15389: vectorization support: reference dlamls has unaligned access
+   remark #15389: vectorization support: reference dlamls has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15450: unmasked unaligned unit stride loads: 2 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 11 
+   remark #15477: vector loop cost: 21.000 
+   remark #15478: estimated potential speedup: 1.980 
+   remark #15479: lightweight vector operations: 8 
+   remark #15480: medium-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(203,9)
+<Remainder>
+   remark #15388: vectorization support: reference g0vec has aligned access
+   remark #15389: vectorization support: reference dlamls has unaligned access
+   remark #15389: vectorization support: reference dlamls has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(203,9)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(204,9)
+   remark #25045: Fused Loops: ( 204 205 )
+
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference g0vec has aligned access
+   remark #15388: vectorization support: reference g0vec has aligned access
+   remark #15388: vectorization support: reference g0vec has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(205,17) ]
+   remark #15388: vectorization support: reference dgvec has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(205,17) ]
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15301: FUSED LOOP WAS VECTORIZED
+   remark #15448: unmasked aligned unit stride loads: 2 
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 43 
+   remark #15477: vector loop cost: 12.000 
+   remark #15478: estimated potential speedup: 9.120 
+   remark #15479: lightweight vector operations: 12 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(205,17)
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(204,9)
+<Remainder>
+   remark #15388: vectorization support: reference g0vec has aligned access
+   remark #15388: vectorization support: reference g0vec has aligned access
+   remark #15388: vectorization support: reference g0vec has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(205,17) ]
+   remark #15388: vectorization support: reference dgvec has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(205,17) ]
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+   remark #25456: Number of Array Refs Scalar Replaced In Loop: 1
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(204,9)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(206,37)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference 362 has aligned access
+   remark #15388: vectorization support: reference g0vec has aligned access
+   remark #15388: vectorization support: reference dgvec has aligned access
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15448: unmasked aligned unit stride loads: 2 
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 9 
+   remark #15477: vector loop cost: 7.000 
+   remark #15478: estimated potential speedup: 4.390 
+   remark #15479: lightweight vector operations: 7 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(206,37)
+<Remainder>
+   remark #15388: vectorization support: reference 362 has aligned access
+   remark #15388: vectorization support: reference g0vec has aligned access
+   remark #15388: vectorization support: reference dgvec has aligned access
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(206,37)
+<Remainder>
+LOOP END
+===========================================================================
+
+Begin optimization report for: TAKELINSTEP:ADDDISP
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (TAKELINSTEP:ADDDISP) [5/5=100.0%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(115,16)
+  -> EXTERN: (115,16) _alloca
+  -> EXTERN: (115,16) _alloca
+  -> EXTERN: (115,16) _alloca
+  -> EXTERN: (115,16) __getsp_inlined
+  -> EXTERN: (121,25) for_stop_core
+  -> EXTERN: (126,12) EVALUATEERROR
+  -> EXTERN: (127,12) GETERROR
+  -> EXTERN: (128,12) GETCGRAD
+  -> EXTERN: (129,12) OPTLAG
+  -> EXTERN: (147,17) for_write_seq_fmt
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (147,17) for_write_seq_fmt_xmit
+  -> EXTERN: (150,5) __resetsp_inlined
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(124,7)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference hnew has aligned access
+   remark #15389: vectorization support: reference  has unaligned access
+   remark #15389: vectorization support: reference  has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15450: unmasked unaligned unit stride loads: 2 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 9 
+   remark #15477: vector loop cost: 19.000 
+   remark #15478: estimated potential speedup: 1.810 
+   remark #15479: lightweight vector operations: 6 
+   remark #15480: medium-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(124,7)
+<Remainder>
+   remark #15388: vectorization support: reference hnew has aligned access
+   remark #15389: vectorization support: reference  has unaligned access
+   remark #15389: vectorization support: reference  has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(124,7)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(125,7)
+   remark #25408: memset generated
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed OUTPUT dependence between hnew line 125 and hnew line 125
+   remark #17106: parallel dependence: assumed OUTPUT dependence between hnew line 125 and hnew line 125
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(125,7)
+   <Peeled>
+      remark #25015: Estimate of max trip count of loop=12
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(125,7)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference hnew has aligned access
+      remark #15399: vectorization support: unroll factor set to 2
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 4 
+      remark #15477: vector loop cost: 1.500 
+      remark #15478: estimated potential speedup: 1.500 
+      remark #15479: lightweight vector operations: 3 
+      remark #15488: --- end vector loop cost summary ---
+      remark #25015: Estimate of max trip count of loop=1
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(125,7)
+   <Remainder>
+      remark #25015: Estimate of max trip count of loop=12
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,23)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,23)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference dcils has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,47) ]
+   remark #15399: vectorization support: unroll factor set to 8
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 11 
+   remark #15477: vector loop cost: 20.000 
+   remark #15478: estimated potential speedup: 3.680 
+   remark #15479: lightweight vector operations: 10 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,23)
+<Remainder>
+   remark #15388: vectorization support: reference dcils has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,47) ]
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,23)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,52)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,52)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference dlamls has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,75) ]
+   remark #15399: vectorization support: unroll factor set to 8
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 11 
+   remark #15477: vector loop cost: 20.000 
+   remark #15478: estimated potential speedup: 3.680 
+   remark #15479: lightweight vector operations: 10 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,52)
+<Remainder>
+   remark #15388: vectorization support: reference dlamls has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,75) ]
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(130,52)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(134,7)
+   remark #17102: loop was not parallelized: not a parallelization candidate
+   remark #15521: loop was not vectorized: explicitly compute the iteration count before executing the loop or try using canonical loop form
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(145,9)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between  line 145 and  line 145
+   remark #17106: parallel dependence: assumed FLOW dependence between  line 145 and  line 145
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(145,9)
+      remark #25401: memcopy(with guard) generated
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed ANTI dependence between  line 145 and  line 145
+      remark #17106: parallel dependence: assumed FLOW dependence between  line 145 and  line 145
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(145,9)
+      <Peeled, Multiversioned v2>
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(145,9)
+      <Multiversioned v2>
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15388: vectorization support: reference  has aligned access
+         remark #15389: vectorization support: reference jaco2 has unaligned access
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+         remark #15449: unmasked aligned unit stride stores: 1 
+         remark #15450: unmasked unaligned unit stride loads: 1 
+         remark #15475: --- begin vector loop cost summary ---
+         remark #15476: scalar loop cost: 4 
+         remark #15477: vector loop cost: 1.250 
+         remark #15478: estimated potential speedup: 3.000 
+         remark #15479: lightweight vector operations: 3 
+         remark #15488: --- end vector loop cost summary ---
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(145,9)
+      <Remainder, Multiversioned v2>
+      LOOP END
+   LOOP END
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(125,7):remark #34014: optimization advice for memset: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(125,7):remark #34026: call to memset implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(145,9):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(145,9):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/linsteps.f90(145,9):remark #34026: call to memcpy implemented as a call to optimized library version
+===========================================================================
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINING FOOTNOTES:
+
+<1> Inlining the subprogram will lead to incorrect program behavior.
+

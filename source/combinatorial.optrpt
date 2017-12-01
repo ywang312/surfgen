@@ -1,0 +1,666 @@
+
+    Report from: Interprocedural optimizations [ipo]
+
+  WHOLE PROGRAM (SAFE) [EITHER METHOD]: false
+  WHOLE PROGRAM (SEEN) [TABLE METHOD]: false
+  WHOLE PROGRAM (READ) [OBJECT READER METHOD]: false
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+In the inlining report below:
+   "sz" refers to the "size" of the routine. The smaller a routine's size,
+      the more likely it is to be inlined.
+   "isz" refers to the "inlined size" of the routine. This is the amount
+      the calling routine will grow if the called routine is inlined into it.
+      The compiler generally limits the amount a routine can grow by having
+      routines inlined into it.
+
+Begin optimization report for: combinatorial._
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (combinatorial._) [1/3=33.3%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(21,8)
+
+===========================================================================
+
+Begin optimization report for: COMBINATORIAL::FACTL
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (COMBINATORIAL::FACTL) [2/3=66.7%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(32,11)
+  -> EXTERN: (40,6) for_alloc_allocatable
+  -> EXTERN: (48,6) for_alloc_allocatable
+  -> EXTERN: (48,6) for_check_mult_overflow64
+  -> EXTERN: (49,6) for_dealloc_allocatable
+  -> EXTERN: (50,6) for_dealloc_allocatable
+  -> EXTERN: (51,6) for_alloc_allocatable
+  -> EXTERN: (51,6) for_check_mult_overflow64
+  -> EXTERN: (53,6) for_dealloc_allocatable
+  -> EXTERN: (60,2) for_dealloc_allocatable
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(41,6)
+   remark #25401: memcopy(with guard) generated
+   remark #25401: memcopy(with guard) generated
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15389: vectorization support: reference combinatorial_mp_factl_data_ has unaligned access
+   remark #15388: vectorization support: reference 77 has aligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15427: loop was completely unrolled
+   remark #15399: vectorization support: unroll factor set to 3
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15451: unmasked unaligned unit stride stores: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 4 
+   remark #15477: vector loop cost: 9.000 
+   remark #15478: estimated potential speedup: 1.140 
+   remark #15479: lightweight vector operations: 2 
+   remark #15481: heavy-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(49,6)
+   remark #25401: memcopy(with guard) generated
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between TMP line 49 and TMP line 49
+   remark #17106: parallel dependence: assumed FLOW dependence between TMP line 49 and TMP line 49
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(49,6)
+   <Peeled, Multiversioned v2>
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(49,6)
+   <Multiversioned v2>
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference TMP has aligned access
+      remark #15389: vectorization support: reference combinatorial_mp_factl_data_ has unaligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15442: entire loop may be executed in remainder
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15450: unmasked unaligned unit stride loads: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 4 
+      remark #15477: vector loop cost: 2.500 
+      remark #15478: estimated potential speedup: 1.560 
+      remark #15479: lightweight vector operations: 1 
+      remark #15480: medium-overhead vector operations: 2 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(49,6)
+   <Remainder, Multiversioned v2>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(52,6)
+   remark #25401: memcopy(with guard) generated
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between combinatorial_mp_factl_data_ line 52 and combinatorial_mp_factl_data_ line 52
+   remark #17106: parallel dependence: assumed FLOW dependence between combinatorial_mp_factl_data_ line 52 and combinatorial_mp_factl_data_ line 52
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(52,6)
+   <Peeled, Multiversioned v2>
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(52,6)
+   <Multiversioned v2>
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference combinatorial_mp_factl_data_ has aligned access
+      remark #15389: vectorization support: reference TMP has unaligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15442: entire loop may be executed in remainder
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15450: unmasked unaligned unit stride loads: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 4 
+      remark #15477: vector loop cost: 2.500 
+      remark #15478: estimated potential speedup: 1.560 
+      remark #15479: lightweight vector operations: 1 
+      remark #15480: medium-overhead vector operations: 2 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(52,6)
+   <Remainder, Multiversioned v2>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(54,6)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed FLOW dependence between combinatorial_mp_factl_data_ line 55 and combinatorial_mp_factl_data_ line 55
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed FLOW dependence between combinatorial_mp_factl_data_ line 55 and combinatorial_mp_factl_data_ line 55
+   remark #25439: unrolled with remainder by 2  
+   remark #25456: Number of Array Refs Scalar Replaced In Loop: 2
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(54,6)
+<Remainder>
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(36,40):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(49,6):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(49,6):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(49,6):remark #34026: call to memcpy implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(52,6):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(52,6):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(52,6):remark #34026: call to memcpy implemented as a call to optimized library version
+===========================================================================
+
+Begin optimization report for: COMBINATORIAL::PERMUTATION
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (COMBINATORIAL::PERMUTATION) [3/3=100.0%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(75,11)
+  -> EXTERN: (75,11) _alloca
+  -> EXTERN: (75,11) __getsp_inlined
+  -> EXTERN: (91,28) for_stop_core
+  -> EXTERN: (94,6) for_alloc_allocatable
+  -> EXTERN: (99,6) for_check_mult_overflow64
+  -> EXTERN: (99,6) for_alloc_allocatable
+  -> EXTERN: (100,6) for_dealloc_allocatable
+  -> EXTERN: (101,6) for_dealloc_allocatable
+  -> EXTERN: (102,6) for_check_mult_overflow64
+  -> EXTERN: (102,6) for_alloc_allocatable
+  -> EXTERN: (104,6) for_dealloc_allocatable
+  -> EXTERN: (112,10) __resetsp_inlined
+  -> EXTERN: (112,10) _alloca
+  -> EXTERN: (112,10) __getsp_inlined
+  -> EXTERN: (114,10) __getsp_inlined
+  -> EXTERN: (114,10) _alloca
+  -> EXTERN: (114,10) __resetsp_inlined
+  -> EXTERN: (122,2) for_dealloc_allocatable
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(85,6)
+   remark #25401: memcopy(with guard) generated
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between mlist line 85 and mlist line 85
+   remark #17106: parallel dependence: assumed FLOW dependence between mlist line 85 and mlist line 85
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(85,6)
+   <Multiversioned v2>
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference mlist has aligned access
+      remark #15389: vectorization support: reference m_list has unaligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15450: unmasked unaligned unit stride loads: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 4 
+      remark #15477: vector loop cost: 2.500 
+      remark #15478: estimated potential speedup: 1.590 
+      remark #15479: lightweight vector operations: 1 
+      remark #15480: medium-overhead vector operations: 2 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(85,6)
+   <Remainder, Multiversioned v2>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(87,6)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15388: vectorization support: reference mlist has aligned access   [ /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(88,8) ]
+   remark #15399: vectorization support: unroll factor set to 2
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 2 
+   remark #15477: vector loop cost: 1.500 
+   remark #15478: estimated potential speedup: 1.320 
+   remark #15479: lightweight vector operations: 2 
+   remark #15480: medium-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(87,6)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(95,6)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+   remark #15460: masked strided loads: 1 
+   remark #15462: unmasked indexed (or gather) loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 4 
+   remark #15477: vector loop cost: 4.000 
+   remark #15478: estimated potential speedup: 1.000 
+   remark #15479: lightweight vector operations: 2 
+   remark #15480: medium-overhead vector operations: 1 
+   remark #15481: heavy-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+   remark #25436: completely unrolled by 3  
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(95,6)
+      remark #25401: memcopy(with guard) generated
+      remark #25401: memcopy(with guard) generated
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15389: vectorization support: reference combinatorial_mp_pmtlist_ has unaligned access
+      remark #15388: vectorization support: reference 172 has aligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+      remark #15399: vectorization support: unroll factor set to 3
+      remark #15448: unmasked aligned unit stride loads: 1 
+      remark #15451: unmasked unaligned unit stride stores: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 4 
+      remark #15477: vector loop cost: 9.000 
+      remark #15478: estimated potential speedup: 1.140 
+      remark #15479: lightweight vector operations: 2 
+      remark #15481: heavy-overhead vector operations: 1 
+      remark #15488: --- end vector loop cost summary ---
+      remark #25436: completely unrolled by 6  
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(95,6)
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(95,6)
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(100,6)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between TMP line 100 and TMP line 100
+   remark #17106: parallel dependence: assumed FLOW dependence between TMP line 100 and TMP line 100
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(100,6)
+      remark #25401: memcopy(with guard) generated
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed ANTI dependence between TMP line 100 and TMP line 100
+      remark #17106: parallel dependence: assumed FLOW dependence between TMP line 100 and TMP line 100
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(100,6)
+      <Peeled, Multiversioned v2>
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(100,6)
+      <Multiversioned v2>
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15388: vectorization support: reference TMP has aligned access
+         remark #15389: vectorization support: reference combinatorial_mp_pmtlist_ has unaligned access
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+         remark #15449: unmasked aligned unit stride stores: 1 
+         remark #15450: unmasked unaligned unit stride loads: 1 
+         remark #15475: --- begin vector loop cost summary ---
+         remark #15476: scalar loop cost: 4 
+         remark #15477: vector loop cost: 2.500 
+         remark #15478: estimated potential speedup: 1.560 
+         remark #15479: lightweight vector operations: 1 
+         remark #15480: medium-overhead vector operations: 2 
+         remark #15488: --- end vector loop cost summary ---
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(100,6)
+      <Remainder, Multiversioned v2>
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(103,6)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between combinatorial_mp_pmtlist_ line 103 and combinatorial_mp_pmtlist_ line 103
+   remark #17106: parallel dependence: assumed FLOW dependence between combinatorial_mp_pmtlist_ line 103 and combinatorial_mp_pmtlist_ line 103
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(103,6)
+      remark #25401: memcopy(with guard) generated
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed ANTI dependence between combinatorial_mp_pmtlist_ line 103 and combinatorial_mp_pmtlist_ line 103
+      remark #17106: parallel dependence: assumed FLOW dependence between combinatorial_mp_pmtlist_ line 103 and combinatorial_mp_pmtlist_ line 103
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(103,6)
+      <Peeled, Multiversioned v2>
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(103,6)
+      <Multiversioned v2>
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15388: vectorization support: reference combinatorial_mp_pmtlist_ has aligned access
+         remark #15389: vectorization support: reference TMP has unaligned access
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+         remark #15449: unmasked aligned unit stride stores: 1 
+         remark #15450: unmasked unaligned unit stride loads: 1 
+         remark #15475: --- begin vector loop cost summary ---
+         remark #15476: scalar loop cost: 4 
+         remark #15477: vector loop cost: 2.500 
+         remark #15478: estimated potential speedup: 1.560 
+         remark #15479: lightweight vector operations: 1 
+         remark #15480: medium-overhead vector operations: 2 
+         remark #15488: --- end vector loop cost summary ---
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(103,6)
+      <Remainder, Multiversioned v2>
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(105,6)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed OUTPUT dependence between combinatorial_mp_pmtlist_ line 108 and combinatorial_mp_pmtlist_ line 114
+   remark #17106: parallel dependence: assumed OUTPUT dependence between combinatorial_mp_pmtlist_ line 114 and combinatorial_mp_pmtlist_ line 108
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(108,8)
+   <Peeled>
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(108,8)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference combinatorial_mp_pmtlist_ has aligned access
+      remark #15399: vectorization support: unroll factor set to 4
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15442: entire loop may be executed in remainder
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 2 
+      remark #15477: vector loop cost: 6.000 
+      remark #15478: estimated potential speedup: 1.290 
+      remark #15479: lightweight vector operations: 2 
+      remark #15480: medium-overhead vector operations: 1 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(108,8)
+   <Remainder>
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(109,8)
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed ANTI dependence between 222 line 112 and 222 line 112
+      remark #17106: parallel dependence: assumed FLOW dependence between 222 line 112 and 222 line 112
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(112,10)
+         remark #17104: loop was not parallelized: existence of parallel dependence
+         remark #17106: parallel dependence: assumed ANTI dependence between 222 line 112 and 222 line 112
+         remark #17106: parallel dependence: assumed FLOW dependence between 222 line 112 and 222 line 112
+         remark #15542: loop was not vectorized: inner loop was already vectorized
+
+         LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(112,10)
+            remark #25401: memcopy(with guard) generated
+            remark #17104: loop was not parallelized: existence of parallel dependence
+            remark #17106: parallel dependence: assumed ANTI dependence between 222 line 112 and 222 line 112
+            remark #17106: parallel dependence: assumed FLOW dependence between 222 line 112 and 222 line 112
+            remark #15542: loop was not vectorized: inner loop was already vectorized
+            remark #25015: Estimate of max trip count of loop=1
+
+            LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(112,10)
+            <Peeled, Multiversioned v2>
+            LOOP END
+
+            LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(112,10)
+            <Multiversioned v2>
+               remark #17108: loop was not parallelized: insufficient computational work
+               remark #15388: vectorization support: reference 222 has aligned access
+               remark #15389: vectorization support: reference combinatorial_mp_pmtlist_ has unaligned access
+               remark #15381: vectorization support: unaligned access used inside loop body
+               remark #15300: LOOP WAS VECTORIZED
+               remark #15449: unmasked aligned unit stride stores: 1 
+               remark #15450: unmasked unaligned unit stride loads: 1 
+               remark #15475: --- begin vector loop cost summary ---
+               remark #15476: scalar loop cost: 4 
+               remark #15477: vector loop cost: 2.500 
+               remark #15478: estimated potential speedup: 1.560 
+               remark #15479: lightweight vector operations: 1 
+               remark #15480: medium-overhead vector operations: 2 
+               remark #15488: --- end vector loop cost summary ---
+            LOOP END
+
+            LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(112,10)
+            <Remainder, Multiversioned v2>
+            LOOP END
+         LOOP END
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(112,10)
+         remark #17104: loop was not parallelized: existence of parallel dependence
+         remark #17106: parallel dependence: assumed ANTI dependence between combinatorial_mp_pmtlist_ line 112 and combinatorial_mp_pmtlist_ line 112
+         remark #17106: parallel dependence: assumed FLOW dependence between combinatorial_mp_pmtlist_ line 112 and combinatorial_mp_pmtlist_ line 112
+         remark #15542: loop was not vectorized: inner loop was already vectorized
+
+         LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(112,10)
+            remark #25401: memcopy(with guard) generated
+            remark #17104: loop was not parallelized: existence of parallel dependence
+            remark #17106: parallel dependence: assumed ANTI dependence between combinatorial_mp_pmtlist_ line 112 and combinatorial_mp_pmtlist_ line 112
+            remark #17106: parallel dependence: assumed FLOW dependence between combinatorial_mp_pmtlist_ line 112 and combinatorial_mp_pmtlist_ line 112
+            remark #15542: loop was not vectorized: inner loop was already vectorized
+            remark #25015: Estimate of max trip count of loop=1
+
+            LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(112,10)
+            <Peeled, Multiversioned v2>
+            LOOP END
+
+            LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(112,10)
+            <Multiversioned v2>
+               remark #17108: loop was not parallelized: insufficient computational work
+               remark #15388: vectorization support: reference combinatorial_mp_pmtlist_ has aligned access
+               remark #15389: vectorization support: reference 222 has unaligned access
+               remark #15381: vectorization support: unaligned access used inside loop body
+               remark #15300: LOOP WAS VECTORIZED
+               remark #15442: entire loop may be executed in remainder
+               remark #15449: unmasked aligned unit stride stores: 1 
+               remark #15450: unmasked unaligned unit stride loads: 1 
+               remark #15475: --- begin vector loop cost summary ---
+               remark #15476: scalar loop cost: 4 
+               remark #15477: vector loop cost: 2.000 
+               remark #15478: estimated potential speedup: 1.940 
+               remark #15479: lightweight vector operations: 1 
+               remark #15480: medium-overhead vector operations: 2 
+               remark #15488: --- end vector loop cost summary ---
+            LOOP END
+
+            LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(112,10)
+            <Remainder, Multiversioned v2>
+            LOOP END
+         LOOP END
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(113,10)
+      <Peeled>
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(113,10)
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15388: vectorization support: reference combinatorial_mp_pmtlist_ has aligned access
+         remark #15399: vectorization support: unroll factor set to 4
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+         remark #15449: unmasked aligned unit stride stores: 1 
+         remark #15475: --- begin vector loop cost summary ---
+         remark #15476: scalar loop cost: 2 
+         remark #15477: vector loop cost: 6.000 
+         remark #15478: estimated potential speedup: 1.290 
+         remark #15479: lightweight vector operations: 2 
+         remark #15480: medium-overhead vector operations: 1 
+         remark #15488: --- end vector loop cost summary ---
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(113,10)
+      <Remainder>
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(114,10)
+         remark #17104: loop was not parallelized: existence of parallel dependence
+         remark #17106: parallel dependence: assumed ANTI dependence between 238 line 114 and 238 line 114
+         remark #17106: parallel dependence: assumed FLOW dependence between 238 line 114 and 238 line 114
+         remark #15542: loop was not vectorized: inner loop was already vectorized
+
+         LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(114,10)
+            remark #25401: memcopy(with guard) generated
+            remark #17104: loop was not parallelized: existence of parallel dependence
+            remark #17106: parallel dependence: assumed ANTI dependence between 238 line 114 and 238 line 114
+            remark #17106: parallel dependence: assumed FLOW dependence between 238 line 114 and 238 line 114
+            remark #15542: loop was not vectorized: inner loop was already vectorized
+            remark #25015: Estimate of max trip count of loop=1
+
+            LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(114,10)
+            <Peeled, Multiversioned v2>
+            LOOP END
+
+            LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(114,10)
+            <Multiversioned v2>
+               remark #17108: loop was not parallelized: insufficient computational work
+               remark #15388: vectorization support: reference 238 has aligned access
+               remark #15389: vectorization support: reference combinatorial_mp_pmtlist_ has unaligned access
+               remark #15381: vectorization support: unaligned access used inside loop body
+               remark #15300: LOOP WAS VECTORIZED
+               remark #15449: unmasked aligned unit stride stores: 1 
+               remark #15450: unmasked unaligned unit stride loads: 1 
+               remark #15475: --- begin vector loop cost summary ---
+               remark #15476: scalar loop cost: 4 
+               remark #15477: vector loop cost: 2.500 
+               remark #15478: estimated potential speedup: 1.560 
+               remark #15479: lightweight vector operations: 1 
+               remark #15480: medium-overhead vector operations: 2 
+               remark #15488: --- end vector loop cost summary ---
+            LOOP END
+
+            LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(114,10)
+            <Remainder, Multiversioned v2>
+            LOOP END
+         LOOP END
+      LOOP END
+
+      LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(114,10)
+         remark #17104: loop was not parallelized: existence of parallel dependence
+         remark #17106: parallel dependence: assumed ANTI dependence between combinatorial_mp_pmtlist_ line 114 and combinatorial_mp_pmtlist_ line 114
+         remark #17106: parallel dependence: assumed FLOW dependence between combinatorial_mp_pmtlist_ line 114 and combinatorial_mp_pmtlist_ line 114
+         remark #15542: loop was not vectorized: inner loop was already vectorized
+
+         LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(114,10)
+            remark #25401: memcopy(with guard) generated
+            remark #17104: loop was not parallelized: existence of parallel dependence
+            remark #17106: parallel dependence: assumed ANTI dependence between combinatorial_mp_pmtlist_ line 114 and combinatorial_mp_pmtlist_ line 114
+            remark #17106: parallel dependence: assumed FLOW dependence between combinatorial_mp_pmtlist_ line 114 and combinatorial_mp_pmtlist_ line 114
+            remark #15542: loop was not vectorized: inner loop was already vectorized
+            remark #25015: Estimate of max trip count of loop=1
+
+            LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(114,10)
+            <Peeled, Multiversioned v2>
+            LOOP END
+
+            LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(114,10)
+            <Multiversioned v2>
+               remark #17108: loop was not parallelized: insufficient computational work
+               remark #15388: vectorization support: reference combinatorial_mp_pmtlist_ has aligned access
+               remark #15389: vectorization support: reference 238 has unaligned access
+               remark #15381: vectorization support: unaligned access used inside loop body
+               remark #15300: LOOP WAS VECTORIZED
+               remark #15442: entire loop may be executed in remainder
+               remark #15449: unmasked aligned unit stride stores: 1 
+               remark #15450: unmasked unaligned unit stride loads: 1 
+               remark #15475: --- begin vector loop cost summary ---
+               remark #15476: scalar loop cost: 4 
+               remark #15477: vector loop cost: 2.000 
+               remark #15478: estimated potential speedup: 1.940 
+               remark #15479: lightweight vector operations: 1 
+               remark #15480: medium-overhead vector operations: 2 
+               remark #15488: --- end vector loop cost summary ---
+            LOOP END
+
+            LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(114,10)
+            <Remainder, Multiversioned v2>
+            LOOP END
+         LOOP END
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(119,4)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+   remark #15458: masked indexed (or gather) loads: 1 
+   remark #15460: masked strided loads: 1 
+   remark #15462: unmasked indexed (or gather) loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 5 
+   remark #15477: vector loop cost: 7.000 
+   remark #15478: estimated potential speedup: 0.710 
+   remark #15479: lightweight vector operations: 2 
+   remark #15480: medium-overhead vector operations: 1 
+   remark #15481: heavy-overhead vector operations: 2 
+   remark #15488: --- end vector loop cost summary ---
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(120,6)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference plist has aligned access
+      remark #15389: vectorization support: reference combinatorial_mp_pmtlist_ has unaligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15450: unmasked unaligned unit stride loads: 1 
+      remark #15458: masked indexed (or gather) loads: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 5 
+      remark #15477: vector loop cost: 5.500 
+      remark #15478: estimated potential speedup: 0.900 
+      remark #15479: lightweight vector operations: 1 
+      remark #15480: medium-overhead vector operations: 2 
+      remark #15481: heavy-overhead vector operations: 1 
+      remark #15488: --- end vector loop cost summary ---
+      remark #25439: unrolled with remainder by 2  
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(120,6)
+   <Remainder>
+   LOOP END
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(80,48):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(85,6):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(85,6):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(85,6):remark #34026: call to memcpy implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(100,6):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(100,6):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(100,6):remark #34026: call to memcpy implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(103,6):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(103,6):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(103,6):remark #34026: call to memcpy implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(112,10):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(112,10):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(112,10):remark #34026: call to memcpy implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(112,10):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(112,10):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(112,10):remark #34026: call to memcpy implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(114,10):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(114,10):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(114,10):remark #34026: call to memcpy implemented as a call to optimized library version
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(114,10):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(114,10):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/combinatorial.f90(114,10):remark #34026: call to memcpy implemented as a call to optimized library version
+===========================================================================

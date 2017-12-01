@@ -94,52 +94,55 @@ end subroutine getFreq
 
 ! gen_molden_file: generate molden frequency file
 subroutine gen_molden_file(cg, evec, eval, natoms, anames)
-        implicit none
-        integer, intent(in) :: natoms
-        character*3,dimension(natoms) :: anames
-        real*8, dimension(3*natoms), intent(in) :: cg
-        real*8, dimension(3*natoms,3*natoms), intent(in) :: evec
-        real*8, dimension(3*natoms), intent(in) :: eval
-        
-        integer :: mu=11
-        character*25 :: mn
-
-        integer :: ios, i, j
-
-        write(mn,"(a)") "molden.freq"
-        mn=trim(mn)
-
-        open(file=mn,unit=mu,action='write',status='unknown',iostat=ios)
-        if (ios .ne. 0) then
-                print "(A)", "Could not open molden file. No file generated."
-                return
-        end if 
-
-        ! print header
-        write(mu,"(1x,A)") "-- > start of molden input"
-        write(mu,"(1x,A)") "[Molden Format]"
-        ! print frequencies
-        write(mu,"(1x,A)") "[FREQ]"
-        do i=1,3*natoms
-                write(mu,"(f10.2)") eval(i)
-        end do
-        ! print geometry
-        write(mu,"(1x,A)") "[FR-COORD]"
-        do i=1, natoms
-                write(mu,"(1x,a3,3f13.6)") trim(anames(i)), &
-                        cg((i-1)*3+1),cg((i-1)*3+2),cg((i-1)*3+3)
-        end do
-        ! print modes
-        write(mu,"(1x,A)") "[FR-NORM-COORD]"
-        do i=1, 3*natoms
-                write(mu,"(1x,'vibration',i24)") i
-                do j=1,natoms
-                        write(mu,"(3f13.5)") evec((j-1)*3+1,i), &
-                                evec((j-1)*3+2,i), &
-                                evec((j-1)*3+3,i)
-                end do
-        end do
-        write(mu,"(1x,A)") "--> end of molden input"
+  implicit none
+  integer, intent(in) :: natoms
+  character*3,dimension(natoms) :: anames
+  real*8, dimension(3*natoms), intent(in) :: cg
+  real*8, dimension(3*natoms,3*natoms), intent(in) :: evec
+  real*8, dimension(3*natoms), intent(in) :: eval
+  real*8 :: vnorm ! vector norm
+  real*8, external :: dnrm2
+  
+  integer :: mu=11
+  character*25 :: mn
+  
+  integer :: ios, i, j
+  
+  write(mn,"(a)") "molden.freq"
+  mn=trim(mn)
+  
+  open(file=mn,unit=mu,action='write',status='unknown',iostat=ios)
+  if (ios .ne. 0) then
+    print "(A)", "Could not open molden file. No file generated."
+    return
+  end if
+  
+  ! print header
+  write(mu,"(1x,A)") "-- > start of molden input"
+  write(mu,"(1x,A)") "[Molden Format]"
+  ! print frequencies
+  write(mu,"(1x,A)") "[FREQ]"
+  do i=1,3*natoms
+    write(mu,"(f10.2)") eval(i)
+  end do
+  ! print geometry
+  write(mu,"(1x,A)") "[FR-COORD]"
+  do i=1, natoms
+    write(mu,"(1x,a3,3f13.6)") trim(anames(i)), &
+      cg((i-1)*3+1),cg((i-1)*3+2),cg((i-1)*3+3)
+  end do
+  ! print modes
+  write(mu,"(1x,A)") "[FR-NORM-COORD]"
+  do i=1, 3*natoms
+    write(mu,"(1x,'vibration',i24)") i
+    vnorm = dnrm2(3*natoms, evec(1,i), 1)
+    do j=1,natoms
+      write(mu,"(3f13.5)") evec((j-1)*3+1,i)/vnorm, &
+        evec((j-1)*3+2,i)/vnorm, &
+        evec((j-1)*3+3,i)/vnorm
+    end do
+  end do
+  write(mu,"(1x,A)") "--> end of molden input"
 end subroutine gen_molden_file
 
 !---calculate hessian at a certain geometry

@@ -1,0 +1,94 @@
+
+    Report from: Interprocedural optimizations [ipo]
+
+  WHOLE PROGRAM (SAFE) [EITHER METHOD]: false
+  WHOLE PROGRAM (SEEN) [TABLE METHOD]: false
+  WHOLE PROGRAM (READ) [OBJECT READER METHOD]: false
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+In the inlining report below:
+   "sz" refers to the "size" of the routine. The smaller a routine's size,
+      the more likely it is to be inlined.
+   "isz" refers to the "inlined size" of the routine. This is the amount
+      the calling routine will grow if the called routine is inlined into it.
+      The compiler generally limits the amount a routine can grow by having
+      routines inlined into it.
+
+Begin optimization report for: ANALYSE
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (ANALYSE) [1/1=100.0%] analyse.f90(13,9)
+  -> EXTERN: (13,9) for_set_reentrancy
+  -> EXTERN: (24,3) for_write_seq_lis
+  -> EXTERN: (25,3) for_write_seq_lis
+  -> EXTERN: (26,3) for_write_seq_lis
+  -> EXTERN: (27,3) for_write_seq_lis
+  -> EXTERN: (28,8) initpotential_
+  -> EXTERN: (29,8) getinfo_
+  -> EXTERN: (30,8) disableenergyscaling_
+  -> EXTERN: (33,3) for_alloc_allocatable
+  -> EXTERN: (33,3) for_check_mult_overflow64
+  -> EXTERN: (34,3) for_alloc_allocatable
+  -> EXTERN: (34,3) for_check_mult_overflow64
+  -> EXTERN: (35,3) for_alloc_allocatable
+  -> EXTERN: (35,3) for_check_mult_overflow64
+  -> EXTERN: (36,3) for_alloc_allocatable
+  -> EXTERN: (36,3) for_check_mult_overflow64
+  -> EXTERN: (37,3) for_alloc_allocatable
+  -> EXTERN: (37,3) for_check_mult_overflow64
+  -> EXTERN: (38,3) for_alloc_allocatable
+  -> EXTERN: (38,3) for_check_mult_overflow64
+  -> EXTERN: (40,3) for_write_seq_fmt_xmit
+  -> EXTERN: (40,3) for_write_seq_fmt
+  -> EXTERN: (41,3) for_write_seq_fmt_xmit
+  -> EXTERN: (41,3) for_write_seq_fmt
+  -> EXTERN: (47,8) for_getcmd_arg
+  -> EXTERN: (49,7) for_stop_core
+  -> EXTERN: (51,5) for_write_seq_lis
+  -> EXTERN: (52,5) for_write_int_fmt
+  -> EXTERN: (55,3) __resetsp_inlined
+  -> EXTERN: (55,3) for_write_seq_lis
+  -> EXTERN: (55,3) __getsp_inlined
+  -> EXTERN: (55,43) for_concat
+  -> EXTERN: (55,43) _alloca
+  -> EXTERN: (55,45) for_trim
+  -> EXTERN: (57,8) readcolgeom_
+  -> EXTERN: (59,3) for_write_seq_fmt_xmit
+  -> EXTERN: (59,3) for_write_seq_fmt_xmit
+  -> EXTERN: (59,3) for_write_seq_fmt
+  -> EXTERN: (62,5) for_write_seq_fmt_xmit
+  -> EXTERN: (62,5) for_write_seq_fmt_xmit
+  -> EXTERN: (62,5) for_write_seq_fmt
+  -> EXTERN: (63,10) analysegeom_
+  -> EXTERN: (67,3) for_dealloc_allocatable
+  -> EXTERN: (68,3) for_dealloc_allocatable
+  -> EXTERN: (69,3) for_dealloc_allocatable
+  -> EXTERN: (70,3) for_dealloc_allocatable
+  -> EXTERN: (71,3) for_dealloc_allocatable
+  -> EXTERN: (72,3) for_dealloc_allocatable
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at analyse.f90(61,3)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed OUTPUT dependence between 52 line 62 and 52 line 62
+   remark #17106: parallel dependence: assumed OUTPUT dependence between 52 line 62 and 52 line 62
+   remark #15382: vectorization support: call to function for_write_seq_fmt cannot be vectorized   [ analyse.f90(62,5) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt_xmit cannot be vectorized   [ analyse.f90(62,5) ]
+   remark #15382: vectorization support: call to function for_write_seq_fmt_xmit cannot be vectorized   [ analyse.f90(62,5) ]
+   remark #15382: vectorization support: call to function analysegeom_ cannot be vectorized   [ analyse.f90(63,10) ]
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed OUTPUT dependence between 52 line 62 and 52 line 62
+   remark #15346: vector dependence: assumed OUTPUT dependence between 52 line 62 and 52 line 62
+LOOP END
+===========================================================================

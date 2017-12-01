@@ -1,0 +1,238 @@
+
+    Report from: Interprocedural optimizations [ipo]
+
+  WHOLE PROGRAM (SAFE) [EITHER METHOD]: false
+  WHOLE PROGRAM (SEEN) [TABLE METHOD]: false
+  WHOLE PROGRAM (READ) [OBJECT READER METHOD]: false
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+In the inlining report below:
+   "sz" refers to the "size" of the routine. The smaller a routine's size,
+      the more likely it is to be inlined.
+   "isz" refers to the "inlined size" of the routine. This is the amount
+      the calling routine will grow if the called routine is inlined into it.
+      The compiler generally limits the amount a routine can grow by having
+      routines inlined into it.
+
+Begin optimization report for: rdleclse._
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (rdleclse._) [1/4=25.0%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(6,8)
+
+===========================================================================
+
+Begin optimization report for: RDLECLSE::SOLVE
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (RDLECLSE::SOLVE) [2/4=50.0%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(61,14)
+  -> EXTERN: (79,19) for_write_seq_fmt
+  -> EXTERN: (79,19) for_write_seq_fmt_xmit
+  -> EXTERN: (79,19) for_write_seq_fmt_xmit
+  -> EXTERN: (83,5) for_check_mult_overflow64
+  -> EXTERN: (83,5) for_alloc_allocatable
+  -> EXTERN: (83,5) for_check_mult_overflow64
+  -> EXTERN: (84,17) for_stop_core
+  -> (90,10) RDLECLSE::ALLOCARRAYS (isz = 797) (sz = 808)
+     [[ Inlining would exceed -inline-max-size value (808>253) <1>]]
+  -> EXTERN: (91,10) dsysv_
+  -> EXTERN: (92,16) for_stop_core
+  -> (94,10) RDLECLSE::ALLOCARRAYS (isz = 797) (sz = 808)
+     [[ Inlining would exceed -inline-max-size value (808>253) <1>]]
+  -> EXTERN: (95,10) dsysv_
+  -> EXTERN: (96,16) for_stop_core
+  -> EXTERN: (101,3) for_dealloc_allocatable
+  -> EXTERN: (101,3) for_dealloc_allocatable
+  -> EXTERN: (101,3) for_dealloc_allocatable
+  -> EXTERN: (101,3) for_dealloc_allocatable
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(86,5)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15458: masked indexed (or gather) loads: 1 
+   remark #15459: masked indexed (or scatter) stores: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 11 
+   remark #15477: vector loop cost: 50.000 
+   remark #15478: estimated potential speedup: 0.870 
+   remark #15479: lightweight vector operations: 15 
+   remark #15480: medium-overhead vector operations: 2 
+   remark #15488: --- end vector loop cost summary ---
+   remark #25439: unrolled with remainder by 8  
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(86,5)
+<Remainder>
+   remark #25436: completely unrolled by 7  
+LOOP END
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(98,5)
+   remark #25401: memcopy(with guard) generated
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between sol line 98 and sol line 98
+   remark #17106: parallel dependence: assumed FLOW dependence between sol line 98 and sol line 98
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(98,5)
+   <Peeled, Multiversioned v2>
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(98,5)
+   <Multiversioned v2>
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference sol has aligned access
+      remark #15389: vectorization support: reference rhs has unaligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15442: entire loop may be executed in remainder
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15450: unmasked unaligned unit stride loads: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 4 
+      remark #15477: vector loop cost: 2.250 
+      remark #15478: estimated potential speedup: 1.720 
+      remark #15479: lightweight vector operations: 2 
+      remark #15480: medium-overhead vector operations: 1 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(98,5)
+   <Remainder, Multiversioned v2>
+   LOOP END
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(74,52):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(73,56):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(72,56):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(71,56):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (32, 0), and destination (alignment, offset): (16, 0)
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(98,5):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(98,5):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(98,5):remark #34026: call to memcpy implemented as a call to optimized library version
+===========================================================================
+
+Begin optimization report for: RDLECLSE::ALLOCARRAYS
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (RDLECLSE::ALLOCARRAYS) [3/4=75.0%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(113,14)
+  -> EXTERN: (120,26) for_dealloc_allocatable
+  -> EXTERN: (122,9) for_write_seq_lis_xmit
+  -> EXTERN: (122,9) for_write_seq_lis
+  -> EXTERN: (123,14) for_stop_core
+  -> EXTERN: (125,7) for_check_mult_overflow64
+  -> EXTERN: (125,7) for_alloc_allocatable
+  -> EXTERN: (125,7) for_check_mult_overflow64
+  -> EXTERN: (127,9) for_write_seq_lis_xmit
+  -> EXTERN: (127,9) for_write_seq_lis
+  -> EXTERN: (128,14) for_stop_core
+  -> EXTERN: (134,27) for_dealloc_allocatable
+  -> EXTERN: (136,9) for_write_seq_lis_xmit
+  -> EXTERN: (136,9) for_write_seq_lis
+  -> EXTERN: (137,14) for_stop_core
+  -> EXTERN: (139,7) for_check_mult_overflow64
+  -> EXTERN: (139,7) for_alloc_allocatable
+  -> EXTERN: (139,7) for_check_mult_overflow64
+  -> EXTERN: (141,9) for_write_seq_lis_xmit
+  -> EXTERN: (141,9) for_write_seq_lis
+  -> EXTERN: (142,14) for_stop_core
+  -> EXTERN: (148,26) for_dealloc_allocatable
+  -> EXTERN: (150,9) for_write_seq_lis_xmit
+  -> EXTERN: (150,9) for_write_seq_lis
+  -> EXTERN: (151,14) for_stop_core
+  -> EXTERN: (153,7) for_check_mult_overflow64
+  -> EXTERN: (153,7) for_alloc_allocatable
+  -> EXTERN: (153,7) for_check_mult_overflow64
+  -> EXTERN: (155,9) for_write_seq_lis_xmit
+  -> EXTERN: (155,9) for_write_seq_lis
+  -> EXTERN: (156,14) for_stop_core
+  -> EXTERN: (163,25) for_dealloc_allocatable
+  -> EXTERN: (165,9) for_write_seq_lis_xmit
+  -> EXTERN: (165,9) for_write_seq_lis
+  -> EXTERN: (166,14) for_stop_core
+  -> EXTERN: (168,7) for_check_mult_overflow64
+  -> EXTERN: (168,7) for_alloc_allocatable
+  -> EXTERN: (168,7) for_check_mult_overflow64
+  -> EXTERN: (170,9) for_write_seq_lis_xmit
+  -> EXTERN: (170,9) for_write_seq_lis
+  -> EXTERN: (171,14) for_stop_core
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(160,24)
+   remark #25408: memset generated
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed OUTPUT dependence between rdleclse_mp_jpvt_ line 160 and rdleclse_mp_jpvt_ line 160
+   remark #17106: parallel dependence: assumed OUTPUT dependence between rdleclse_mp_jpvt_ line 160 and rdleclse_mp_jpvt_ line 160
+   remark #15398: loop was not vectorized: loop was transformed to memset or memcpy
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(160,24)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference rdleclse_mp_jpvt_ has aligned access
+      remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 2 
+      remark #15477: vector loop cost: 1.500 
+      remark #15478: estimated potential speedup: 0.820 
+      remark #15479: lightweight vector operations: 2 
+      remark #15480: medium-overhead vector operations: 1 
+      remark #15488: --- end vector loop cost summary ---
+      remark #25439: unrolled with remainder by 2  
+      remark #25015: Estimate of max trip count of loop=12
+   LOOP END
+
+   LOOP BEGIN at /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(160,24)
+   <Remainder>
+      remark #25015: Estimate of max trip count of loop=12
+   LOOP END
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(160,24):remark #34014: optimization advice for memset: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(160,24):remark #34026: call to memset implemented as a call to optimized library version
+===========================================================================
+
+Begin optimization report for: RDLECLSE::CLEANARRAYS
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (RDLECLSE::CLEANARRAYS) [4/4=100.0%] /global/project/projectdirs/m1778/malbon/surfgen/surfgen-edison/source/rdleclse.f90(180,14)
+  -> EXTERN: (184,24) for_dealloc_allocatable
+  -> EXTERN: (185,18) for_write_seq_lis
+  -> EXTERN: (186,25) for_dealloc_allocatable
+  -> EXTERN: (187,18) for_write_seq_lis
+  -> EXTERN: (188,24) for_dealloc_allocatable
+  -> EXTERN: (189,18) for_write_seq_lis
+  -> EXTERN: (190,23) for_dealloc_allocatable
+  -> EXTERN: (191,18) for_write_seq_lis
+
+===========================================================================
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINING FOOTNOTES:
+
+<1> The subprogram is larger than the inliner would normally inline.  Use the
+    option -inline-max-size to increase the size of any subprogram that would
+    normally be inlined, add "!DIR$ATTRIBUTES FORCEINLINE" to the
+    declaration of the called function, or add "!DIR$ FORCEINLINE" before
+    the call site.
+
