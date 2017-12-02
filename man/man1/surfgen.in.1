@@ -399,6 +399,12 @@ Uniformly scale all exact equations.  Since there is no weight for exact equatio
 this is done through scaling the gradient of the Lagrangian with respect to Lagrange
 multipliers.  This option normally does not need to be changed.  Only use it when 
 convergence problems occur.
+.It jshift
+.Sy DOUBLE PRECISION [0.]
+Shift to Jacobian part of Marquardt step.
+.It autoshrink
+.Sy LOGICAL [.false.]
+Automatically shrink the step size when fitting error increases.
 .El
 ./"  DELETED: EXPANSION_INPUT, EXPANSION_OUTPUT
 .Pp
