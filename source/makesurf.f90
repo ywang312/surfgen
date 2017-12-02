@@ -3423,7 +3423,7 @@ SUBROUTINE readMakesurf(INPUTFL)
   gcutoff   = 1D-14
   exactTol      = 1D-12
   LSETol        = 1D-7
-  jshift        = 1d-1
+  jshift        = 0d0
   flattening    = 1D-8
   outputfl      = ''
   flheader      = '----'
