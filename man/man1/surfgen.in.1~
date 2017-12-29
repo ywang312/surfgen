@@ -536,7 +536,7 @@ will be excluded when
 .Em rmsexcl<0 .
 No effect when 
 .Em rmsexcl>=0
-.It printError
+.It printErr
 .Sy LOGICAL [.false.]
 This option specifies if geometry and error information will be generated for error analysis procedure in `libsurfgen`.
 Geometries will be stored in file `refgeom` and error info will be stored in `error.log`.
