@@ -486,7 +486,15 @@ END SUBROUTINE
    return
  end subroutine CalculateDerivNAD
 !---------------------------------------------------------------------
-! calcHess: calculate energy hessian for single adiabatic state at geometry.
+! calcHessNAD: calculate derivative of derivative couplings
+! Input:
+!  natoms = number of atoms
+!  cgeom  = cartesian geometry (3*natoms)
+!  nstate = number of states
+!  istate = state a of f_ab 
+!  jstate = state b of f_ab
+!  stepsize = hessian step size
+!  hessian = derivative of derivative couplings (3*natoms,3*natoms)
  subroutine calcHessNAD(natoms,cgeom,nstate,istate,jstate,stepsize,hessian)
    implicit none
   integer, intent(in)          :: natoms, nstate,istate,jstate
@@ -532,7 +540,14 @@ end subroutine calcHessNAD
  end subroutine CalculateHessians
  
 !---------------------------------------------------------------------
-! calcHess: calculate energy hessian for single adiabatic state at geometry.
+! calcHessE: calculate energy hessian for single adiabatic state at geometry.
+! Input:
+!  natoms = number of atoms
+!  cgeom  = cartesian geometry (3*natoms)
+!  nstate = number of states
+!  istate = adiabatic state index 
+!  stepsize = hessian step size
+!  hessian = hessian (3*natoms,3*natoms)
  subroutine calcHessE(natoms,cgeom,nstate,istate,stepsize,hessian)
    implicit none
   integer, intent(in)          :: natoms, nstate,istate
