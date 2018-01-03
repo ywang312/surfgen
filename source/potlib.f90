@@ -429,7 +429,7 @@ END SUBROUTINE
 !       Maximum number of atoms. Used as dimensionality of cgeos,Ga and Gd
 ! mnst  [in] INTEGER 
 !       Maximum number of states, used as dimensionality of arrays
-! cgeom [in] DOUBLE PRECISION, dimension(3*mnat)
+! cgeom [in] DOUBLE PRECISION, dimension(3*mnatm)
 !       Cartesian geometry of the molecule.
 ! Ea    [out] DOUBLE PRECISION,dimension(mnst)
 !       Adiabatic energies of all electronic states.
@@ -458,6 +458,109 @@ END SUBROUTINE
    Ga(1:3*natoms,1:nstates,1:nstates) = gapck
    Gd(1:3*natoms,1:nstates,1:nstates) = gdpck
  end subroutine EvaluateSurfgen77
+
+!---------------------------------------------------------------------
+! CalculateDerivNAD: calculate the derivatives of the derivative
+! coupling.
+ subroutine CalculateDerivNAD(natoms,cgeom,nstate,stepsize,nadhess,blks)
+   implicit none
+   integer, intent(in) :: natoms ! Number of atoms
+   integer, intent(in) :: nstate ! Number of states
+   integer, intent(in) :: blks ! (nstate*(nstate-1))/2 off-diagonal blocks
+   double precision, intent(in) :: stepsize ! Hessian step size
+   double precision, intent(in) :: cgeom(3*natoms) ! Cartesian geometry
+   double precision, intent(out):: nadhess(3*natoms,3*natoms,blks)
+   integer :: i, j, k
+   if (blks .ne. (nstate*(nstate - 1)/2)) then
+           print *, "BLKS != NSTATE*(NSTATE-1)/2"
+           stop
+   end if
+   k=1
+   do i = 1, nstate
+           do j= i + 1, nstate
+                   call calcHessNAD(natoms,cgeom,nstate,i,j,stepsize, &
+                           nadhess(1,1,k))
+                   k=k+1
+           end do
+   end do
+   return
+ end subroutine CalculateDerivNAD
+!---------------------------------------------------------------------
+! calcHess: calculate energy hessian for single adiabatic state at geometry.
+ subroutine calcHessNAD(natoms,cgeom,nstate,istate,jstate,stepsize,hessian)
+   implicit none
+  integer, intent(in)          :: natoms, nstate,istate,jstate
+  double precision,intent(in)  :: stepsize
+  double precision,intent(in)  :: cgeom(3*natoms)
+  double precision,intent(out) :: hessian(3*natoms,3*natoms)
+  double precision   ::  mdif
+  
+  integer   ::   i,  j
+  double precision  ::  dispgeom(3*natoms), dgrd(3*natoms),gref(3*natoms)
+  real*8    ::  h(nstate,nstate),cg(3*natoms,nstate,nstate),dcg(3*natoms,nstate,nstate),e(nstate)
+  hessian = 0d0
+  do i=1,3*natoms
+          dispgeom=cgeom
+          dispgeom(i)=dispgeom(i) - stepsize
+          call EvaluateSurfgen(dispgeom,e,cg,h,dcg)
+          dgrd  =-cg(:,istate,jstate)
+          dispgeom=cgeom
+          dispgeom(i)=dispgeom(i) + stepsize
+          call EvaluateSurfgen(dispgeom,e,cg,h,dcg)
+          dgrd = dgrd+cg(:,istate,jstate)
+          hessian(i,:)= dgrd/2/stepsize
+  end do
+  mdif = maxval(abs(hessian-transpose(hessian)))
+  if(mdif>1d-5)print *,"maximum hermiticity breaking : ",mdif
+  hessian = (hessian+transpose(hessian))/2
+end subroutine calcHessNAD
+
+!---------------------------------------------------------------------
+! CalculateHessians: calculate hessians for all adiabats at geometry.
+ subroutine CalculateHessians(natoms,cgeom,nstate,stepsize,hessian)
+   implicit none
+   integer, intent(in) :: natoms ! Number of atoms
+   integer, intent(in) :: nstate ! Number of states
+   double precision, intent(in)  :: stepsize ! Hessian step size
+   double precision, intent(in)  :: cgeom(3*natoms) ! Cartesian geometry
+   double precision, intent(out) :: hessian(3*natoms,3*natoms,nstate) ! Hessians
+   integer :: i
+   do i = 1, nstate
+           call calcHessE(natoms,cgeom,nstate,i,stepsize,hessian(1,1,i))
+   end do
+   return
+ end subroutine CalculateHessians
+ 
+!---------------------------------------------------------------------
+! calcHess: calculate energy hessian for single adiabatic state at geometry.
+ subroutine calcHessE(natoms,cgeom,nstate,istate,stepsize,hessian)
+   implicit none
+  integer, intent(in)          :: natoms, nstate,istate
+  double precision,intent(in)  :: stepsize
+  double precision,intent(in)  :: cgeom(3*natoms)
+  double precision,intent(out) :: hessian(3*natoms,3*natoms)
+  double precision   ::  mdif
+  
+  integer   ::   i,  j
+  double precision  ::  dispgeom(3*natoms), dgrd(3*natoms),gref(3*natoms)
+  real*8    ::  h(nstate,nstate),cg(3*natoms,nstate,nstate),dcg(3*natoms,nstate,nstate),e(nstate)
+  hessian = 0d0
+  do i=1,3*natoms
+          dispgeom=cgeom
+          dispgeom(i)=dispgeom(i) - stepsize
+          call EvaluateSurfgen(dispgeom,e,cg,h,dcg)
+          dgrd  =-cg(:,istate,istate)
+          dispgeom=cgeom
+          dispgeom(i)=dispgeom(i) + stepsize
+          call EvaluateSurfgen(dispgeom,e,cg,h,dcg)
+          dgrd = dgrd+cg(:,istate,istate)
+          hessian(i,:)= dgrd/2/stepsize
+  end do
+  mdif = maxval(abs(hessian-transpose(hessian)))
+  if(mdif>1d-5)print *,"maximum hermiticity breaking : ",mdif
+  hessian = (hessian+transpose(hessian))/2
+end subroutine calcHessE
+
 !---------------------------------------------------------------------
 ! POTLIB interface in compliance with ANT 09's NH3 potential 
 ! works only for 2 state systems
