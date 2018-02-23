@@ -54,7 +54,7 @@ subroutine getFreq(natoms,masses,hess,w,cg,anm,pl,mol)
   allocate(IWORK(LIWORK))
   
   ! if print level is greater than 0 we want to print the modes.
-  if (pl == 0) then
+  if (pl == 0 .and. .not. mol) then
         call DSYEVD('N','U',3*natoms,hmw,3*natoms,w,WORK,LWORK,IWORK,LIWORK,INFO)
   else
         call DSYEVD('V','U',3*natoms,hmw,3*natoms,w,WORK,LWORK,IWORK,LIWORK,INFO)
