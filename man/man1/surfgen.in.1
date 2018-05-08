@@ -284,7 +284,9 @@ The threshold below which gradients will be considered vanished and treated as e
 Specifies if the derivative couplings instead of derivative coupling times
 energy differences will be used as coupling input.  Derivative couplings approach
 infinity at intersections while coupling times energy difference remain well 
-behaved everywhere.  
+behaved everywhere. usefij=true will use derivative coupling, corresponds to the fij file 
+in GRADIENT directory. usefij=false will use derivative coupling times energy difference,
+corresponds to the nad file in GRADIENT directory.
 .It w_energy
 .Sy DOUBLE PRECISION [1.]
 Weight factor for energy equations.  This factor is multiplied with point weights
